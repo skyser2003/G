@@ -6,13 +6,13 @@ using System.Text;
 
 class PlayerCharacter : MonoBehaviour
 {
-    private float speed = 1.0f;
+    private float speed = 0.0f;
     private bool isJumping = false;
     private float jumpTime = 0.0f;
 
     private void Start()
     {
-
+        Stop();
     }
 
     private void Update()
@@ -37,7 +37,23 @@ class PlayerCharacter : MonoBehaviour
 
     private void Move(float speed)
     {
+        var skeleton = GetComponent<SkeletonAnimation>();
+
         this.speed = speed;
+        if(speed == 0)
+        {
+            skeleton.AnimationName = null;
+        }
+        else if(speed < 0)
+        {
+            GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            skeleton.AnimationName = "Walk";
+        }
+        else
+        {
+            GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            skeleton.AnimationName = "Walk";
+        }
     }
 
     public void MoveLeft()
