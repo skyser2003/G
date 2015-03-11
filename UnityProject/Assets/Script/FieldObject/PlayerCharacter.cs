@@ -7,6 +7,7 @@ using System.Text;
 class PlayerCharacter : MonoBehaviour
 {
     private float speed = 0.0f;
+    private bool jumpPossible = true;
     private bool isJumping = false;
     private float jumpTime = 0.0f;
 
@@ -73,6 +74,11 @@ class PlayerCharacter : MonoBehaviour
 
     public void Jump()
     {
+        if(jumpPossible == false)
+        {
+            return;
+        }
+
         isJumping = true;
         jumpTime = 1.0f;
     }
@@ -80,5 +86,10 @@ class PlayerCharacter : MonoBehaviour
     public float GetSpeed()
     {
         return speed;
+    }
+
+    public void SetJumpPossible(bool isPossible)
+    {
+        jumpPossible = isPossible;
     }
 }
