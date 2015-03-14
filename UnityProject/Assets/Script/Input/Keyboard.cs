@@ -14,6 +14,7 @@ class Keyboard : MonoBehaviour
             return;
         }
 
+        // Key down
         if (Input.GetKeyDown("space"))
         {
             pc.Jump();
@@ -28,6 +29,12 @@ class Keyboard : MonoBehaviour
             pc.MoveRight();
         }
 
+        if(Input.GetKeyDown("z"))
+        {
+            pc.Attack();
+        }
+        
+        // Key up
         if (Input.GetKeyUp("left") || Input.GetKeyUp("right"))
         {
             pc.Stop();

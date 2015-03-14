@@ -4,12 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class PlayerCharacter : MonoBehaviour
+partial class PlayerCharacter : MonoBehaviour
 {
     private float speed = 0.0f;
     private bool jumpPossible = true;
     private bool isJumping = false;
     private float jumpTime = 0.0f;
+
+    private MOVE_STATE moveState;
+    private AbstractFSM msFSM = null;
+
+    private ACTION_STATE actionState;
+    private AbstractFSM asFSM = null;
 
     private void Start()
     {
@@ -34,26 +40,94 @@ class PlayerCharacter : MonoBehaviour
 
         var dx = velocity * Time.deltaTime;
         transform.localPosition += new Vector3(dx.x, dx.y, 0.0f);
+
+        // FSM
+        if(msFSM != null)
+        {
+            msFSM.OnUpdate();
+        }
+
+        if(asFSM != null)
+        {
+            asFSM.OnUpdate();
+        }
     }
 
     private void Move(float speed)
     {
-        var skeleton = GetComponent<SkeletonAnimation>();
-
         this.speed = speed;
-        if(speed == 0)
+        SetMoveState(MOVE_STATE.MS_WALK);
+    }
+    
+    private void SetMoveState(MOVE_STATE state)
+    {
+        var oldFSM = msFSM;
+
+        moveState = state;
+        switch (state)
         {
-            skeleton.AnimationName = null;
+            case MOVE_STATE.MS_IDLE:
+                {
+                    msFSM = new MoveFSM_Idle();
+                }
+                break;
+            case MOVE_STATE.MS_WALK:
+                {
+                    msFSM = new MoveFSM_Walk();
+                }
+                break;
+            default:
+                {
+                    msFSM = null;
+                }
+                break;
         }
-        else if(speed < 0)
+
+        if (oldFSM != null)
         {
-            GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            skeleton.AnimationName = "Walk";
+            oldFSM.OnEnd();
         }
-        else
+
+        if (msFSM != null)
         {
-            GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            skeleton.AnimationName = "Walk";
+            msFSM.Init(this);
+            msFSM.OnBegin();
+        }
+    }
+
+    private void SetActionState(ACTION_STATE state)
+    {
+        var oldFSM = asFSM;
+
+        actionState = state;
+        switch (state)
+        {
+            case ACTION_STATE.AS_IDLE:
+                {
+                    asFSM = new AttackFSM_Idle();
+                }
+                break;
+            case ACTION_STATE.AS_ATTACK:
+                {
+                    asFSM = new AttackFSM_BaseAttack();
+                }
+                break;
+            default:
+                {
+                    asFSM = null;
+                }
+                break;
+        }
+
+        if (oldFSM != null)
+        {
+            oldFSM.OnEnd();
+        }
+
+        if (asFSM != null)
+        {
+            asFSM.Init(this);
+            asFSM.OnBegin();
         }
     }
 
@@ -70,6 +144,8 @@ class PlayerCharacter : MonoBehaviour
     public void Stop()
     {
         Move(0);
+        SetMoveState(MOVE_STATE.MS_IDLE);
+        SetActionState(ACTION_STATE.AS_IDLE);
     }
 
     public void Jump()
@@ -81,6 +157,11 @@ class PlayerCharacter : MonoBehaviour
 
         isJumping = true;
         jumpTime = 1.0f;
+    }
+
+    public void Attack()
+    {
+        SetActionState(ACTION_STATE.AS_ATTACK);
     }
    
     public float GetSpeed()
