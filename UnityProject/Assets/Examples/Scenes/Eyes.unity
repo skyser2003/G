@@ -161,7 +161,7 @@ MonoBehaviour:
   flip: 0
   flipX: 0
   overrideAlpha: 1
-  boneName: 525f457965
+  boneName: R_Eye
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!1 &376564975
@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &554350588
 Transform:
   m_ObjectHideFlags: 0
@@ -243,13 +243,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554350587}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: ef2f009a37ff7ff42bc2a2f407ca9483, type: 2}
-  initialSkinName: 64656661756c74
+  initialSkinName: default
   calculateNormals: 0
   calculateTangents: 0
   zSpacing: 0
@@ -271,7 +271,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4f9d106a1e4d45b468b980311947a225, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
   flip: 0
   flipX: 0
   overrideAlpha: 1
-  boneName: 4c5f457965
+  boneName: L_Eye
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!1 &1842554116
@@ -494,6 +494,6 @@ MonoBehaviour:
   flip: 0
   flipX: 0
   overrideAlpha: 1
-  boneName: 726f6f74
+  boneName: root
   parentReference: {fileID: 0}
   transformLerpComplete: 0

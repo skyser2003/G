@@ -119,16 +119,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 44691b56ed7d1f04da0cbc2a52a91b8d, type: 2}
-  initialSkinName: 64656661756c74
+  initialSkinName: default
   calculateNormals: 0
   calculateTangents: 0
   zSpacing: 0
   renderMeshes: 0
   immutableTriangles: 0
+  frontFacing: 0
   logErrors: 0
+  submeshSeparators: []
   timeScale: 1
   loop: 1
-  _animationName: 77616c6b
+  _animationName: walk
 --- !u!23 &1256911795
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -139,7 +141,7 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4083cd422558e2540a62bbafb94f57b5, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -313,7 +315,7 @@ MonoBehaviour:
   skeletonRenderer: {fileID: 1256911794}
   followZPosition: 1
   followBoneRotation: 1
-  boneName: 66726f6e745f66697374
+  boneName: front_fist
   resetOnAwake: 1
 --- !u!23 &2069555282
 MeshRenderer:

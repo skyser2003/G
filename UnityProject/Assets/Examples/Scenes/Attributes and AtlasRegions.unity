@@ -202,12 +202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c826b50b0cfee343be3bdbbf59d0f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAnimation: 49646c65
-  attackAnimation: 41747461636b
-  moveAnimation: 4d6f7665
-  eyesSlot: 45796573
-  eyesOpenAttachment: 4f70656e
-  blinkAttachment: 426c696e6b
+  idleAnimation: Idle
+  attackAnimation: Attack
+  moveAnimation: Move
+  eyesSlot: Eyes
+  eyesOpenAttachment: Open
+  blinkAttachment: Blink
   blinkDuration: .0500000007
   moveSpeed: 3
 --- !u!114 &1263080510
@@ -223,11 +223,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atlasAsset: {fileID: 11400000, guid: c574489dd067c2b4cb4dc165a4c410cc, type: 2}
   attachments:
-  - slot: 576561706f6e
-    region: 45717569706d656e742f73776f726431
-  - slot: 536869656c64
-    region: 45717569706d656e742f736869656c6431
-  skeletonRenderer: {fileID: 0}
+  - slot: Weapon
+    region: Equipment/shield2
+  - slot: Shield
+    region: Equipment/shield2
 --- !u!114 &1263080511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,12 +239,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: e57cdb51287d3924ebb2ececf816733b, type: 2}
-  initialSkinName: 5768697465
+  initialSkinName: White
   calculateNormals: 0
   calculateTangents: 0
   zSpacing: 0
   renderMeshes: 1
   immutableTriangles: 0
+  frontFacing: 0
   logErrors: 0
   submeshSeparators: []
   timeScale: 1

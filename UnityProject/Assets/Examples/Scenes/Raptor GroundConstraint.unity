@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 36219066}
   m_LocalRotation: {x: 0, y: 0, z: -.520488143, w: .853868902}
-  m_LocalPosition: {x: -2.33259988, y: 1.046368, z: 0}
+  m_LocalPosition: {x: -2.33259988, y: .153499991, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 973814792}
@@ -127,9 +127,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3662334b99de5fe4396ab24e30c4fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask: {}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   use2D: 0
+  useRadius: 0
+  castRadius: .100000001
   castDistance: 3.5
+  castOffset: 0
+  groundOffset: 0
+  adjustSpeed: 5
 --- !u!114 &36219069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +153,10 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
+  flip: 0
+  flipX: 0
   overrideAlpha: 1
-  boneName: 726561725f666f6f745f676f616c
+  boneName: rear_foot_goal
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &44654812
@@ -223,7 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boneRoot: {fileID: 44654813}
   skeletonRenderer: {fileID: 120294523}
-  skeletonAnimation: {fileID: 120294523}
 --- !u!114 &120294523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,16 +244,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 22c4b5e5a0fd9484d83b1aa705b9a54c, type: 2}
-  initialSkinName: 64656661756c74
+  initialSkinName: default
   calculateNormals: 0
   calculateTangents: 0
   zSpacing: 0
   renderMeshes: 1
   immutableTriangles: 0
+  frontFacing: 0
   logErrors: 0
+  submeshSeparators: []
   timeScale: 1
   loop: 1
-  _animationName: 77616c6b
+  _animationName: walk
 --- !u!23 &120294524
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -256,7 +266,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4e2feebfcaa26a54ab19f1ff3e0eae35, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -323,8 +333,10 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
+  flip: 0
+  flipX: 0
   overrideAlpha: 1
-  boneName: 726f6f74
+  boneName: root
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &976394122
@@ -512,9 +524,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3662334b99de5fe4396ab24e30c4fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask: {}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   use2D: 0
+  useRadius: 0
+  castRadius: .100000001
   castDistance: 3.5
+  castOffset: 0
+  groundOffset: 0
+  adjustSpeed: 5
 --- !u!114 &1984548218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,8 +550,10 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
+  flip: 0
+  flipX: 0
   overrideAlpha: 1
-  boneName: 66726f6e745f666f6f745f676f616c
+  boneName: front_foot_goal
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!4 &1984548219
