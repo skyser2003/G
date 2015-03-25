@@ -6,15 +6,29 @@ using System.Text;
 
 class BossCharacter : MonoBehaviour
 {
-    private double hp = 1000000;
+    public class Phase
+    {
+        public double hp;
+    }
+
+    private List<Phase> phaseList = new List<Phase>();
+    private int currentPhase;
 
     private void Start()
     {
-
+        currentPhase = 0;
     }
 
     public void ReceiveDamage(double damage)
     {
-        hp -= damage;
+        phaseList[currentPhase].hp -= damage;
+        if(phaseList[currentPhase].hp <= 0.0)
+        {
+            currentPhase += 1;
+            if(phaseList.Count <= currentPhase)
+            {
+                // End!
+            }
+        }
     }
 }
