@@ -11,11 +11,8 @@ partial class PlayerCharacter : MonoBehaviour
     private bool isJumping = false;
     private float jumpTime = 0.0f;
 
-    private MOVE_STATE moveState;
-    private AbstractFSM msFSM = null;
-
-    private ACTION_STATE actionState;
-    private AbstractFSM asFSM = null;
+    private STATE state;
+    private AbstractFSM FSM = null;
 
     private void Start()
     {
@@ -42,43 +39,43 @@ partial class PlayerCharacter : MonoBehaviour
         transform.localPosition += new Vector3(dx.x, dx.y, 0.0f);
 
         // FSM
-        if(msFSM != null)
+        if(FSM != null)
         {
-            msFSM.OnUpdate();
-        }
-
-        if(asFSM != null)
-        {
-            asFSM.OnUpdate();
+            FSM.OnUpdate();
         }
     }
 
     private void Move(float speed)
     {
         this.speed = speed;
-        SetMoveState(MOVE_STATE.MS_WALK);
+        SetState(STATE.WALK);
     }
     
-    private void SetMoveState(MOVE_STATE state)
+    private void SetState(STATE state)
     {
-        var oldFSM = msFSM;
+        var oldFSM = FSM;
 
-        moveState = state;
+        this.state = state;
         switch (state)
         {
-            case MOVE_STATE.MS_IDLE:
+            case STATE.IDLE:
                 {
-                    msFSM = new MoveFSM_Idle();
+                    FSM = new FSM_Idle();
                 }
                 break;
-            case MOVE_STATE.MS_WALK:
+            case STATE.ATTACK:
                 {
-                    msFSM = new MoveFSM_Walk();
+                    FSM = new FSM_BaseAttack();
+                }
+                break;
+            case STATE.WALK:
+                {
+                    FSM = new FSM_Walk();
                 }
                 break;
             default:
                 {
-                    msFSM = null;
+                    FSM = null;
                 }
                 break;
         }
@@ -88,49 +85,13 @@ partial class PlayerCharacter : MonoBehaviour
             oldFSM.OnEnd();
         }
 
-        if (msFSM != null)
+        if (FSM != null)
         {
-            msFSM.Init(this);
-            msFSM.OnBegin();
+            FSM.Init(this);
+            FSM.OnBegin();
         }
     }
-
-    private void SetActionState(ACTION_STATE state)
-    {
-        var oldFSM = asFSM;
-
-        actionState = state;
-        switch (state)
-        {
-            case ACTION_STATE.AS_IDLE:
-                {
-                    asFSM = new AttackFSM_Idle();
-                }
-                break;
-            case ACTION_STATE.AS_ATTACK:
-                {
-                    asFSM = new AttackFSM_BaseAttack();
-                }
-                break;
-            default:
-                {
-                    asFSM = null;
-                }
-                break;
-        }
-
-        if (oldFSM != null)
-        {
-            oldFSM.OnEnd();
-        }
-
-        if (asFSM != null)
-        {
-            asFSM.Init(this);
-            asFSM.OnBegin();
-        }
-    }
-
+    
     public void MoveLeft()
     {
         Move(-1);
@@ -144,8 +105,7 @@ partial class PlayerCharacter : MonoBehaviour
     public void Stop()
     {
         Move(0);
-        SetMoveState(MOVE_STATE.MS_IDLE);
-        SetActionState(ACTION_STATE.AS_IDLE);
+        SetState(STATE.IDLE);
     }
 
     public void Jump()
@@ -161,7 +121,7 @@ partial class PlayerCharacter : MonoBehaviour
 
     public void Attack()
     {
-        SetActionState(ACTION_STATE.AS_ATTACK);
+        SetState(STATE.ATTACK);
     }
    
     public float GetSpeed()

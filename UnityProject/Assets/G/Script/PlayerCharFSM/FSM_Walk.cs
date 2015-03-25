@@ -6,7 +6,7 @@ using System.Text;
 
 partial class PlayerCharacter
 {
-    private class MoveFSM_Walk : AbstractFSM
+    private class FSM_Walk : AbstractFSM
     {
         private SkeletonAnimation skeleton = null;
  

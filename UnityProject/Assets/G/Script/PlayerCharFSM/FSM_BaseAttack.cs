@@ -6,7 +6,7 @@ using System.Text;
 
 partial class PlayerCharacter
 {
-    private class AttackFSM_BaseAttack : AbstractFSM
+    private class FSM_BaseAttack : AbstractFSM
     {
         private SkeletonAnimation skeleton = null;
         private float attackTime = 1.0f;
@@ -23,7 +23,7 @@ partial class PlayerCharacter
             attackTime -= Time.deltaTime;
             if(attackTime <= 0.0f)
             {
-                pc.SetActionState(ACTION_STATE.AS_IDLE);
+                pc.SetState(STATE.IDLE);
                 return;
             }
         }

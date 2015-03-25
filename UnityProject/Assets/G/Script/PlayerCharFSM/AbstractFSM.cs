@@ -5,16 +5,11 @@ using System.Text;
 
 partial class PlayerCharacter
 {
-    public enum MOVE_STATE
+    public enum STATE
     {
-        MS_IDLE,
-        MS_WALK,
-    }
-
-    public enum ACTION_STATE
-    {
-        AS_IDLE,
-        AS_ATTACK
+        IDLE,
+        WALK,
+        ATTACK
     }
 
     private abstract class AbstractFSM
