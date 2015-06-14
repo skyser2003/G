@@ -9,7 +9,6 @@ partial class PlayerCharacter
     {
         override public void OnBegin()
         {
-            pc.GetComponent<SkeletonAnimation>().AnimationName = null;
         }
 
         override public void OnUpdate()

@@ -8,27 +8,8 @@ partial class PlayerCharacter
 {
     private class FSM_Walk : AbstractFSM
     {
-        private SkeletonAnimation skeleton = null;
- 
         override public void OnBegin()
         {
-            skeleton = pc.GetComponent<SkeletonAnimation>();
-
-            float speed = pc.speed;
-            if (speed == 0)
-            {
-                skeleton.AnimationName = null;
-            }
-            else if (speed < 0)
-            {
-                pc.GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                skeleton.AnimationName = "Walk";
-            }
-            else
-            {
-                pc.GetComponent<Transform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                skeleton.AnimationName = "Walk";
-            }
         }
 
         override public void OnUpdate()
@@ -38,7 +19,6 @@ partial class PlayerCharacter
 
         override public void OnEnd()
         {
-            skeleton.AnimationName = null;
         }
     }
 }

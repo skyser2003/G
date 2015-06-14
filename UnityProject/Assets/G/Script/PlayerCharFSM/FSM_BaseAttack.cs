@@ -8,14 +8,10 @@ partial class PlayerCharacter
 {
     private class FSM_BaseAttack : AbstractFSM
     {
-        private SkeletonAnimation skeleton = null;
         private float attackTime = 1.0f;
 
         override public void OnBegin()
         {
-            skeleton = pc.GetComponent<SkeletonAnimation>();
-            skeleton.AnimationName = "Attack";
-            skeleton.loop = true;
         }
 
         override public void OnUpdate()
@@ -39,7 +35,6 @@ partial class PlayerCharacter
 
         override public void OnEnd()
         {
-            skeleton.AnimationName = null;
         }
     }
 }
