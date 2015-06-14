@@ -19,15 +19,11 @@ public class GSpineTestScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Init ();	
-		SkelRenderer.OnReset += Apply;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.R))
-		{
-			SkelRenderer.Reset();
-		}
+	
 	}
 
 	void Init()
@@ -135,24 +131,19 @@ public class GSpineTestScript : MonoBehaviour {
 			Rect currect = rects[iter];
 			AtlasRegion curregion = GenreatedAtlasRegionList[iter];
 
-			Rect convertedrect = GetUVRectFromUnityToSpine(currect);
-			curregion.u = convertedrect.x;
-			curregion.v = convertedrect.y;
-			curregion.u2 = convertedrect.width;
-			curregion.v2 = convertedrect.height;
-			//if(curregion.rotate)
-			//{
-			//	curregion.u = currect.x;
-			//	curregion.v = currect.y;
-			//	curregion.u2 = currect.width;
-			//	curregion.v2 = currect.height;
-			//}else
-			//{
-			//	curregion.u = currect.x;
-			//	curregion.v = currect.y;
-			//	curregion.u2 = currect.x + currect.width;
-			//	curregion.v2 = currect.y + currect.height;
-			//}
+			if(curregion.rotate)
+			{
+				curregion.u = currect.x;
+				curregion.v = currect.y;
+				curregion.u2 = currect.width;
+				curregion.v2 = currect.height;
+			}else
+			{
+				curregion.u = currect.x;
+				curregion.v = currect.y;
+				curregion.u2 = currect.width;
+				curregion.v2 = currect.height;
+			}
 
 			curregion.page = GeneratedAtlasPage;
 		}
@@ -173,15 +164,14 @@ public class GSpineTestScript : MonoBehaviour {
 		created.width = _region.width;
 		created.height = _region.height;
 		
-		created.u = _region.u;
+		created.u = _region.x;
 		created.v = _region.v;
 		created.u2 = _region.u2;
 		created.v2 = _region.v2;
 		
 		created.offsetX = _region.offsetX;
 		created.offsetY = _region.offsetY;
-		created.originalHeight = _region.originalHeight;
-		created.originalWidth = _region.originalWidth;
+		created.originalWidth = _region.originalHeight;
 		created.index = _region.index;
 		
 		created.rotate = _region.rotate;
@@ -211,18 +201,10 @@ public class GSpineTestScript : MonoBehaviour {
 		return genatlaspage;
 	}
 
-
-	public Rect GetUVRectFromUnityToSpine(Rect _rectinfo)
+	public Rect GetUVRectFromUnityToSpine(int _texturewidth, int _textureheight, int _startx, int _starty, int _width, int _height)
 	{
 		Rect genrect = new Rect();
-
-		genrect.x = _rectinfo.x;
-		genrect.width = _rectinfo.x + _rectinfo.width;
-		genrect.y = (_rectinfo.y + _rectinfo.height);
-		genrect.height =(_rectinfo.y);
-
-		//Debug.Log("Input rect: " + _rectinfo + " Outpur rect: " + genrect);
-
+		
 		return genrect;
 	}
 
@@ -242,59 +224,4 @@ public class GSpineTestScript : MonoBehaviour {
 
 		return genrect;
 	}
-
-	public SkeletonDataAsset SkeletonAsset;
-	[System.Serializable]
-	public class SlotRegionPair {
-		[SpineSlot]
-		public string slot;
-		
-		//[SpineAtlasRegion]
-		//public string region;
-	}
-
-	public SkeletonRenderer SkelRenderer;
-	public SlotRegionPair[] attachments;
-	protected int ApplyRegionIndexer = -1;
-
-	void Apply(SkeletonRenderer skeletonRenderer) {
-		Debug.Log ("cursom apply called");
-		AtlasAttachmentLoader loader = new AtlasAttachmentLoader(GeneratedAtlas);
-		
-		float scaleMultiplier = skeletonRenderer.skeletonDataAsset.scale;
-		
-		//IEnumerator enumerator = attachments.GetEnumerator();
-		//while (enumerator.MoveNext()) {
-		//	var entry = (SlotRegionPair)enumerator.Current;
-		//	var regionAttachment = loader.NewRegionAttachment(entry.region, entry.region);
-		//	regionAttachment.Width = regionAttachment.RegionOriginalWidth * scaleMultiplier;
-		//	regionAttachment.Height = regionAttachment.RegionOriginalHeight * scaleMultiplier;
-		//	
-		//	regionAttachment.SetColor(new Color(1, 1, 1, 1));
-		//	regionAttachment.UpdateOffset();
-		//
-		//	var slot = skeletonRenderer.skeleton.FindSlot(entry.slot);
-		//	slot.Attachment = regionAttachment;
-		//}
-
-		//Debug.Log("
-		ApplyRegionIndexer = (ApplyRegionIndexer + 1) % GeneratedAtlas.Regions.Count;
-		foreach(SlotRegionPair pair in attachments)
-		{
-			RegionAttachment attachment = loader.NewRegionAttachment(null, 
-			                                                         GeneratedAtlas.Regions[ApplyRegionIndexer].name, 
-			                                                         GeneratedAtlas.Regions[ApplyRegionIndexer].name);
-			attachment.Width = attachment.regionOriginalWidth * scaleMultiplier;
-			attachment.Height = attachment.RegionOriginalHeight * scaleMultiplier;
-
-			attachment.SetColor(new Color(1, 1, 1, 1));
-			attachment.UpdateOffset();
-
-			Slot slot = skeletonRenderer.skeleton.FindSlot(pair.slot);
-			slot.Attachment = attachment;
-
-			Debug.Log("Region: " + GeneratedAtlas.Regions[ApplyRegionIndexer].name + " Attachment: " + attachment.Name);
-		}
-	}
-
 }
