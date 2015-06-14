@@ -26,6 +26,15 @@ partial class PlayerCharacter
                 pc.SetState(STATE.IDLE);
                 return;
             }
+
+            if(pc.speed >= 0.0f)
+            {
+                pc.speed -= Time.deltaTime;
+                if(pc.speed < 0.0f)
+                {
+                    pc.speed = 0.0f;
+                }
+            }
         }
 
         override public void OnEnd()
