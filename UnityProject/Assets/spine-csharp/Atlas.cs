@@ -42,22 +42,6 @@ namespace Spine {
 	public class Atlas {
 		List<AtlasPage> pages = new List<AtlasPage>();
 		List<AtlasRegion> regions = new List<AtlasRegion>();
-
-		public List<AtlasPage> Pages
-		{
-			get
-			{
-				return pages;
-			}
-		}
-
-		public List<AtlasRegion> Regions
-		{
-			get
-			{
-				return regions;
-			}
-		}
 		TextureLoader textureLoader;
 
 #if WINDOWS_STOREAPP
@@ -295,80 +279,6 @@ namespace Spine {
 		public bool rotate;
 		public int[] splits;
 		public int[] pads;
-
-
-//			public AtlasRegion(AtlasRegion _region)
-//			{
-//				this.page = _region;
-//				this.name = _region.name;
-//				this.x = _region.x;
-//				this.y = _region.y;
-//				this.width = _region.width;
-//				this.height = _region.height;
-//
-//				this.u = _region.x;
-//				this.v = _region.v;
-//				this.u2 = _region.u2;
-//				this.v2 = _region.v2;
-//
-//				this.offsetX = _region.offsetX;
-//				this.offsetY = _region.offsetY;
-//				this.originalWidth = _region.originalHeight;
-//				this.index = _region.index;
-//
-//				this.rotate = _region.rotate;
-//				this.splits = _region.splits;
-//				this.pads = _region.pads;
-//
-//			}
-
-		public override string ToString ()
-		{
-				string returnstring = "";
-				returnstring += " Page name: " + page.name;
-				returnstring += " name: " + name;
-
-				returnstring += " x: " + x;
-				returnstring += " y: " + y;
-				returnstring += " width: " + width;
-				returnstring += " height: " + height;
-
-				returnstring += " u: " + u;
-				returnstring += " v: " + v;
-				returnstring += " u2: " + u2;
-				returnstring += " v2: " + v2;
-
-				returnstring += " offsetX: " + offsetX;
-				returnstring += " offsetY: " + offsetY;
-
-				returnstring += " originalWidth: " + originalWidth;
-				returnstring += " originalHeight: " + originalHeight;
-
-				returnstring += " index: " + index;
-
-				returnstring += " rotate: " + rotate;
-
-				returnstring += " Splites: ";
-				if(splits != null)
-				{
-					foreach(int i in splits)
-					{
-						returnstring += " " + i.ToString();
-					}
-				}
-
-				returnstring += " Pads: ";
-
-				if(pads != null)
-				{
-					foreach(int i in pads)
-					{
-						returnstring += " " + i.ToString();
-					}
-				}
-
-				return returnstring;
-		}
 	}
 
 	public interface TextureLoader {

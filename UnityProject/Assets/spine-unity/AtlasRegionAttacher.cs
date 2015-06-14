@@ -38,8 +38,6 @@ public class AtlasRegionAttacher : MonoBehaviour {
 			regionAttachment.Width = regionAttachment.RegionOriginalWidth * scaleMultiplier;
 			regionAttachment.Height = regionAttachment.RegionOriginalHeight * scaleMultiplier;
 
-			//Debug.Log("?? whats going on: " + entry.region);
-
 			regionAttachment.SetColor(new Color(1, 1, 1, 1));
 			regionAttachment.UpdateOffset();
 

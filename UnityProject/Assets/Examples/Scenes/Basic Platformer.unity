@@ -497,9 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3662334b99de5fe4396ab24e30c4fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1024
+  groundMask: {}
   use2D: 0
   useRadius: 1
   castRadius: .219999999
@@ -523,10 +521,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: R_Ground
+  boneName: 525f47726f756e64
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!4 &380101355
@@ -962,6 +958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boneRoot: {fileID: 1776464689}
   skeletonRenderer: {fileID: 658011011}
+  skeletonAnimation: {fileID: 658011011}
 --- !u!114 &658011011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,18 +971,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6ba8c33ba732ee34290c79f1d69e0d55, type: 2}
-  initialSkinName: White
+  initialSkinName: 5768697465
   calculateNormals: 0
   calculateTangents: 0
   zSpacing: 0
   renderMeshes: 1
   immutableTriangles: 0
-  frontFacing: 0
   logErrors: 0
-  submeshSeparators: []
   timeScale: 1
   loop: 1
-  _animationName: Idle
+  _animationName: 49646c65
 --- !u!23 &658011012
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -996,7 +991,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 380672bd303e2764eb47728ead477b19, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1357,10 +1352,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: root
+  boneName: 726f6f74
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &1018673310
@@ -1403,9 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3662334b99de5fe4396ab24e30c4fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1024
+  groundMask: {}
   use2D: 0
   useRadius: 1
   castRadius: .219999999
@@ -1429,10 +1420,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: L_Ground
+  boneName: 4c5f47726f756e64
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &1074999553
@@ -1861,9 +1850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b3e3370f55c0a438ef0a10c2eba510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XAxis: Horizontal
-  YAxis: Vertical
-  JumpButton: Jump
+  XAxis: 486f72697a6f6e74616c
+  YAxis: 566572746963616c
+  JumpButton: 4a756d70
   walkSpeed: 1.5
   runSpeed: 7
   gravity: 65
@@ -1874,16 +1863,16 @@ MonoBehaviour:
   forceCrouchDuration: .5
   graphicsRoot: {fileID: 1621947181}
   skeletonAnimation: {fileID: 658011011}
-  walkName: Walk
-  runName: Run
-  idleName: Idle
-  jumpName: Jump
-  fallName: Fall
-  crouchName: Crouch
+  walkName: 57616c6b
+  runName: 52756e
+  idleName: 49646c65
+  jumpName: 4a756d70
+  fallName: 46616c6c
+  crouchName: 43726f756368
   jumpAudioSource: {fileID: 1845666709}
   hardfallAudioSource: {fileID: 443343505}
   footstepAudioSource: {fileID: 666622921}
-  footstepEventName: Footstep
+  footstepEventName: 466f6f7473746570
 --- !u!1 &1217440894
 GameObject:
   m_ObjectHideFlags: 0

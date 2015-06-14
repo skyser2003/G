@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boneRoot: {fileID: 44654813}
   skeletonRenderer: {fileID: 120294523}
+  skeletonAnimation: {fileID: 120294523}
 --- !u!114 &120294523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,18 +173,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 22c4b5e5a0fd9484d83b1aa705b9a54c, type: 2}
-  initialSkinName: default
+  initialSkinName: 64656661756c74
   calculateNormals: 0
   calculateTangents: 0
   zSpacing: 0
   renderMeshes: 1
   immutableTriangles: 0
-  frontFacing: 0
   logErrors: 0
-  submeshSeparators: []
   timeScale: 1
   loop: 1
-  _animationName: walk
+  _animationName: 77616c6b
 --- !u!23 &120294524
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -194,7 +193,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4e2feebfcaa26a54ab19f1ff3e0eae35, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -321,10 +320,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: tail5
+  boneName: 7461696c35
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!1 &196322038
@@ -375,10 +372,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: rear_arm1
+  boneName: 726561725f61726d31
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!54 &196322041
@@ -487,10 +482,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: rear_hand
+  boneName: 726561725f68616e64
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!59 &350419679
@@ -598,10 +591,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: hip
+  boneName: 686970
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &520760180
@@ -652,10 +643,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: front_arm2
+  boneName: 66726f6e745f61726d32
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!54 &520760183
@@ -752,10 +741,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: front_hand
+  boneName: 66726f6e745f68616e64
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!4 &574377924
@@ -936,10 +923,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: tail2
+  boneName: 7461696c32
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!1 &733897517
@@ -989,10 +974,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: head
+  boneName: 68656164
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!59 &733897520
@@ -1102,10 +1085,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: rear_arm2
+  boneName: 726561725f61726d32
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!59 &871208811
@@ -1212,10 +1193,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: root
+  boneName: 726f6f74
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &976394122
@@ -1409,10 +1388,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: tail4
+  boneName: 7461696c34
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!1 &1285379174
@@ -1465,10 +1442,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: torso2
+  boneName: 746f72736f32
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!54 &1285379177
@@ -1510,7 +1485,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideShadow: 1
-  parent: {fileID: 0}
 --- !u!1 &1342167691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1529,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideShadow: 1
-  parent: {fileID: 0}
 --- !u!54 &1342167694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1599,10 +1572,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: tail1
+  boneName: 7461696c31
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &1421488703
@@ -1650,10 +1621,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: torso1
+  boneName: 746f72736f31
   parentReference: {fileID: 0}
   transformLerpComplete: 0
 --- !u!1 &1524588283
@@ -1763,10 +1732,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: tail3
+  boneName: 7461696c33
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!1 &1714294601
@@ -1817,10 +1784,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: neck
+  boneName: 6e65636b
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!54 &1714294604
@@ -1930,10 +1895,8 @@ MonoBehaviour:
   position: 1
   rotation: 1
   scale: 1
-  flip: 0
-  flipX: 0
   overrideAlpha: 1
-  boneName: front_arm1
+  boneName: 66726f6e745f61726d31
   parentReference: {fileID: 0}
   transformLerpComplete: 1
 --- !u!59 &1769886738
