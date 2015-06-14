@@ -51,7 +51,7 @@ public class GSpineTestScript : MonoBehaviour {
 
 		foreach(AtlasRegion region in Atlas1.Regions)
 		{
-			//Debug.Log (region.ToString());
+			Debug.Log (region.ToString());
 			CombinedAtlasRegionsList.Add(region);
 		}
 		foreach(AtlasRegion region in Atlas2.Regions)
@@ -257,8 +257,6 @@ public class GSpineTestScript : MonoBehaviour {
 	public SlotRegionPair[] attachments;
 	protected int ApplyRegionIndexer = -1;
 
-	public GSpineSkeletonCreatingTest SkeletonTest;
-
 	void Apply(SkeletonRenderer skeletonRenderer) {
 		Debug.Log ("cursom apply called");
 		AtlasAttachmentLoader loader = new AtlasAttachmentLoader(GeneratedAtlas);
@@ -295,10 +293,8 @@ public class GSpineTestScript : MonoBehaviour {
 			Slot slot = skeletonRenderer.skeleton.FindSlot(pair.slot);
 			slot.Attachment = attachment;
 
-			//Debug.Log("Region: " + GeneratedAtlas.Regions[ApplyRegionIndexer].name + " Attachment: " + attachment.Name);
+			Debug.Log("Region: " + GeneratedAtlas.Regions[ApplyRegionIndexer].name + " Attachment: " + attachment.Name);
 		}
-
-		SkeletonTest.Generate(GeneratedAtlas);
 	}
-	
+
 }
