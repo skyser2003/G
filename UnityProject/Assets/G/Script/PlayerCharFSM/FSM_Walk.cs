@@ -10,6 +10,14 @@ partial class PlayerCharacter
     {
         override public void OnBegin()
         {
+            if(pc.speed < 0)
+            {
+                pc.GetComponent<Transform>().rotation = Quaternion.Euler(0, -90, 0);
+            }
+            else if(pc.speed > 0)
+            {
+                pc.GetComponent<Transform>().rotation = Quaternion.Euler(0, 90, 0);
+            }
         }
 
         override public void OnUpdate()
