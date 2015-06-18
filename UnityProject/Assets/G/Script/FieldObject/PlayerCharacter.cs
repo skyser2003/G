@@ -1,33 +1,48 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-partial class PlayerCharacter : MonoBehaviour
+class PlayerCharacter : MonoBehaviour
 {
-    private float speed = 0.0f;
     private bool jumpPossible = true;
     private bool isJumping = false;
     private float jumpTime = 0.0f;
 
     private STATE state;
     private AbstractFSM FSM = null;
+    private WalkObject walk;
+
+    public WalkObject Walk { get { return walk; } }
+
+    public float WalkVelocity
+    {
+        get
+        {
+            return walk == null ? 0.0f : walk.Velocity;
+        }
+        set
+        {
+            if (walk != null)
+            {
+                walk.Velocity = value;
+            }
+        }
+    }
+
+    public float WalkSpeed { get { return walk == null ? 0.0f : walk.Speed; } }
 
     private void Start()
     {
         Stop();
+        walk = GetComponent<WalkObject>();
     }
 
     private void Update()
     {
         var velocity = new Vector3();
-        velocity.x = speed;
 
-        if(isJumping == true)
+        if (isJumping == true)
         {
             jumpTime -= Time.deltaTime;
-            if(jumpTime <= 0.0f)
+            if (jumpTime <= 0.0f)
             {
                 isJumping = false;
             }
@@ -39,19 +54,19 @@ partial class PlayerCharacter : MonoBehaviour
         transform.localPosition += new Vector3(dx.x, dx.y, 0.0f);
 
         // FSM
-        if(FSM != null)
+        if (FSM != null)
         {
             FSM.OnUpdate();
         }
     }
 
-    private void Move(float speed)
+    private void Move(float velocity)
     {
-        this.speed = speed;
+        WalkVelocity = velocity;
         SetState(STATE.WALK);
     }
-    
-    private void SetState(STATE state)
+
+    public void SetState(STATE state)
     {
         var oldFSM = FSM;
 
@@ -91,7 +106,7 @@ partial class PlayerCharacter : MonoBehaviour
             FSM.OnBegin();
         }
     }
-    
+
     public void MoveLeft()
     {
         Move(-1);
@@ -110,7 +125,7 @@ partial class PlayerCharacter : MonoBehaviour
 
     public void Jump()
     {
-        if(jumpPossible == false)
+        if (jumpPossible == false)
         {
             return;
         }
@@ -122,11 +137,6 @@ partial class PlayerCharacter : MonoBehaviour
     public void Attack()
     {
         SetState(STATE.ATTACK);
-    }
-   
-    public float GetSpeed()
-    {
-        return speed;
     }
 
     public void SetJumpPossible(bool isPossible)

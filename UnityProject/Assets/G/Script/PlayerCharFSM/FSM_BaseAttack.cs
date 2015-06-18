@@ -4,37 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-partial class PlayerCharacter
+class FSM_BaseAttack : AbstractFSM
 {
-    private class FSM_BaseAttack : AbstractFSM
+    private float attackTime = 1.0f;
+
+    override public void OnBegin()
     {
-        private float attackTime = 1.0f;
+    }
 
-        override public void OnBegin()
+    override public void OnUpdate()
+    {
+        attackTime -= Time.deltaTime;
+        if (attackTime <= 0.0f)
         {
+            pc.SetState(STATE.IDLE);
+            return;
         }
 
-        override public void OnUpdate()
+        if (pc.WalkVelocity != 0.0f)
         {
-            attackTime -= Time.deltaTime;
-            if(attackTime <= 0.0f)
+            pc.WalkVelocity = pc.Walk.Direction * (pc.WalkSpeed - Time.deltaTime);
+            if (pc.WalkVelocity < 0.0f)
             {
-                pc.SetState(STATE.IDLE);
-                return;
-            }
-
-            if(pc.speed >= 0.0f)
-            {
-                pc.speed -= Time.deltaTime;
-                if(pc.speed < 0.0f)
-                {
-                    pc.speed = 0.0f;
-                }
+                pc.WalkVelocity = 0.0f;
             }
         }
+    }
 
-        override public void OnEnd()
-        {
-        }
+    override public void OnEnd()
+    {
     }
 }
