@@ -140,7 +140,8 @@ GameObject:
   - 50: {fileID: 392488247}
   - 61: {fileID: 392488246}
   - 114: {fileID: 392488245}
-  - 212: {fileID: 392488249}
+  - 23: {fileID: 392488250}
+  - 33: {fileID: 392488249}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -200,17 +201,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!212 &392488249
-SpriteRenderer:
+--- !u!33 &392488249
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 392488244}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &392488250
+MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 392488244}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -224,8 +232,6 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: f45a39483cf4f914a816af821c9262bb, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &575481340 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100158, guid: fb4a56ee3e3993c418718c5f37d81927, type: 2}
