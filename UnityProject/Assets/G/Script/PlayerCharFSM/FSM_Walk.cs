@@ -12,6 +12,12 @@ class FSM_Walk : AbstractFSM
         {
             pc.GetComponent<Transform>().rotation = Quaternion.Euler(0, 90, 0);
         }
+
+        if (pc.WalkVelocity != 0)
+        {
+            var animator = pc.GetComponent<Animator>();
+            animator.Play("Walk");
+        }
     }
 
     override public void OnUpdate()

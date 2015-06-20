@@ -10,6 +10,18 @@ class FSM_BaseAttack : AbstractFSM
 
     override public void OnBegin()
     {
+        Collider[] colliders;
+        if ((colliders = Physics.OverlapSphere(pc.GetComponent<Transform>().position, 100.0f)).Length > 0)
+        {
+            foreach (var collider in colliders)
+            {
+                var monster = collider.GetComponent<Monster>();
+                if (monster != null)
+                {
+                    collider.GetComponent<Unit>().GetDamage(500);
+                }
+            }
+        }
     }
 
     override public void OnUpdate()
