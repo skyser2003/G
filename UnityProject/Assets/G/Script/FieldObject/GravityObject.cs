@@ -7,10 +7,10 @@ using System.Text;
 class GravityObject : MonoBehaviour
 {
     static private float gravity = 0.5f;
-
     static public float Gravity { get { return gravity; } }
 
     private bool applyGravity = true;
+    public Platform hitPlatform;
 
     private void Update()
     {
@@ -22,9 +22,11 @@ class GravityObject : MonoBehaviour
         {
             foreach (var hit in hitList)
             {
-                if (hit.collider.gameObject.GetComponent<Platform>() != null)
+                var platform = hit.collider.gameObject.GetComponent<Platform>();
+                if (platform != null)
                 {
                     applyGravity = false;
+                    hitPlatform = platform;
                     break;
                 }
             }
@@ -32,6 +34,7 @@ class GravityObject : MonoBehaviour
 
         if(applyGravity == true)
         {
+            hitPlatform = null;
             GetComponent<Transform>().localPosition += new Vector3(0.0f, -gravity * Time.deltaTime, 0.0f);
         }
 
