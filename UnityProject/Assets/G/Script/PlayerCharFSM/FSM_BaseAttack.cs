@@ -18,7 +18,15 @@ class FSM_BaseAttack : AbstractFSM
                 var monster = collider.GetComponent<Monster>();
                 if (monster != null)
                 {
-                    collider.GetComponent<Unit>().GetDamage(500);
+                    var obj = UnityEngine.Object.Instantiate(GameObject.Find("AttackSphere"));
+                    var atkObj = obj.GetComponent<AttackObject>();
+                    var info = new AttackInfo();
+                    info.startPosition = pc.GetComponent<Transform>().localPosition;
+                    info.ownerID = pc.GetComponent<Unit>().UID;
+                    info.targetGroup.Add(typeof(Monster));
+                    info.damage = 500;
+
+                    atkObj.Init(info);
                 }
             }
         }
