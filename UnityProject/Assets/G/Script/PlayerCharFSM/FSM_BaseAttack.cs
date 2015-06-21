@@ -12,14 +12,14 @@ class FSM_BaseAttack : AbstractFSM
     {
         var obj = UnityEngine.Object.Instantiate(GameObject.Find("AttackSphere"));
         var atkObj = obj.GetComponent<AttackObject>();
-        var info = new AttackInfo();
-        info.startPosition = pc.GetComponent<Transform>().localPosition;
+
+        var info = DataManager.Inst.GetAttackInfo("Fireball").Clone();
+        info.startPosition.x += pc.GetComponent<Transform>().localPosition.x;
+        info.startPosition.y += pc.GetComponent<Transform>().localPosition.y;
         info.ownerID = pc.GetComponent<Unit>().UID;
         info.targetGroup.Add(typeof(Monster));
-        info.totalFrame = 3;
-        info.damagePerFrame = 500;
-        info.beginSpeed = new Vector2(1.0f * pc.GetComponent<Transform>().rotation.y, 0);
-        info.accel = new Vector2(2.0f * pc.GetComponent<Transform>().rotation.y, 0);
+        info.initialSpeed.x *= pc.GetComponent<Transform>().rotation.y;
+        info.acceleration.x *= pc.GetComponent<Transform>().rotation.y;
 
         atkObj.Init(info);
     }

@@ -2,17 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class AttackInfo
-{
-    public Vector2 startPosition;
-    public int ownerID;
-    public List<Type> targetGroup = new List<Type>();
-    public int totalFrame;
-    public int damagePerFrame;
-    public Vector2 beginSpeed;
-    public Vector2 accel;
-}
-
 class AttackObject : MonoBehaviour
 {
     private AttackInfo info;
@@ -24,7 +13,7 @@ class AttackObject : MonoBehaviour
         this.info = info;
 
         GetComponent<Transform>().localPosition = info.startPosition;
-        speed = info.beginSpeed;
+        speed = info.initialSpeed;
         leftFrame = info.totalFrame;
     }
 
@@ -35,7 +24,7 @@ class AttackObject : MonoBehaviour
             return;
         }
 
-        var ds = info.accel * Time.deltaTime;
+        var ds = info.acceleration * Time.deltaTime;
         speed += ds;
 
         var dt = speed * Time.deltaTime;
