@@ -4,19 +4,19 @@ using UnityEngine;
 
 class AttackInfo
 {
-    public Vector3 startPosition;
+    public Vector2 startPosition;
     public int ownerID;
     public List<Type> targetGroup = new List<Type>();
     public int totalFrame;
     public int damagePerFrame;
-    public float beginSpeed;
-    public float accel;
+    public Vector2 beginSpeed;
+    public Vector2 accel;
 }
 
 class AttackObject : MonoBehaviour
 {
     private AttackInfo info;
-    private float speed;
+    private Vector2 speed;
     private int leftFrame;
 
     public void Init(AttackInfo info)
@@ -35,12 +35,13 @@ class AttackObject : MonoBehaviour
             return;
         }
 
-        float ds = info.accel * Time.deltaTime;
+        var ds = info.accel * Time.deltaTime;
         speed += ds;
 
-        float dt = speed * Time.deltaTime;
+        var dt = speed * Time.deltaTime;
         var newPos = GetComponent<Transform>().localPosition;
-        newPos.x += dt;
+        newPos.x += dt.x;
+        newPos.y += dt.y;
         GetComponent<Transform>().localPosition = newPos;
     }
 
