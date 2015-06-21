@@ -2,6 +2,7 @@
     {
         "name": "Wolf",
         "attackType": "Claw",
-        "moveSpeed": 10
+        "moveSpeed": 10,
+        "hp": 1000
     }
 ]

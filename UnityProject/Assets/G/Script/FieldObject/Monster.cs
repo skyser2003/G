@@ -9,5 +9,6 @@ class Monster : MonoBehaviour
         MonsterManager.Inst.Add(this);
 
         info = DataManager.Inst.GetMonsterInfo(name);
+        GetComponent<Unit>().Init(info);
     }
 }
