@@ -27,6 +27,11 @@ class AttackObject : MonoBehaviour
 
     private void Update()
     {
+        if (info == null)
+        {
+            return;
+        }
+
         float ds = info.accel * Time.deltaTime;
         speed += ds;
 
@@ -53,9 +58,9 @@ class AttackObject : MonoBehaviour
 
             var unit = collider.gameObject.GetComponent<Unit>();
             unit.GetDamage(info.damage);
+            UnityEngine.Object.Destroy(gameObject);
+
             break;
         }
-
-        UnityEngine.Object.Destroy(gameObject);
     }
 }
