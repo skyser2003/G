@@ -24,7 +24,8 @@ class FSM_BaseAttack : AbstractFSM
                     info.startPosition = pc.GetComponent<Transform>().localPosition;
                     info.ownerID = pc.GetComponent<Unit>().UID;
                     info.targetGroup.Add(typeof(Monster));
-                    info.damage = 500;
+                    info.totalFrame = 3;
+                    info.damagePerFrame = 500;
                     info.beginSpeed = 1.0f * pc.GetComponent<Transform>().rotation.y;
                     info.accel = 2.0f * pc.GetComponent<Transform>().rotation.y;
 

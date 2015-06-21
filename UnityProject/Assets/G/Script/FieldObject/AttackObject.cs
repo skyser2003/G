@@ -7,7 +7,8 @@ class AttackInfo
     public Vector3 startPosition;
     public int ownerID;
     public List<Type> targetGroup = new List<Type>();
-    public int damage;
+    public int totalFrame;
+    public int damagePerFrame;
     public float beginSpeed;
     public float accel;
 }
@@ -16,6 +17,7 @@ class AttackObject : MonoBehaviour
 {
     private AttackInfo info;
     private float speed;
+    private int leftFrame;
 
     public void Init(AttackInfo info)
     {
@@ -23,6 +25,7 @@ class AttackObject : MonoBehaviour
 
         GetComponent<Transform>().localPosition = info.startPosition;
         speed = info.beginSpeed;
+        leftFrame = info.totalFrame;
     }
 
     private void Update()
@@ -41,12 +44,14 @@ class AttackObject : MonoBehaviour
         GetComponent<Transform>().localPosition = newPos;
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerStay(Collider collider)
     {
         if (info == null)
         {
             return;
         }
+
+        bool damageDealt = false;
 
         foreach (var type in info.targetGroup)
         {
@@ -57,10 +62,18 @@ class AttackObject : MonoBehaviour
             }
 
             var unit = collider.gameObject.GetComponent<Unit>();
-            unit.GetDamage(info.damage);
-            UnityEngine.Object.Destroy(gameObject);
-
+            unit.GetDamage(info.damagePerFrame);
+            damageDealt = true;
             break;
+        }
+
+        if (damageDealt == true)
+        {
+            --leftFrame;
+            if (leftFrame <= 0)
+            {
+                UnityEngine.Object.Destroy(gameObject);
+            }
         }
     }
 }
