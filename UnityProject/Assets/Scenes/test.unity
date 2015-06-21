@@ -99,6 +99,7 @@ GameObject:
   - 135: {fileID: 35815749}
   - 23: {fileID: 35815748}
   - 114: {fileID: 35815753}
+  - 54: {fileID: 35815752}
   m_Layer: 0
   m_Name: AttackSphere
   m_TagString: Untagged
@@ -161,6 +162,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!54 &35815752
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 35815747}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &35815753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +322,7 @@ BoxCollider2D:
   m_Size: {x: 1, y: 1}
 --- !u!50 &392488247
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -314,11 +331,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &392488248
 Transform:
   m_ObjectHideFlags: 0
@@ -362,7 +379,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!1 &575481340
+--- !u!1 &575481340 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100158, guid: fb4a56ee3e3993c418718c5f37d81927, type: 2}
   m_PrefabInternal: {fileID: 240499302}
@@ -383,7 +400,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!1 &649468036
+--- !u!1 &649468036 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100004, guid: fb4a56ee3e3993c418718c5f37d81927, type: 2}
   m_PrefabInternal: {fileID: 240499302}
@@ -443,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c46218c71908494c88f853c36af05f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1214847706
+--- !u!1 &1214847706 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100026, guid: 0f09767cced46cd4e9334485caf73946, type: 2}
   m_PrefabInternal: {fileID: 167760605}
@@ -615,6 +632,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1785272911
 Transform:
   m_ObjectHideFlags: 0
