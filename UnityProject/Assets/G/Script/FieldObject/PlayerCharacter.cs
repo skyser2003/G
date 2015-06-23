@@ -66,7 +66,15 @@ class PlayerCharacter : MonoBehaviour
     private void Move(int direction)
     {
         Walk.Direction = direction;
-        SetState(STATE.WALK);
+
+        if (direction == 0)
+        {
+            SetState(STATE.IDLE);
+        }
+        else
+        {
+            SetState(STATE.WALK);
+        }
     }
 
     public void SetState(STATE state)
@@ -123,7 +131,6 @@ class PlayerCharacter : MonoBehaviour
     public void Stop()
     {
         Move(0);
-        SetState(STATE.IDLE);
     }
 
     public void Jump()

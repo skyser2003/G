@@ -16,7 +16,7 @@ class FSM_Walk : AbstractFSM
         if (pc.WalkVelocity != 0)
         {
             var animator = pc.GetComponent<Animator>();
-            animator.Play("Walk");
+            animator.SetFloat("HorizontalSpeed", pc.Walk.Speed);
         }
     }
 
