@@ -6,13 +6,11 @@ class Unit : MonoBehaviour
 
     private bool isDead = false;
     private int hp;
-    private UnitPhysicsInfo physics;
 
     public int UID { get; private set; }
     public int HP { get { return hp; } }
     public int Group { get; set; }
-
-    public UnitPhysicsInfo Physics { get { return physics; } }
+    public UnitPhysicsInfo Physics;
 
     public Unit()
     {
@@ -26,7 +24,7 @@ class Unit : MonoBehaviour
 
     public void SetPhysicsInfo(UnitPhysicsInfo physics)
     {
-        this.physics = physics;
+        Physics = physics;
     }
 
     public void GetDamage(int damage)

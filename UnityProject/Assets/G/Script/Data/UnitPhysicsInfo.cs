@@ -1,4 +1,5 @@
-﻿class UnitPhysicsInfo
+﻿[System.Serializable]
+class UnitPhysicsInfo
 {
     public float weight;
     public float moveAcceleration;
