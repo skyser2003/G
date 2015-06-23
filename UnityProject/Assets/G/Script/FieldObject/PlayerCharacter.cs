@@ -120,17 +120,26 @@ class PlayerCharacter : MonoBehaviour
 
     public void MoveLeft()
     {
-        Move(-1);
+        if(walk.Direction != -1)
+        {
+            Move(-1);
+        }
     }
 
     public void MoveRight()
     {
-        Move(1);
+        if(walk.Direction != 1)
+        {
+            Move(1);
+        }
     }
 
     public void Stop()
     {
-        Move(0);
+        if(walk.Direction != 0)
+        {
+            Move(0);
+        }
     }
 
     public void Jump()

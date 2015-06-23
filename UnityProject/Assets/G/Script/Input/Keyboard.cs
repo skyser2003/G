@@ -20,24 +20,22 @@ class Keyboard : MonoBehaviour
             pc.Jump();
         }
 
-        if (Input.GetKeyDown("left"))
+        if (Input.GetKey("left"))
         {
             pc.MoveLeft();
         }
-        else if (Input.GetKeyDown("right"))
+        else if (Input.GetKey("right"))
         {
             pc.MoveRight();
+        }
+        else
+        {
+            pc.Stop();
         }
 
         if(Input.GetKeyDown("z"))
         {
             pc.Attack();
-        }
-        
-        // Key up
-        if (Input.GetKeyUp("left") || Input.GetKeyUp("right"))
-        {
-            pc.Stop();
         }
     }
 }
