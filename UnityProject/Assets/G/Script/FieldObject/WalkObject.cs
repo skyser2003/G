@@ -3,29 +3,36 @@ using System;
 
 class WalkObject : MonoBehaviour
 {
-    private float speed;
     private int direction;
 
     private GravityObject gvObject;
+    private Unit unitObject;
 
-    public float Velocity {
+    public float Velocity
+    {
         get
         {
-            return direction * speed;
-        }
-        set
-        {
-            direction = Math.Sign(value);
-            speed = Math.Abs(value);
+            return direction * unitObject.Physics.maxMoveSpeed;
         }
     }
 
-    public float Speed { get { return speed; } }
-    public int Direction { get { return direction; } }
+    public float Speed { get { return unitObject.Physics.maxMoveSpeed; } }
+    public int Direction
+    {
+        get
+        {
+            return direction;
+        }
+        set
+        {
+            direction = value;
+        }
+    }
 
     private void Start()
     {
         gvObject = GetComponent<GravityObject>();
+        unitObject = GetComponent<Unit>();
     }
 
     private void Update()

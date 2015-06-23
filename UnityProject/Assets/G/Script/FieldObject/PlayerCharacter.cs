@@ -18,21 +18,24 @@ class PlayerCharacter : MonoBehaviour
         {
             return walk == null ? 0.0f : walk.Velocity;
         }
-        set
-        {
-            if (walk != null)
-            {
-                walk.Velocity = value;
-            }
-        }
     }
 
     public float WalkSpeed { get { return walk == null ? 0.0f : walk.Speed; } }
 
     private void Start()
     {
-        Stop();
         walk = GetComponent<WalkObject>();
+                
+        var physics = new UnitPhysicsInfo();
+        physics.weight = 10;
+        physics.moveAcceleration = 0.5f;
+        physics.maxMoveSpeed = 1.0f;
+        physics.moveFriction = 0.25f;
+        physics.jumpSpeed = 1.0f;
+        physics.jumpFriction = 0.0f;
+        GetComponent<Unit>().SetPhysicsInfo(physics);
+
+        Stop();
     }
 
     private void Update()
@@ -47,7 +50,7 @@ class PlayerCharacter : MonoBehaviour
                 isJumping = false;
             }
 
-            velocity.y = 1.0f;
+            velocity.y = GetComponent<Unit>().Physics.jumpSpeed;
         }
 
         var dx = velocity * Time.deltaTime;
@@ -60,9 +63,9 @@ class PlayerCharacter : MonoBehaviour
         }
     }
 
-    private void Move(float velocity)
+    private void Move(int direction)
     {
-        WalkVelocity = velocity;
+        Walk.Direction = direction;
         SetState(STATE.WALK);
     }
 

@@ -33,14 +33,7 @@ class FSM_BaseAttack : AbstractFSM
             return;
         }
 
-        if (pc.WalkVelocity != 0.0f)
-        {
-            pc.WalkVelocity = pc.Walk.Direction * (pc.WalkSpeed - Time.deltaTime);
-            if (pc.WalkVelocity < 0.0f)
-            {
-                pc.WalkVelocity = 0.0f;
-            }
-        }
+        pc.Stop();
     }
 
     override public void OnEnd()
