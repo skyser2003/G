@@ -16,9 +16,9 @@ class Unit : MonoBehaviour
         UID = NextUID++;
     }
 
-    public void Init(MonsterInfo info)
+    public void Init(int hp)
     {
-        hp = info.hp;
+        this.hp = hp;
     }
 
     public void GetDamage(int damage)
