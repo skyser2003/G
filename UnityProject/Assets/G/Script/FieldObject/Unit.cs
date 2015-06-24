@@ -12,6 +12,8 @@ class Unit : MonoBehaviour
     public int Group { get; set; }
     public UnitPhysicsInfo Physics;
 
+    public Vector2 Velocity;
+
     public Unit()
     {
         UID = NextUID++;
@@ -35,6 +37,7 @@ class Unit : MonoBehaviour
     private void Start()
     {
         hp = 1000;
+        Velocity = new Vector2();
     }
 
     private void Update()
@@ -48,5 +51,8 @@ class Unit : MonoBehaviour
         {
             Object.Destroy(gameObject);
         }
+
+        var delta = Velocity * Time.deltaTime;
+        transform.localPosition += new Vector3(delta.x, delta.y, 0.0f);
     }
 }

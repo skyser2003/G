@@ -3,14 +3,15 @@
 class PlayerCharacter : MonoBehaviour
 {
     private bool jumpPossible = true;
-    private bool isJumping = false;
-    private float jumpTime = 0.0f;
+    private float jumpVelocity = 0.0f;
 
     private STATE state;
     private AbstractFSM FSM = null;
     private WalkObject walk;
+    private Unit unit;
 
     public WalkObject Walk { get { return walk; } }
+    public bool IsJumping { get; set; }
 
     public float WalkVelocity
     {
@@ -25,37 +26,22 @@ class PlayerCharacter : MonoBehaviour
     private void Start()
     {
         walk = GetComponent<WalkObject>();
+        unit = GetComponent<Unit>();
                 
         var physics = new UnitPhysicsInfo();
         physics.weight = 10;
         physics.moveAcceleration = 0.5f;
         physics.maxMoveSpeed = 1.0f;
         physics.moveFriction = 0.25f;
-        physics.jumpSpeed = 1.0f;
+        physics.jumpSpeed = 5.0f;
         physics.jumpFriction = 0.0f;
-        GetComponent<Unit>().SetPhysicsInfo(physics);
+        unit.SetPhysicsInfo(physics);
 
         Stop();
     }
 
     private void Update()
     {
-        var velocity = new Vector3();
-
-        if (isJumping == true)
-        {
-            jumpTime -= Time.deltaTime;
-            if (jumpTime <= 0.0f)
-            {
-                isJumping = false;
-            }
-
-            velocity.y = GetComponent<Unit>().Physics.jumpSpeed;
-        }
-
-        var dx = velocity * Time.deltaTime;
-        transform.localPosition += new Vector3(dx.x, dx.y, 0.0f);
-
         // FSM
         if (FSM != null)
         {
@@ -149,8 +135,8 @@ class PlayerCharacter : MonoBehaviour
             return;
         }
 
-        isJumping = true;
-        jumpTime = 1.0f;
+        IsJumping = true;
+        unit.Velocity = new Vector2(unit.Velocity.x, unit.Physics.jumpSpeed);
     }
 
     public void Attack()

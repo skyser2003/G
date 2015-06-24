@@ -6,7 +6,7 @@ class WalkObject : MonoBehaviour
     private int direction;
 
     private GravityObject gvObject;
-    private Unit unitObject;
+    private Unit unit;
 
     private float speed;
 
@@ -14,7 +14,7 @@ class WalkObject : MonoBehaviour
     {
         get
         {
-            return direction * unitObject.Physics.maxMoveSpeed;
+            return direction * unit.Physics.maxMoveSpeed;
         }
     }
 
@@ -30,7 +30,7 @@ class WalkObject : MonoBehaviour
             direction = value;
             if(direction != 0)
             {
-                speed = unitObject.Physics.maxMoveSpeed;
+                speed = unit.Physics.maxMoveSpeed;
             }
             else
             {
@@ -42,7 +42,7 @@ class WalkObject : MonoBehaviour
     private void Start()
     {
         gvObject = GetComponent<GravityObject>();
-        unitObject = GetComponent<Unit>();
+        unit = GetComponent<Unit>();
         speed = 0.0f;
     }
 

@@ -363,6 +363,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c46218c71908494c88f853c36af05f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Physics:
+    weight: 0
+    moveAcceleration: 0
+    maxMoveSpeed: 0
+    moveFriction: 0
+    jumpSpeed: 0
+    jumpFriction: 0
 --- !u!114 &806670008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +454,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c46218c71908494c88f853c36af05f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Physics:
+    weight: 0
+    moveAcceleration: 0
+    maxMoveSpeed: 0
+    moveFriction: 0
+    jumpSpeed: 0
+    jumpFriction: 0
 --- !u!114 &1214847712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +524,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448692, guid: 10b3ac8ab057af942b983dca833b76d4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .119999997
+      value: .189999998
       objectReference: {fileID: 0}
     - target: {fileID: 448692, guid: 10b3ac8ab057af942b983dca833b76d4, type: 2}
       propertyPath: m_LocalPosition.z
