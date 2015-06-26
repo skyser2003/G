@@ -2,9 +2,6 @@
 
 class PlayerCharacter : MonoBehaviour
 {
-    private bool jumpPossible = true;
-    private float jumpVelocity = 0.0f;
-
     private STATE state;
     private AbstractFSM FSM = null;
     private WalkObject walk;
@@ -27,13 +24,14 @@ class PlayerCharacter : MonoBehaviour
     {
         walk = GetComponent<WalkObject>();
         unit = GetComponent<Unit>();
-                
+
         var physics = new UnitPhysicsInfo();
-        physics.weight = 10;
+        physics.weight = 1;
         physics.moveAcceleration = 0.5f;
         physics.maxMoveSpeed = 1.0f;
         physics.moveFriction = 0.25f;
         physics.jumpSpeed = 5.0f;
+        physics.jumpContinueSpeed = 5.0f;
         physics.jumpFriction = 0.0f;
         unit.SetPhysicsInfo(physics);
 
@@ -106,7 +104,7 @@ class PlayerCharacter : MonoBehaviour
 
     public void MoveLeft()
     {
-        if(walk.Direction != -1)
+        if (walk.Direction != -1)
         {
             Move(-1);
         }
@@ -114,7 +112,7 @@ class PlayerCharacter : MonoBehaviour
 
     public void MoveRight()
     {
-        if(walk.Direction != 1)
+        if (walk.Direction != 1)
         {
             Move(1);
         }
@@ -122,30 +120,14 @@ class PlayerCharacter : MonoBehaviour
 
     public void Stop()
     {
-        if(walk.Direction != 0)
+        if (walk.Direction != 0)
         {
             Move(0);
         }
     }
 
-    public void Jump()
-    {
-        if (jumpPossible == false)
-        {
-            return;
-        }
-
-        IsJumping = true;
-        unit.Velocity = new Vector2(unit.Velocity.x, unit.Physics.jumpSpeed);
-    }
-
     public void Attack()
     {
         SetState(STATE.ATTACK);
-    }
-
-    public void SetJumpPossible(bool isPossible)
-    {
-        jumpPossible = isPossible;
     }
 }

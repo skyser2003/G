@@ -6,5 +6,6 @@ class UnitPhysicsInfo
     public float maxMoveSpeed;
     public float moveFriction;
     public float jumpSpeed;
+    public float jumpContinueSpeed;
     public float jumpFriction;
 }

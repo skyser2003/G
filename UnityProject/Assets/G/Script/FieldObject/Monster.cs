@@ -17,6 +17,7 @@ class Monster : MonoBehaviour
         physics.maxMoveSpeed = 1.0f;
         physics.moveFriction = 0.25f;
         physics.jumpSpeed = 1.0f;
+        physics.jumpContinueSpeed = 1.0f;
         physics.jumpFriction = 0.0f;
         GetComponent<Unit>().SetPhysicsInfo(physics);
     }

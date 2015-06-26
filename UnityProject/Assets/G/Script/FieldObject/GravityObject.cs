@@ -26,14 +26,14 @@ class GravityObject : MonoBehaviour
         applyGravity = true;
 
         var hitList = Physics2D.RaycastAll(transform.position, -Vector2.up, 0.1f);
-        if(hitList != null)
+        if (hitList != null)
         {
             foreach (var hit in hitList)
             {
                 var platform = hit.collider.gameObject.GetComponent<Platform>();
                 if (platform != null)
                 {
-                    if(unit.Velocity.y <= 0)
+                    if (unit.Velocity.y <= 0)
                     {
                         applyGravity = false;
                         hitPlatform = platform;
@@ -43,31 +43,22 @@ class GravityObject : MonoBehaviour
             }
         }
 
-        if(applyGravity == true)
+        if (applyGravity == true)
         {
             hitPlatform = null;
             unit.Velocity.y += gravity * Time.deltaTime;
         }
 
         // Stop
-        if(oldApplyGravity == true && applyGravity == false)
+        if (oldApplyGravity == true && applyGravity == false)
         {
-            SetJumpPossible(true);
+            unit.IsJumpPossible = true;
             unit.Velocity.y = 0.0f;
         }
         // Begin
-        else if(oldApplyGravity == false && applyGravity == true)
+        else if (oldApplyGravity == false && applyGravity == true)
         {
-            SetJumpPossible(false);
-        }
-    }
-
-    private void SetJumpPossible(bool isPossible)
-    {
-        var pc = GetComponent<PlayerCharacter>();
-        if(pc != null)
-        {
-            pc.SetJumpPossible(isPossible);
+            unit.IsJumpPossible = false;
         }
     }
 }

@@ -14,12 +14,20 @@ class Keyboard : MonoBehaviour
             return;
         }
 
-        // Key down
+        var unit = GetComponent<Unit>();
+
+        // Jump
         if (Input.GetKeyDown("space"))
         {
-            pc.Jump();
+            unit.Jump();
         }
 
+        if(Input.GetKey("space") && unit.IsJumping == true)
+        {
+            unit.ContinueJump(Time.deltaTime);
+        }
+
+        // Move
         if (Input.GetKey("left"))
         {
             pc.MoveLeft();
@@ -33,6 +41,7 @@ class Keyboard : MonoBehaviour
             pc.Stop();
         }
 
+        // Attack
         if(Input.GetKeyDown("z"))
         {
             pc.Attack();
