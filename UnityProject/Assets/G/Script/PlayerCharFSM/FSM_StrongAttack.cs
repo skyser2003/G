@@ -4,17 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class FSM_BaseAttack : AbstractFSM
+class FSM_StrongAttack : AbstractFSM
 {
     private float preDelay;
     private float postDelay;
     bool attacked;
+    public float ChargeTime = 0.0f;
 
     override public void OnBegin()
     {
         preDelay = pc.attackPreDelay;
         postDelay = pc.attackPostDelay;
         attacked = false;
+        ChargeTime = 0.0f;
+
         pc.GetComponent<Animator>().SetTrigger("StartWeakAttack");
     }
 

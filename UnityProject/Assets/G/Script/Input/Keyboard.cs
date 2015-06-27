@@ -6,6 +6,9 @@ using System.Text;
 
 class Keyboard : MonoBehaviour
 {
+    private float strongAttackDelay = 0.0f;
+    private float strongAttackChargeTime = 0.0f;
+
     private void Update()
     {
         var pc = GetComponent<PlayerCharacter>();
@@ -44,7 +47,33 @@ class Keyboard : MonoBehaviour
         // Attack
         if(Input.GetKeyDown("z"))
         {
-            pc.Attack();
+            strongAttackDelay = pc.strongAttackDelay;
+            strongAttackChargeTime = 0.0f;
+        }
+
+        if(Input.GetKey("z"))
+        {
+            strongAttackDelay -= Time.deltaTime;
+            strongAttackChargeTime += Time.deltaTime;
+
+            if(strongAttackDelay <= 0.0f)
+            {
+                pc.GetComponent<Animator>().SetTrigger("StartStrongAttack");
+            }
+        }
+
+        if(Input.GetKeyUp("z"))
+        {
+            if (strongAttackDelay > 0.0f)
+            {
+                pc.Attack();
+                strongAttackChargeTime = 0.0f;
+            }
+            else
+            {
+                pc.StrongAttack(strongAttackChargeTime);
+                strongAttackDelay = 0.0f;
+            }
         }
     }
 }

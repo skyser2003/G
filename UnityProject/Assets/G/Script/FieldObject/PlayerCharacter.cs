@@ -22,6 +22,7 @@ class PlayerCharacter : MonoBehaviour
 
     public float attackPreDelay = 0.2f;
     public float attackPostDelay = 1.0f;
+    public float strongAttackDelay = 1.0f;
 
     private void Start()
     {
@@ -86,6 +87,11 @@ class PlayerCharacter : MonoBehaviour
                     FSM = new FSM_BaseAttack();
                 }
                 break;
+            case STATE.STRONG_ATTACK:
+                {
+                    FSM = new FSM_StrongAttack();
+                }
+                break;
             case STATE.WALK:
                 {
                     FSM = new FSM_Walk();
@@ -137,5 +143,15 @@ class PlayerCharacter : MonoBehaviour
     public void Attack()
     {
         SetState(STATE.ATTACK);
+    }
+
+    public void StrongAttack(float chargeTime)
+    {
+        SetState(STATE.STRONG_ATTACK);
+        if (FSM.GetType() == typeof(FSM_StrongAttack))
+        {
+            var strAtkFSM = (FSM_StrongAttack)FSM;
+            strAtkFSM.ChargeTime = chargeTime;
+        }
     }
 }

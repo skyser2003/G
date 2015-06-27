@@ -7,7 +7,8 @@ public enum STATE
 {
     IDLE,
     WALK,
-    ATTACK
+    ATTACK,
+    STRONG_ATTACK
 }
 
 abstract class AbstractFSM
