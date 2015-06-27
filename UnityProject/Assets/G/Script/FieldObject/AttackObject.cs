@@ -4,7 +4,7 @@ using UnityEngine;
 
 class AttackObject : MonoBehaviour
 {
-    private AttackInfo info;
+    public AttackInfo info;
     private Vector2 speed;
     private int leftFrame;
 

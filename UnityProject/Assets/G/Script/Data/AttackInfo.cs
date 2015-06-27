@@ -11,7 +11,7 @@ class AttackInfo
     public int damagePerFrame;
     public Vector2 initialSpeed;
     public Vector2 acceleration;
-
+    
     // Runtime data
     public List<Type> targetGroup = new List<Type>();
     public int ownerID;
@@ -25,7 +25,7 @@ class AttackInfo
         ret.damagePerFrame = damagePerFrame;
         ret.initialSpeed = initialSpeed;
         ret.acceleration = acceleration;
-
+        
         ret.targetGroup = new List<Type>(targetGroup);
         ret.ownerID = ownerID;
 

@@ -20,6 +20,9 @@ class PlayerCharacter : MonoBehaviour
 
     public float WalkSpeed { get { return walk == null ? 0.0f : walk.Speed; } }
 
+    public float attackPreDelay = 0.2f;
+    public float attackPostDelay = 1.0f;
+
     private void Start()
     {
         walk = GetComponent<WalkObject>();
@@ -49,6 +52,11 @@ class PlayerCharacter : MonoBehaviour
 
     private void Move(int direction)
     {
+        if (state == STATE.ATTACK)
+        {
+            return;
+        }
+
         Walk.Direction = direction;
 
         if (direction == 0)
