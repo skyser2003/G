@@ -7,10 +7,10 @@ using System.Text;
 class GravityObject : MonoBehaviour
 {
     static private float gravity = -9.8f;
+    static private float maxFallSpeed = -10.0f;
     static public float Gravity { get { return gravity; } }
 
     private bool applyGravity = true;
-    private float speed = 0.0f;
     private Unit unit;
 
     public Platform hitPlatform;
@@ -47,6 +47,7 @@ class GravityObject : MonoBehaviour
         {
             hitPlatform = null;
             unit.Velocity.y += gravity * Time.deltaTime;
+            unit.Velocity.y = Math.Max(unit.Velocity.y, maxFallSpeed);
         }
 
         // Stop
