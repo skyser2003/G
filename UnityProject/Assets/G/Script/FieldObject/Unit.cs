@@ -21,13 +21,17 @@ class Unit : MonoBehaviour
         set
         {
             isJumpPossible = value;
-            JumpContinueTime = 0.2f;
+			if(isJumpPossible)
+			{
+				JumpContinueTimer = JumpContinueTime;
+			}
         }
     }
 
     public UnitPhysicsInfo Physics;
     public Vector2 Velocity;
-    public float JumpContinueTime;
+    public float JumpContinueTime = 0.2f;
+	protected float JumpContinueTimer;
 
     public Unit()
     {
