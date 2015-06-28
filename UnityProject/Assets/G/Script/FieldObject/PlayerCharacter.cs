@@ -23,7 +23,8 @@ class PlayerCharacter : MonoBehaviour
     public float attackPreDelay = 0.2f;
     public float attackPostDelay = 1.0f;
     public float strongAttackDelay = 1.0f;
-    public float attackSpeed = 1.0f;
+    public float weakAttackSpeed = 1.0f;
+    public float strongAttackSpeed = 3.0f;
     public float attackCooltime = 0.0f;
     public int strongAttackBestCharge = 5;
 
