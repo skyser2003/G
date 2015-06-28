@@ -23,11 +23,14 @@ class PlayerCharacter : MonoBehaviour
     public float attackPreDelay = 0.2f;
     public float attackPostDelay = 1.0f;
     public float strongAttackDelay = 1.0f;
+    public float attackSpeed = 1.0f;
+    public float attackCooltime = 0.0f;
 
     private void Start()
     {
         walk = GetComponent<WalkObject>();
         unit = GetComponent<Unit>();
+        attackCooltime = 0.0f;
 
         var physics = new UnitPhysicsInfo();
         physics.weight = 1;
@@ -49,6 +52,8 @@ class PlayerCharacter : MonoBehaviour
         {
             FSM.OnUpdate();
         }
+
+        attackCooltime -= Time.deltaTime;
     }
 
     private void Move(int direction)
@@ -142,12 +147,23 @@ class PlayerCharacter : MonoBehaviour
 
     public void Attack()
     {
+        if(attackCooltime > 0.0f)
+        {
+            return;
+        }
+
         SetState(STATE.ATTACK);
     }
 
     public void StrongAttack(float chargeTime)
     {
+        if(attackCooltime > 0.0f)
+        {
+            return;
+        }
+
         SetState(STATE.STRONG_ATTACK);
+
         if (FSM.GetType() == typeof(FSM_StrongAttack))
         {
             var strAtkFSM = (FSM_StrongAttack)FSM;

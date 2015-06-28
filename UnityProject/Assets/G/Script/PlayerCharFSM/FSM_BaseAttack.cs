@@ -15,7 +15,9 @@ class FSM_BaseAttack : AbstractFSM
         preDelay = pc.attackPreDelay;
         postDelay = pc.attackPostDelay;
         attacked = false;
+
         pc.GetComponent<Animator>().SetTrigger("StartWeakAttack");
+        pc.attackCooltime = pc.attackSpeed;
     }
 
     override public void OnUpdate()

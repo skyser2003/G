@@ -19,6 +19,7 @@ class FSM_StrongAttack : AbstractFSM
         ChargeTime = 0.0f;
 
         pc.GetComponent<Animator>().SetTrigger("StartWeakAttack");
+        pc.attackCooltime = pc.attackSpeed;
     }
 
     override public void OnUpdate()
