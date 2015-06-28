@@ -58,12 +58,11 @@ class Unit : MonoBehaviour
 
         IsJumping = true;
         Velocity.y = Physics.jumpSpeed / Physics.weight;
+        GetComponent<Animator>().SetBool("StartJump", true);
     }
 
     public void ContinueJump(float dt)
     {
-        Debug.Log(JumpContinueTime);
-
         if (IsJumping == false || JumpContinueTime <= 0.0f)
         {
             return;

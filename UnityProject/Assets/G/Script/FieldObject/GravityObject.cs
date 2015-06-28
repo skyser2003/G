@@ -55,11 +55,13 @@ class GravityObject : MonoBehaviour
         {
             unit.IsJumpPossible = true;
             unit.Velocity.y = 0.0f;
+            GetComponent<Animator>().SetBool("IsOnAir", false);
         }
         // Begin
         else if (oldApplyGravity == false && applyGravity == true)
         {
             unit.IsJumpPossible = false;
+            GetComponent<Animator>().SetBool("IsOnAir", true);
         }
     }
 }
