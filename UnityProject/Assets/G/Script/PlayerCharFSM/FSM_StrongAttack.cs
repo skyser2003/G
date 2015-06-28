@@ -34,6 +34,13 @@ class FSM_StrongAttack : AbstractFSM
         // Create attack object
         if (attacked == false)
         {
+            int currentCharge = (int)(ChargeTime / 1.0f);
+            float damageMultiplier = 1.0f;
+            if(currentCharge > pc.strongAttackBestCharge)
+            {
+                damageMultiplier = 0.5f;
+            }
+
             var obj = UnityEngine.Object.Instantiate(GameObject.Find("AttackSphere"));
             var atkObj = obj.GetComponent<AttackObject>();
 
@@ -42,6 +49,7 @@ class FSM_StrongAttack : AbstractFSM
             info.startPosition.y += pc.GetComponent<Transform>().localPosition.y;
             info.ownerID = pc.GetComponent<Unit>().UID;
             info.targetGroup.Add(typeof(Monster));
+            info.damagePerFrame = (int)(info.damagePerFrame * damageMultiplier);
             info.initialSpeed.x *= pc.GetComponent<Transform>().rotation.y;
             info.acceleration.x *= pc.GetComponent<Transform>().rotation.y;
 
