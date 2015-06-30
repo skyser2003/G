@@ -28,6 +28,22 @@ public class MoveObject : MonoBehaviour {
 	public Vector3 GravityForce = Vector3.down * 9.8f;
 	public float GravityResistance = 1f;
 
+	public void Init(float _mass, float _maxspeed, float _acceleration, float _movefriction, 
+	                 float _outerfriction, float _jumpinitforce, float _jumpcontinueforce, float _jumpcontinuetime,
+	                 float _maxfallspeed, float _gravityresistance)
+	{
+		Mass = _mass;
+		MaxSpeed = _maxspeed;
+		Acceleration = _acceleration;
+		MoveFriction = _movefriction;
+		OuterFriction = _outerfriction;
+		JumpInitForce = _jumpinitforce;
+		JumpContinueForce = _jumpcontinueforce;
+		JumpContinueTime = _jumpcontinuetime;
+		MaxFallSpeed = _maxfallspeed;
+		GravityResistance = _gravityresistance;
+	}
+
 	public void Move(bool _isleft)
 	{
 		IsInnerMoving = true;
@@ -47,10 +63,10 @@ public class MoveObject : MonoBehaviour {
 
 	public void Process(float _deltatime)
 	{
-		ProcessInnerForce(_deltatime);
-		ProcessOuterForce(_deltatime);
 		ProcessJump(_deltatime);
 		ProcessGravity (_deltatime);
+		ProcessInnerForce(_deltatime);
+		ProcessOuterForce(_deltatime);
 		Acummulate(_deltatime);
 
 		ProcessMovement(_deltatime);
@@ -98,6 +114,7 @@ public class MoveObject : MonoBehaviour {
 		if(IsOnGround)
 		{
 			IsOnGround = false;
+			//InnerForce.y += JumpInitForce;
 			InnerVelocity.y += JumpInitForce / Mass;
 		}else
 		{
@@ -112,7 +129,7 @@ public class MoveObject : MonoBehaviour {
 			JumpContinueTimer += _deltatime;
 			if(JumpContinueTimer < JumpContinueTime && IsTryingToJump)
 			{
-				InnerVelocity.y += JumpContinueForce / Mass * _deltatime;
+				InnerForce.y += JumpContinueForce;
 			}
 		}
 	}
@@ -159,6 +176,13 @@ public class MoveObject : MonoBehaviour {
 			{			
 				Vector3 newpos = transform.position;
 				newpos.y = rayhits[0].point.y;
+				for(int iter = 0; iter < rayhits.Length; iter++)
+				{
+					if(newpos.y < rayhits[iter].point.y)
+					{
+						newpos.y = rayhits[iter].point.y;
+					}
+				}
 				transform.position = newpos;
 				TotalVelocity.y = 0f;
 				InnerVelocity.y = 0f;
