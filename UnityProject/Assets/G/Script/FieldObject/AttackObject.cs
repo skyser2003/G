@@ -4,17 +4,16 @@ using UnityEngine;
 
 class AttackObject : MonoBehaviour
 {
-    public AttackInfo info;
+    public AttackObjectInfo info;
     private Vector2 speed;
     private int leftFrame;
 
-    public void Init(AttackInfo info)
+    public void Init(AttackObjectInfo info)
     {
         this.info = info;
 
-        GetComponent<Transform>().localPosition = info.startPosition;
+        GetComponent<Transform>().localPosition = info.position;
         speed = info.initialSpeed;
-        leftFrame = info.totalFrame;
     }
 
     private void Update()
@@ -52,18 +51,14 @@ class AttackObject : MonoBehaviour
             }
 
             var unit = collider.gameObject.GetComponent<Unit>();
-            unit.GetDamage(info.damagePerFrame);
+            unit.GetDamage(info.damage);
             damageDealt = true;
             break;
         }
 
         if (damageDealt == true)
         {
-            --leftFrame;
-            if (leftFrame <= 0)
-            {
-                UnityEngine.Object.Destroy(gameObject);
-            }
+            UnityEngine.Object.Destroy(gameObject);
         }
     }
 }

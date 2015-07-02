@@ -9,12 +9,14 @@ class FSM_BaseAttack : AbstractFSM
     private float preDelay;
     private float postDelay;
     bool attacked;
+    float time;
 
     override public void OnBegin()
     {
         preDelay = pc.attackPreDelay;
         postDelay = pc.attackPostDelay;
         attacked = false;
+        time = 0.0f;
 
         pc.GetComponent<Animator>().SetTrigger("StartWeakAttack");
         pc.attackCooltime = pc.weakAttackSpeed;
@@ -32,18 +34,11 @@ class FSM_BaseAttack : AbstractFSM
         // Create attack object
         if (attacked == false)
         {
-            var obj = UnityEngine.Object.Instantiate(GameObject.Find("AttackSphere"));
-            var atkObj = obj.GetComponent<AttackObject>();
+            var info = DataManager.Inst.GetAttackInfo("Fireball");
 
-            var info = DataManager.Inst.GetAttackInfo("Fireball").Clone();
-            info.startPosition.x += pc.GetComponent<Transform>().localPosition.x;
-            info.startPosition.y += pc.GetComponent<Transform>().localPosition.y;
-            info.ownerID = pc.GetComponent<Unit>().UID;
-            info.targetGroup.Add(typeof(Monster));
-            info.initialSpeed.x *= pc.GetComponent<Transform>().rotation.y;
-            info.acceleration.x *= pc.GetComponent<Transform>().rotation.y;
-
-            atkObj.Init(info);
+            var obj = new GameObject();
+            var atkManagerObj = obj.AddComponent<AttackManagerObject>();
+            atkManagerObj.Init(pc.gameObject, info);
 
             attacked = true;
         }

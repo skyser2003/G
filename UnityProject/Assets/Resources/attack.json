@@ -1,9 +1,23 @@
 [
     {
         "name": "Fireball",
-        "startPosition": { "x": 0, "y": 0 },
-        "totalFrame": 3,
-        "damagePerFrame": 500,
+        "frames": [
+            {
+                "position": { "x": 0, "y": 0 },
+                "time": 0.1,
+                "damage": 500
+            },
+            {
+                "position": { "x": 0, "y": 0 },
+                "time": 0.2,
+                "damage": 500
+            },
+            {
+                "position": { "x": 0, "y": 0 },
+                "time": 0.3,
+                "damage": 500
+            }
+        ],
         "initialSpeed": { "x": 1, "y": 0 },
         "acceleration": { "x": 2, "y": 0 }
     },

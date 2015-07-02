@@ -41,19 +41,15 @@ class FSM_StrongAttack : AbstractFSM
                 damageMultiplier = 0.5f;
             }
 
-            var obj = UnityEngine.Object.Instantiate(GameObject.Find("AttackSphere"));
-            var atkObj = obj.GetComponent<AttackObject>();
-
             var info = DataManager.Inst.GetAttackInfo("Fireball").Clone();
-            info.startPosition.x += pc.GetComponent<Transform>().localPosition.x;
-            info.startPosition.y += pc.GetComponent<Transform>().localPosition.y;
-            info.ownerID = pc.GetComponent<Unit>().UID;
-            info.targetGroup.Add(typeof(Monster));
-            info.damagePerFrame = (int)(info.damagePerFrame * damageMultiplier);
-            info.initialSpeed.x *= pc.GetComponent<Transform>().rotation.y;
-            info.acceleration.x *= pc.GetComponent<Transform>().rotation.y;
+            foreach(var frame in info.frames)
+            {
+                frame.damage = (int)(frame.damage * damageMultiplier);
+            }
 
-            atkObj.Init(info);
+            var obj = new GameObject();
+            var atkManagerObj = obj.AddComponent<AttackManagerObject>();
+            atkManagerObj.Init(pc.gameObject, info);
 
             attacked = true;
         }
