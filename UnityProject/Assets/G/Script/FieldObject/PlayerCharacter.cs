@@ -60,11 +60,6 @@ class PlayerCharacter : MonoBehaviour
 
     private void Move(int direction)
     {
-        if (state == STATE.ATTACK)
-        {
-            return;
-        }
-
         Walk.Direction = direction;
 
         if (direction == 0)
