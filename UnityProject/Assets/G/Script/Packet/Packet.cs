@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 
-public class PKS_MOVE
+public struct PKS_ENTER
+{
+    string name;
+}
+
+public struct PKS_MOVE
 {
     Vector2 dest;
 }
 
-public class PKS_STOP
+public struct PKS_STOP
 {
     Vector2 currentPos;
 }
