@@ -14,7 +14,7 @@ class WalkObject : MonoBehaviour
     {
         get
         {
-            return direction * unit.Physics.maxMoveSpeed;
+            return (float)(direction * unit.Info.MaxMovementSpeed);
         }
     }
 
@@ -30,7 +30,7 @@ class WalkObject : MonoBehaviour
             direction = value;
             if(direction != 0)
             {
-                speed = unit.Physics.maxMoveSpeed;
+                speed = (float)unit.Info.MaxMovementSpeed;
             }
             else
             {

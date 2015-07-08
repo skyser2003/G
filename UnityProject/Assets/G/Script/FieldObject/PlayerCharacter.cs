@@ -34,15 +34,8 @@ class PlayerCharacter : MonoBehaviour
         unit = GetComponent<Unit>();
         attackCooltime = 0.0f;
 
-        var physics = new UnitPhysicsInfo();
-        physics.weight = 1;
-        physics.moveAcceleration = 0.5f;
-        physics.maxMoveSpeed = 1.0f;
-        physics.moveFriction = 0.25f;
-        physics.jumpSpeed = 5.0f;
-        physics.jumpContinueSpeed = 5.0f;
-        physics.jumpFriction = 0.0f;
-        unit.SetPhysicsInfo(physics);
+        var info = DataManager.Inst.GetObjectBalance("ID_1");
+        unit.SetPhysicsInfo(info);
 
         Stop();
     }

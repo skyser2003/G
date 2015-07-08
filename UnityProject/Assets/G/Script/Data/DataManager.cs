@@ -6,50 +6,64 @@ class DataManager : MonoBehaviour
 {
     static public DataManager Inst;
 
-    public Dictionary<string, MonsterInfo> monsterList = new Dictionary<string, MonsterInfo>();
-    public Dictionary<string, AttackInfo> attackList = new Dictionary<string, AttackInfo>();
+    public ObjectBalanceDataDatabase ObjectBalanceList { get; private set; }
+    public AttackPatternDataDatabase AttackPatternList { get; private set; }
+    public AttackObjectDataDatabase AttackObjectList { get; private set; }
 
-    public AttackInfo GetAttackInfo(string name)
+    public ObjectBalanceDataRow GetObjectBalance(string name)
     {
-        AttackInfo info;
-        attackList.TryGetValue(name, out info);
-        return info;
+        foreach (var info in ObjectBalanceList.ObjectBalanceDataRow)
+        {
+            if (info.ID == name)
+            {
+                return info;
+            }
+        }
+
+        return null;
     }
 
-    public MonsterInfo GetMonsterInfo(string name)
+    public AttackPatternDataRow GetAttackPattern(string name)
     {
-        MonsterInfo info;
-        monsterList.TryGetValue(name, out info);
-        return info;
+        foreach (var info in AttackPatternList.AttackPatternDataRow)
+        {
+            if (info.ID == name)
+            {
+                return info;
+            }
+        }
+
+        return null;
+    }
+
+    public AttackObjectDataRow GetAttackObject(string name)
+    {
+        foreach (var info in AttackObjectList.AttackObjectDataRow)
+        {
+            if (info.ID == name)
+            {
+                return info;
+            }
+        }
+
+        return null;
     }
 
     private void Awake()
     {
         Inst = this;
 
-        InitAttack();
-        InitMonster();
-    }
+        ObjectBalanceList = new ObjectBalanceDataDatabase();
+        AttackPatternList = new AttackPatternDataDatabase();
+        AttackObjectList = new AttackObjectDataDatabase();
 
-    private void InitAttack()
-    {
-        var json = Resources.Load<TextAsset>("attack");
-        var obj = JsonMapper.ToObject<AttackInfo[]>(json.text);
+        var json = Resources.Load<TextAsset>("ObjectBalanceData/ObjectBalanceData");
+        ObjectBalanceList.ObjectBalanceDataRow = new List<ObjectBalanceDataRow>(JsonMapper.ToObject<ObjectBalanceDataRow[]>(json.text));
 
-        foreach (var info in obj)
-        {
-            attackList.Add(info.name, info);
-        }
-    }
-
-    private void InitMonster()
-    {
-        var json = Resources.Load<TextAsset>("monster");
-        var obj = JsonMapper.ToObject<MonsterInfo[]>(json.text);
-
-        foreach (var info in obj)
-        {
-            monsterList.Add(info.name, info);
-        }
+        json = Resources.Load<TextAsset>("AttackPatternData/AttackPatternData");
+        AttackPatternList.AttackPatternDataRow = new List<AttackPatternDataRow>(JsonMapper.ToObject<AttackPatternDataRow[]>(json.text));
+        
+        json = Resources.Load<TextAsset>("AttackObjectData/AttackObjectData");
+        AttackObjectList.AttackObjectDataRow = new List<AttackObjectDataRow>(JsonMapper.ToObject<AttackObjectDataRow[]>(json.text));
     }
 }

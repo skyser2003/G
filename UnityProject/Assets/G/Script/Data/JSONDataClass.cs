@@ -6,16 +6,16 @@ public class ObjectBalanceDataRow
 {
 	public string ID { get; set; }
 	public string Name { get; set; }
-	public float Attack { get; set; }
-	public float Health { get; set; }
-	public float Defense { get; set; }
-	public float Mass { get; set; }
-	public float MaxMovementSpeed { get; set; }
-	public float MoveForce { get; set; }
-	public float MoveResistance { get; set; }
-	public float JumpForce { get; set; }
+	public double Attack { get; set; }
+	public double Health { get; set; }
+	public double Defense { get; set; }
+	public double Mass { get; set; }
+	public double MaxMovementSpeed { get; set; }
+	public double MoveForce { get; set; }
+	public double MoveResistance { get; set; }
+	public double JumpForce { get; set; }
 	public int MaxJumpCount { get; set; }
-	public float GravityResistance { get; set; }
+	public double GravityResistance { get; set; }
 	public List<string> AttackPatternList { get; set; }
 }
 
@@ -28,9 +28,9 @@ public class AttackPatternDataRow
 {
 	public string ID { get; set; }
 	public string Name { get; set; }
-	public float TotalTime { get; set; }
-	public float CoolTime { get; set; }
-	public List<float> AttackObjectTimeList { get; set; }
+	public double TotalTime { get; set; }
+	public double CoolTime { get; set; }
+	public List<double> AttackObjectTimeList { get; set; }
 	public List<string> AttackObjectDataList { get; set; }
 }
 
@@ -45,10 +45,10 @@ public class AttackObjectDataRow
 	public string Name { get; set; }
 	public string Attack_Effect { get; set; }
 	public string Hit_Effect { get; set; }
-	public float DamageMulti { get; set; }
+	public double DamageMulti { get; set; }
 	public string DamageType { get; set; }
-	public List<float> MoveLocalSpeed { get; set; }
-	public Vector3 MoveLocalSpeed_Vector3 { get { return new Vector3(MoveLocalSpeed[0], MoveLocalSpeed[1], MoveLocalSpeed[2]); } }
+	public List<double> MoveLocalSpeed { get; set; }
+	public Vector3 MoveLocalSpeed_Vector3 { get { return new Vector3((float)MoveLocalSpeed[0], (float)MoveLocalSpeed[1], (float)MoveLocalSpeed[2]); } }
 	public int RemainFrame { get; set; }
 }
 

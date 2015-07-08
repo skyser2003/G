@@ -41,16 +41,11 @@ class FSM_StrongAttack : AbstractFSM
                 damageMultiplier = 0.5f;
             }
 
-            var info = DataManager.Inst.GetAttackInfo("Fireball").Clone();
-            foreach(var frame in info.frames)
-            {
-                frame.damage = (int)(frame.damage * damageMultiplier);
-            }
+            var info = DataManager.Inst.GetAttackPattern("ID_3");
 
             var obj = new GameObject();
             var atkManagerObj = obj.AddComponent<AttackManagerObject>();
-            atkManagerObj.Init(pc.gameObject, info);
-
+            atkManagerObj.Init(pc.gameObject, info, damageMultiplier);
             attacked = true;
         }
 

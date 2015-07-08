@@ -28,7 +28,8 @@ class Unit : MonoBehaviour
         }
     }
 
-    public UnitPhysicsInfo Physics;
+    public ObjectBalanceDataRow Info;
+
     public Vector2 Velocity;
     public float JumpContinueTime = 0.2f;
 	protected float JumpContinueTimer;
@@ -43,9 +44,9 @@ class Unit : MonoBehaviour
         this.hp = hp;
     }
 
-    public void SetPhysicsInfo(UnitPhysicsInfo physics)
+    public void SetPhysicsInfo(ObjectBalanceDataRow info)
     {
-        Physics = physics;
+        Info = info;
     }
 
     public void GetDamage(int damage)
@@ -61,19 +62,12 @@ class Unit : MonoBehaviour
         }
 
         IsJumping = true;
-        Velocity.y = Physics.jumpSpeed / Physics.weight;
+        Velocity.y = (float)(Info.JumpForce / Info.Mass);
         GetComponent<Animator>().SetBool("StartJump", true);
     }
 
     public void ContinueJump(float dt)
     {
-        if (IsJumping == false || JumpContinueTime <= 0.0f)
-        {
-            return;
-        }
-
-        Velocity.y += Physics.jumpContinueSpeed / Physics.weight * dt;
-        JumpContinueTime -= dt;
     }
 
     private void Start()

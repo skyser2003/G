@@ -6,17 +6,19 @@ class AttackManagerObject : MonoBehaviour
 {
     private float currentTime;
     private GameObject owner;
+    private float damageMultiplier;
 
-    public AttackInfo info;
+    public AttackPatternDataRow info;
     public bool[] attacked;
 
-    public void Init(GameObject owner, AttackInfo info)
+    public void Init(GameObject owner, AttackPatternDataRow info, float damageMultiplier)
     {
-        this.info = info.Clone();
+        this.info = info;
         this.owner = owner;
-        attacked = new bool[info.frames.Length];
+        this.damageMultiplier = damageMultiplier;
+        attacked = new bool[info.AttackObjectTimeList.Count];
 
-        for(int i=0;i<attacked.Length;++i)
+        for (int i = 0; i < attacked.Length; ++i)
         {
             attacked[i] = false;
         }
@@ -36,25 +38,25 @@ class AttackManagerObject : MonoBehaviour
 
         currentTime += Time.deltaTime;
 
-        for (int i = 0; i < info.frames.Length; ++i)
+        for (int i = 0; i < info.AttackObjectTimeList.Count; ++i)
         {
-            if(attacked[i] == true)
+            if (attacked[i] == true)
             {
                 continue;
             }
 
-            var atk = info.frames[i];
-            if(atk.time <= currentTime)
+            var atk = info.AttackObjectDataList[i];
+            if (info.TotalTime * info.AttackObjectTimeList[i] <= currentTime)
             {
-                CreateAttackObject(atk);
+                CreateAttackObject(atk, (int)(owner.GetComponent<Unit>().Info.Attack * damageMultiplier));
                 attacked[i] = true;
             }
         }
 
         // Destroy object if all frames have passed
-        for(int i=0;i<attacked.Length;++i)
+        for (int i = 0; i < attacked.Length; ++i)
         {
-            if(attacked[i] == false)
+            if (attacked[i] == false)
             {
                 return;
             }
@@ -63,23 +65,12 @@ class AttackManagerObject : MonoBehaviour
         DestroyObject(gameObject);
     }
 
-    private void CreateAttackObject(AttackFrameInfo frame)
+    private void CreateAttackObject(string atkObjectName, int baseDamage)
     {
         var obj = UnityEngine.Object.Instantiate(GameObject.Find("AttackSphere"));
-        var info = DataManager.Inst.GetAttackInfo("Fireball");
+        var info = DataManager.Inst.GetAttackObject(atkObjectName);
 
         var atkObj = obj.GetComponent<AttackObject>();
-
-        var atkObjInfo = new AttackObjectInfo();
-        atkObjInfo.position.x = owner.GetComponent<Transform>().localPosition.x + frame.position.x;
-        atkObjInfo.position.y = owner.GetComponent<Transform>().localPosition.y + frame.position.y;
-        atkObjInfo.initialSpeed = info.initialSpeed;
-        atkObjInfo.acceleration = info.acceleration;
-        atkObjInfo.damage = frame.damage;
-
-        atkObjInfo.targetGroup.Add(typeof(Monster));
-        atkObjInfo.ownerID = owner.GetComponent<Unit>().UID;
-
-        atkObj.Init(atkObjInfo);
+        atkObj.Init(baseDamage, info, new Vector2());
     }
 }

@@ -4,16 +4,18 @@ using UnityEngine;
 
 class AttackObject : MonoBehaviour
 {
-    public AttackObjectInfo info;
+    public AttackObjectDataRow info;
+    private int baseDamage;
     private Vector2 speed;
     private int leftFrame;
 
-    public void Init(AttackObjectInfo info)
+    public void Init(int baseDamage, AttackObjectDataRow info, Vector2 position)
     {
+        this.baseDamage = baseDamage;
         this.info = info;
 
-        GetComponent<Transform>().localPosition = info.position;
-        speed = info.initialSpeed;
+        GetComponent<Transform>().localPosition = position;
+        speed = info.MoveLocalSpeed_Vector3;
     }
 
     private void Update()
@@ -22,9 +24,6 @@ class AttackObject : MonoBehaviour
         {
             return;
         }
-
-        var ds = info.acceleration * Time.deltaTime;
-        speed += ds;
 
         var dt = speed * Time.deltaTime;
         var newPos = GetComponent<Transform>().localPosition;
@@ -42,19 +41,15 @@ class AttackObject : MonoBehaviour
 
         bool damageDealt = false;
 
-        foreach (var type in info.targetGroup)
+        var unit = collider.gameObject.GetComponent<Unit>();
+        if(unit == null)
         {
-            var target = collider.gameObject.GetComponent(type);
-            if (target == null)
-            {
-                continue;
-            }
-
-            var unit = collider.gameObject.GetComponent<Unit>();
-            unit.GetDamage(info.damage);
-            damageDealt = true;
-            break;
+            return;
         }
+
+        unit.GetDamage((int)(info.DamageMulti * baseDamage));
+        damageDealt = true;
+
 
         if (damageDealt == true)
         {
