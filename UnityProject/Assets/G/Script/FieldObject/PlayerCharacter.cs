@@ -18,8 +18,6 @@ class PlayerCharacter : MonoBehaviour
         }
     }
 
-    public float WalkSpeed { get { return walk == null ? 0.0f : walk.Speed; } }
-
     public float attackPreDelay = 0.2f;
     public float attackPostDelay = 1.0f;
     public float strongAttackDelay = 1.0f;
@@ -54,15 +52,7 @@ class PlayerCharacter : MonoBehaviour
     private void Move(int direction)
     {
         Walk.Direction = direction;
-
-        if (direction == 0)
-        {
-            SetState(STATE.IDLE);
-        }
-        else
-        {
-            SetState(STATE.WALK);
-        }
+        SetState(STATE.WALK);
     }
 
     public void SetState(STATE state)
@@ -113,7 +103,7 @@ class PlayerCharacter : MonoBehaviour
 
     public void MoveLeft()
     {
-        if (walk.Direction != -1)
+        if (walk.Velocity >= 0.0f)
         {
             Move(-1);
         }
@@ -121,7 +111,7 @@ class PlayerCharacter : MonoBehaviour
 
     public void MoveRight()
     {
-        if (walk.Direction != 1)
+        if (walk.Velocity <= 0.0f)
         {
             Move(1);
         }
@@ -129,15 +119,16 @@ class PlayerCharacter : MonoBehaviour
 
     public void Stop()
     {
-        if (walk.Direction != 0)
+        if (walk.Speed != 0)
         {
-            Move(0);
+            Walk.Stop();
+            SetState(STATE.IDLE);
         }
     }
 
     public void Attack()
     {
-        if(attackCooltime > 0.0f)
+        if (attackCooltime > 0.0f)
         {
             return;
         }
@@ -147,7 +138,7 @@ class PlayerCharacter : MonoBehaviour
 
     public void StrongAttack(float chargeTime)
     {
-        if(attackCooltime > 0.0f)
+        if (attackCooltime > 0.0f)
         {
             return;
         }

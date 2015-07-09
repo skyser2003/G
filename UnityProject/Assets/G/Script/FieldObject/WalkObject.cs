@@ -14,7 +14,7 @@ class WalkObject : MonoBehaviour
     {
         get
         {
-            return (float)(direction * unit.Info.MaxMovementSpeed);
+            return (float)(direction * speed);
         }
     }
 
@@ -28,21 +28,20 @@ class WalkObject : MonoBehaviour
         set
         {
             direction = value;
-            if(direction != 0)
-            {
-                speed = (float)unit.Info.MaxMovementSpeed;
-            }
-            else
-            {
-                speed = 0.0f;
-            }
+            speed = (float)unit.Info.MaxMovementSpeed;
         }
+    }
+
+    public void Stop()
+    {
+        speed = 0.0f;
     }
 
     private void Start()
     {
         gvObject = GetComponent<GravityObject>();
         unit = GetComponent<Unit>();
+        direction = Math.Abs(GetComponent<Transform>().rotation.eulerAngles.y - 90.0f) <= 0.001f ? 1 : -1;
         speed = 0.0f;
     }
 

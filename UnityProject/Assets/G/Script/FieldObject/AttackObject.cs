@@ -9,12 +9,12 @@ class AttackObject : MonoBehaviour
     private Vector2 speed;
     private int leftFrame;
 
-    public void Init(int baseDamage, AttackObjectDataRow info, Vector2 position)
+    public void Init(int baseDamage, AttackObjectDataRow info, Vector3 position, int direction)
     {
         this.baseDamage = baseDamage;
         this.info = info;
 
-        GetComponent<Transform>().localPosition = position;
+        GetComponent<Transform>().position = new Vector2(position.x + info.CreateDeltaPos_Vector3.x * direction, position.y + info.CreateDeltaPos_Vector3.y);
         speed = info.MoveLocalSpeed_Vector3;
     }
 

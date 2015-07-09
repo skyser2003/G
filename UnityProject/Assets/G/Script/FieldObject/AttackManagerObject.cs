@@ -71,6 +71,6 @@ class AttackManagerObject : MonoBehaviour
         var info = DataManager.Inst.GetAttackObject(atkObjectName);
 
         var atkObj = obj.GetComponent<AttackObject>();
-        atkObj.Init(baseDamage, info, new Vector2());
+        atkObj.Init(baseDamage, info, owner.GetComponent<Transform>().position, owner.GetComponent<WalkObject>().Direction);
     }
 }
