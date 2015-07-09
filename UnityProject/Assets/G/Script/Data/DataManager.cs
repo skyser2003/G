@@ -57,13 +57,18 @@ class DataManager : MonoBehaviour
         AttackPatternList = new AttackPatternDataDatabase();
         AttackObjectList = new AttackObjectDataDatabase();
 
+        JsonData data;
+
         var json = Resources.Load<TextAsset>("ObjectBalanceData/ObjectBalanceData");
-        ObjectBalanceList.ObjectBalanceDataRow = new List<ObjectBalanceDataRow>(JsonMapper.ToObject<ObjectBalanceDataRow[]>(json.text));
+        data = JsonMapper.ToObject(json.text);
+        ObjectBalanceList.ObjectBalanceDataRow = new List<ObjectBalanceDataRow>(JsonMapper.ToObject<ObjectBalanceDataRow[]>(data["ObjectBalanceDataRow"].ToJson()));
 
         json = Resources.Load<TextAsset>("AttackPatternData/AttackPatternData");
-        AttackPatternList.AttackPatternDataRow = new List<AttackPatternDataRow>(JsonMapper.ToObject<AttackPatternDataRow[]>(json.text));
+        data = JsonMapper.ToObject(json.text);
+        AttackPatternList.AttackPatternDataRow = new List<AttackPatternDataRow>(JsonMapper.ToObject<AttackPatternDataRow[]>(data["AttackPatternDataRow"].ToJson()));
         
         json = Resources.Load<TextAsset>("AttackObjectData/AttackObjectData");
-        AttackObjectList.AttackObjectDataRow = new List<AttackObjectDataRow>(JsonMapper.ToObject<AttackObjectDataRow[]>(json.text));
+        data = JsonMapper.ToObject(json.text);
+        AttackObjectList.AttackObjectDataRow = new List<AttackObjectDataRow>(JsonMapper.ToObject<AttackObjectDataRow[]>(data["AttackObjectDataRow"].ToJson()));
     }
 }
