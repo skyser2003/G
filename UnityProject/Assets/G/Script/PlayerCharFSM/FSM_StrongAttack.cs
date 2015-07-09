@@ -41,7 +41,7 @@ class FSM_StrongAttack : AbstractFSM
                 damageMultiplier = 0.5f;
             }
 
-            var info = DataManager.Inst.GetAttackPattern("ID_3");
+            var info = DataManager.Inst.GetAttackPattern("ID_2");
 
             var obj = new GameObject();
             var atkManagerObj = obj.AddComponent<AttackManagerObject>();

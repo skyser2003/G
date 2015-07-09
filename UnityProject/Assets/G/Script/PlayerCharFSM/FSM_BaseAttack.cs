@@ -34,7 +34,7 @@ class FSM_BaseAttack : AbstractFSM
         // Create attack object
         if (attacked == false)
         {
-            var info = DataManager.Inst.GetAttackPattern("ID_3");
+            var info = DataManager.Inst.GetAttackPattern("ID_1");
 
             var obj = new GameObject();
             var atkManagerObj = obj.AddComponent<AttackManagerObject>();
