@@ -4,10 +4,12 @@ using UnityEngine;
 
 class AttackObject : MonoBehaviour
 {
-    public AttackObjectDataRow info;
+    private bool isRealObject = false;
     private int baseDamage;
     private Vector2 speed;
-    private int leftFrame;
+    private int remainFrame;
+
+    public AttackObjectDataRow info;
 
     public void Init(int baseDamage, AttackObjectDataRow info, Vector3 position, int direction)
     {
@@ -16,10 +18,23 @@ class AttackObject : MonoBehaviour
 
         GetComponent<Transform>().position = new Vector2(position.x + info.CreateDeltaPos_Vector3.x * direction, position.y + info.CreateDeltaPos_Vector3.y);
         speed = info.MoveLocalSpeed_Vector3;
+        remainFrame = info.RemainFrame;
+        isRealObject = true;
     }
 
     private void Update()
     {
+        if (isRealObject == false)
+        {
+            return;
+        }
+
+        --remainFrame;
+        if (remainFrame <= 0)
+        {
+            UnityEngine.Object.Destroy(gameObject);
+        }
+
         if (info == null)
         {
             return;
@@ -34,26 +49,22 @@ class AttackObject : MonoBehaviour
 
     private void OnTriggerStay(Collider collider)
     {
+        if (isRealObject == false)
+        {
+            return;
+        }
+
         if (info == null)
         {
             return;
         }
 
-        bool damageDealt = false;
-
         var unit = collider.gameObject.GetComponent<Unit>();
-        if(unit == null)
+        if (unit == null)
         {
             return;
         }
 
         unit.GetDamage((int)(info.DamageMulti * baseDamage));
-        damageDealt = true;
-
-
-        if (damageDealt == true)
-        {
-            UnityEngine.Object.Destroy(gameObject);
-        }
     }
 }
