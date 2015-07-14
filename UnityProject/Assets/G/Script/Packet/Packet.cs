@@ -2,15 +2,15 @@
 
 public struct PKS_ENTER
 {
-    string name;
+    public string name;
 }
 
 public struct PKS_MOVE
 {
-    Vector2 dest;
+    public Vector2 dest;
 }
 
 public struct PKS_STOP
 {
-    Vector2 currentPos;
+    public Vector2 currentPos;
 }

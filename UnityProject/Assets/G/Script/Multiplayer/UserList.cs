@@ -2,6 +2,14 @@
 
 class UserList
 {
+    static private UserList inst = new UserList();
+    static public UserList Inst { get { return inst; } }
+
+    private UserList()
+    {
+
+    }
+
     private Dictionary<string, User> userList;
 
     public void Init()
