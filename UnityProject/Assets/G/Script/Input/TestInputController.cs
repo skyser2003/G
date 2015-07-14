@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestInputController : MonoBehaviour {
 
-	public MoveObject Test;
+	public MoveObjectBase Test;
 
 	void Update()
 	{
@@ -15,7 +15,7 @@ public class TestInputController : MonoBehaviour {
 			Test.Move(false);
 		}
 
-		if(Input.GetKey(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			Test.Jump();
 		}

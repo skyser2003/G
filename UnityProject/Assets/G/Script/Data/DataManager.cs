@@ -23,6 +23,39 @@ class DataManager : MonoBehaviour
         return null;
     }
 
+	public List<string> GetAttackPatternStringList(string _id)
+	{
+		ObjectBalanceDataRow data = GetObjectBalance(_id);
+		if(data != null)
+		{
+			return data.AttackPatternList;
+		}
+		return new List<string>();
+	}
+
+	public ObjectStat GetObjectStat(string _name)
+	{
+		ObjectBalanceDataRow data = GetObjectBalance(_name);
+
+		ObjectStat stat = new ObjectStat();
+		if(data != null)
+		{
+			stat.Mass = (float)data.Mass;
+			stat.Attack = (float)data.Attack;
+			stat.Defense = (float)data.Defense;
+			stat.Health = (float)data.Health;
+			stat.MaxMovementSpeed = (float)data.MaxMovementSpeed;
+			stat.MoveForce = (float)data.MoveForce;
+			stat.MoveResistance = (float)data.MoveResistance;
+			stat.JumpForce = (float)data.JumpForce;
+			stat.MaxJumpCount = data.MaxJumpCount;
+			stat.MaxFallSpeed = (float)data.MaxFallSpeed;
+			stat.GravityResistance = (float)data.GravityResistance;
+		}
+
+		return stat;
+	}
+
     public AttackPatternDataRow GetAttackPattern(string name)
     {
         foreach (var info in AttackPatternList.AttackPatternDataRow)
@@ -35,6 +68,29 @@ class DataManager : MonoBehaviour
 
         return null;
     }
+
+	public GAttackPatternObject GetGAttackPattern(string _id)
+	{
+		AttackPatternDataRow data = GetAttackPattern(_id);
+		if(data != null)
+		{
+			GAttackPatternObject gendata = new GAttackPatternObject();
+			gendata.ID = data.ID;
+			gendata.Name = data.Name;
+			gendata.TotalTime = (float)data.TotalTime;
+			gendata.CoolTime = (float)data.CoolTime;
+			gendata.AttackPatternObjectTimeList = new List<float>();
+			for(int iter = 0; iter < data.AttackObjectTimeList.Count; iter++)
+			{
+				gendata.AttackPatternObjectTimeList.Add((float)data.AttackObjectTimeList[iter]);
+			}
+			gendata.AttackObjectDataList = data.AttackObjectDataList;
+			gendata.Reset();
+			return gendata;
+		}
+
+		return null;
+	}
 
     public AttackObjectDataRow GetAttackObject(string name)
     {
