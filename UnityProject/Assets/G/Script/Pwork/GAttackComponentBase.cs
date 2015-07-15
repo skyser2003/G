@@ -35,11 +35,25 @@ public class GAttackComponentBase {
 		{
 			if(AttackPatternList[_index].CoolIsReady())
 			{
+				Debug.Log("ATtack: " + AttackPatternList[_index].ID);
 				AttackPatternList[_index].Play();
 				return true;
 			}
 		}
 
+		return false;
+	}
+
+	public virtual bool CanAttack(int _index)
+	{
+		if(_index < AttackPatternList.Count)
+		{
+			if(AttackPatternList[_index].CoolIsReady())
+			{
+				//AttackPatternList[_index].Play();
+				return true;
+			}
+		}
 		return false;
 	}
 
