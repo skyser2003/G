@@ -1,18 +1,12 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
+using UnityEngine;
 
-class NetworkClient
+class NetworkClient : MonoBehaviour
 {
-    private DummyServer ds;
-
-    public void Init(DummyServer ds)
-    {
-        this.ds = ds;
-    }
-
     public void Send<PKS>(PKS pks)
     {
-        ds.Receive(pks);
+        DummyServer.Inst.Receive(pks);
     }
 
     public void Receive<PKS>(PKS pks)
@@ -22,7 +16,7 @@ class NetworkClient
         {
             if (method.Name == "OnPacketReceive")
             {
-                if (method.GetParameters()[0].GetType() == typeof(PKS))
+                if (method.GetParameters()[0].ParameterType == typeof(PKS))
                 {
                     method.Invoke(this, new object[] { pks });
                 }
@@ -34,7 +28,14 @@ class NetworkClient
     {
         var user = new User();
         user.ID = pks.name;
+        user.Obj = Object.Instantiate(GameObject.Find("Arland_green"));
+        Object.Destroy(user.Obj.GetComponent<Keyboard>());
 
         UserList.Inst.Add(user);
+    }
+
+    private void Awake()
+    {
+        DummyServer.Inst.AddClient(this);
     }
 }
