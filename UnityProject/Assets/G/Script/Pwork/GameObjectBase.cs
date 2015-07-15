@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 public class GameObjectBase : MonoBehaviour {
 
+	public Vector3 DirectionPos;
 	public string BalanceID = "ID_1";
 	public int ID;
+	public int GroupID;
 
+	public float CurHealth;
 	void Start()
 	{
 		Create ();
@@ -21,6 +24,8 @@ public class GameObjectBase : MonoBehaviour {
 		SetBaseStat(stat);
 
 		GameObjectManager.Instance.AddToObjectList(this);
+
+		CurHealth = Stat.Health;
 	}
 
 	public virtual void Process(float _deltatime)
@@ -29,6 +34,12 @@ public class GameObjectBase : MonoBehaviour {
 		MoveObject.Process(_deltatime);
 		ProcessAttack(_deltatime);
 		ProcessAnimation(_deltatime);
+	}
+
+	public virtual void Hit(float _damage)
+	{
+		CurHealth -= _damage;
+		Debug.Log("name: " + name + " got damage: " + _damage + " health: " + CurHealth);
 	}
 
 	#region Input things
@@ -101,6 +112,8 @@ public class GameObjectBase : MonoBehaviour {
 		                Stat.GravityResistance
 		                );
 		AttackComp.SetStat(Stat);
+
+		CurHealth = Mathf.Min(CurHealth, Stat.Health);
 	}
 
 	#endregion
@@ -122,6 +135,7 @@ public class GameObjectBase : MonoBehaviour {
 	}
 	protected virtual void ProcessAttack(float _timer)
 	{
+		AttackComp.UpdateState(transform.position, DirectionPos);
 		AttackComp.Process(_timer);
 	}
 	#endregion

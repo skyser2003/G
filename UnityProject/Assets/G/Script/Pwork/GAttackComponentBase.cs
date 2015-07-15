@@ -5,12 +5,21 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GAttackComponentBase {
 
+	public Vector3 RootPos;
+	public Vector3 Direction;
 	public ObjectStat Stat;
 	public List<GAttackPatternObject> AttackPatternList = new List<GAttackPatternObject>();
+
+	public void UpdateState(Vector3 _rootworldpos, Vector3 _direction)
+	{
+		RootPos = _rootworldpos;
+		Direction = _direction;
+	}
 
 	public void SetStat(ObjectStat _stat)
 	{
 		Stat = _stat;
+		UpdateDamage();
 	}
 
 	public void Init(List<string> _idlist)
@@ -26,6 +35,8 @@ public class GAttackComponentBase {
 				AttackPatternList.Add(data);
 			}
 		}
+
+		UpdateDamage();
 	}
 
 	public virtual bool PlayAttack(int _index)
@@ -57,12 +68,21 @@ public class GAttackComponentBase {
 		return false;
 	}
 
+	protected virtual void UpdateDamage()
+	{
+		for(int iter = 0; iter < AttackPatternList.Count; iter++)
+		{
+			GAttackPatternObject curobject = AttackPatternList[iter];
+			curobject.Damage = Stat.Attack;
+		}
+	}
+
 	public virtual void Process(float _timer)
 	{
 		for(int iter = 0; iter < AttackPatternList.Count; iter++)
 		{
 			GAttackPatternObject curobject = AttackPatternList[iter];
-			curobject.Process(_timer);
+			curobject.Process(_timer, RootPos, Direction);
 		}
 	}
 }
@@ -83,6 +103,8 @@ public class GAttackPatternObject
 
 	public bool IsPlaying;
 
+	public float Damage;
+	public List<int> HitGroupIDList = new List<int>();
 	public void Reset()
 	{
 		AttackPatternObjectFlagList.Clear();
@@ -98,7 +120,7 @@ public class GAttackPatternObject
 		CoolTimer = 0f;
 	}
 
-	public void Process(float _timer)
+	public void Process(float _timer, Vector3 _rootpos, Vector3 _direction)
 	{
 		CoolTimer += _timer;
 		if(IsPlaying)
@@ -114,6 +136,12 @@ public class GAttackPatternObject
 					//if ratio is done and didn't created before, create attack object
 					AttackPatternObjectFlagList.Add(true);
 					Debug.Log("Create attack object id: " + AttackObjectDataList[iter]);
+					string curattackobjectid = AttackObjectDataList[iter];
+					GAttackObjectCreateManager.Instance.CreateAttackObject(curattackobjectid,
+					                                                       Damage,
+					                                                       _rootpos,
+					                                                       _direction,
+					                                                       new List<int>());
 				}
 			}
 

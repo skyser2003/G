@@ -21,12 +21,14 @@ public class GameObject_Player : GameObjectBase {
 			if(curinput == GInputType.MOVE_LEFT_PRESSED)
 			{
 				IsLeft = true;
+				DirectionPos = Vector3.left;
 				MoveObject.Move(true);
 			}
 
 			if(curinput == GInputType.MOVE_RIGHT_PRESSED)
 			{
 				IsLeft = false;
+				DirectionPos = Vector3.right;
 				MoveObject.Move(false);
 			}
 

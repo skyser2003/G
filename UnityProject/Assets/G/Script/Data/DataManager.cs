@@ -105,6 +105,28 @@ class DataManager : MonoBehaviour
         return null;
     }
 
+	public GAttackObjectData GetGAttackObjectData(string _id)
+	{
+		AttackObjectDataRow data = GetAttackObject(_id);
+		if(data != null)
+		{
+			GAttackObjectData newdata = new GAttackObjectData();
+			newdata.Attack_Effect = data.Attack_Effect;
+			newdata.CreateDeltaPos = data.CreateDeltaPos_Vector3;
+			newdata.DamageMulti = (float)data.DamageMulti;
+			newdata.DamageType = data.DamageType;
+			newdata.Hit_Effect = data.Hit_Effect;
+			newdata.ID = data.ID;
+			newdata.MoveLocalSpeed = data.MoveLocalSpeed_Vector3;
+			newdata.Name = data.Name;
+			newdata.RemainFrame = data.RemainFrame;
+
+			return newdata;
+		}
+
+		return null;
+	}
+
     private void Awake()
     {
         Inst = this;
