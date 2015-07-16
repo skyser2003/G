@@ -111,7 +111,10 @@ public class GameObjectBase : MonoBehaviour {
 		                Stat.MaxFallSpeed,
 		                Stat.GravityResistance
 		                );
-		AttackComp.SetStat(Stat);
+		for(int iter = 0; iter < AttackCompList.Count; iter++)
+		{
+			AttackCompList[iter].SetStat(Stat);
+		}
 
 		CurHealth = Mathf.Min(CurHealth, Stat.Health);
 	}
@@ -127,16 +130,20 @@ public class GameObjectBase : MonoBehaviour {
 	#endregion
 
 	#region AttackComponent
-	public GAttackComponentBase AttackComp;
+	public List<GAttackComponentBase> AttackCompList = new List<GAttackComponentBase>();
 	protected virtual void InitAttackComp()
 	{
-		AttackComp = new GAttackComponentBase();
-		AttackComp.Init(DataManager.Inst.GetAttackPatternStringList(BalanceID));
+		for(int iter = 0; iter < AttackCompList.Count; iter++)
+		{
+			AttackCompList[iter].Init();
+		}
 	}
 	protected virtual void ProcessAttack(float _timer)
 	{
-		AttackComp.UpdateState(transform.position, DirectionPos);
-		AttackComp.Process(_timer);
+		for(int iter = 0; iter < AttackCompList.Count; iter++)
+		{
+			AttackCompList[iter].Process(_timer);
+		}
 	}
 	#endregion
 }

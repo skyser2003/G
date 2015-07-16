@@ -193,10 +193,45 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: 'MuscleClip ''Adventurer Aland@FallBackwardAndGetUp''
+      conversion warning: ''RigPelvis/RigSpine1'' is between humanoid transforms and
+      has rotation animation. This might lower retargeting quality.
+
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2''
+      is between humanoid transforms and has rotation animation. This might lower
+      retargeting quality.
+
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4''
+      is between humanoid transforms and has rotation animation. This might lower
+      retargeting quality.
+
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4/RigRibcage/RigLArmCollarbone/RigLArmUpperarm/RigLArmForearm/RigLArmPalm/RigLArmThumb1''
+      has scale animation''. It is not supported.
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4/RigRibcage/RigNeck1/RigNeck2''
+      is between humanoid transforms and has rotation animation. This might lower
+      retargeting quality.
+
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4/RigRibcage/RigRArmCollarbone/RigRArmUpperarm/RigRArmForearm/RigRArmPalm''
+      has scale animation''. It is not supported.
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4/RigRibcage/RigRArmCollarbone/RigRArmUpperarm/RigRArmForearm/RigRArmPalm/RigRArmThumb1''
+      has scale animation''. It is not supported.
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4/RigRibcage/RigRArmCollarbone/RigRArmUpperarm/RigRArmForearm/RigRArmPalm/RigRArmIndex1/RigRArmIndex2/RigRArmIndex3''
+      has scale animation''. It is not supported.
+
+      MuscleClip ''Adventurer Aland@FallBackwardAndGetUp'' conversion warning: ''RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigSpine4/RigRibcage/RigRArmCollarbone/RigRArmUpperarm/RigRArmForearm/RigRArmPalm/RigRArmPinky1/RigRArmPinky2/RigRArmPinky3''
+      has scale animation''. It is not supported.
+
+'
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5

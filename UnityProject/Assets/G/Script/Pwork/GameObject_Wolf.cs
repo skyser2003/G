@@ -2,16 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameObject_Player : GameObjectBase {
+public class GameObject_Wolf : GameObjectBase {
 
-	protected bool IsHoldingStringAttack = false;
-	public float StrongAttackStartTime = 0.05f;
-	protected float AttackPressedTimer;
 	protected bool IsLeft = false;
 	protected override void ProcessInput (float _deltatime)
 	{
 		base.ProcessInput (_deltatime);
-		IsHoldingStringAttack = false;
 		//Debug.Log("?: " + InputReceivedList.Count);
 		for(int inputiter = 0; inputiter < InputReceivedList.Count; inputiter++)
 		{
@@ -47,22 +43,12 @@ public class GameObject_Player : GameObjectBase {
 				//}
 				if(AttackCompList[0].CanAttack())
 				{
-					IsHoldingStringAttack = true;
 				}
 
-				AttackPressedTimer = 0f;
 			}
 			if(curinput == GInputType.KEY_1_PRESSED)
 			{
-				if(AttackCompList[0].CanAttack())
-				{
-					IsHoldingStringAttack = true;
-					AttackPressedTimer += Time.deltaTime;
-					if(AttackPressedTimer > StrongAttackStartTime)
-					{
 
-					}
-				}
 			}
 
 			if(curinput == GInputType.KEY_1_RELEASE)
@@ -73,7 +59,6 @@ public class GameObject_Player : GameObjectBase {
 					{
 						AnimationComp.SetTrigger("ReleaseAttack");
 					}
-					AttackPressedTimer = 0f;
 				}
 			}
 		}
@@ -84,9 +69,13 @@ public class GameObject_Player : GameObjectBase {
 	protected override void ProcessAnimation (float _timer)
 	{
 		base.ProcessAnimation (_timer);
-		AnimationComp.SetBool("IsOnAir", !MoveObject.IsOnGround);
 		AnimationComp.SetFloat ("HorizontalSpeed", Mathf.Abs(MoveObject.InnerVelocity.x));
 		AnimationComp.SetLeft(IsLeft);
-		AnimationComp.SetBool("HoldAttack", IsHoldingStringAttack);
+	}
+
+	public override void Hit (float _damage)
+	{
+		base.Hit (_damage);
+		AnimationComp.SetTrigger("StartDamaged");
 	}
 }

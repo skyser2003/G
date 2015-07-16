@@ -85,7 +85,7 @@ class DataManager : MonoBehaviour
 				gendata.AttackPatternObjectTimeList.Add((float)data.AttackObjectTimeList[iter]);
 			}
 			gendata.AttackObjectDataList = data.AttackObjectDataList;
-			gendata.Reset();
+			//gendata.Reset();
 			return gendata;
 		}
 

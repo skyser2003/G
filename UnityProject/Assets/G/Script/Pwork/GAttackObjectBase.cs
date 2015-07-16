@@ -33,6 +33,7 @@ public class GAttackObjectBase : MonoBehaviour {
 		AttackObject = GEffectManager.Instance.GetEffectObject(AttackEffect);
 		//AttackObject.transform.parent = transform;
 		AttackObject.transform.position = transform.position;
+		Destroy(AttackObject.gameObject, 0.2f);
 	}
 
 	void FixedUpdate()
