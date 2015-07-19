@@ -9,6 +9,8 @@ public class GAttackObjectBase : MonoBehaviour {
 		Single,
 	}
 
+	public string ID;
+
 	public GameObject AttackObject;
 	public float Damage;
 	public int RemainFrame;
@@ -24,13 +26,15 @@ public class GAttackObjectBase : MonoBehaviour {
 	                            string _hiteffect,
 	                            List<int> _hitgrouplist)
 	{
+		GAttackObjectCreateManager.Instance.AddAttackObject(this);
 		transform.position = _worldpos;
 		MoveLocalSpeed = _movespeed;
 		AttackEffect = _attackeffect;
 		HitEffect = _hiteffect;
 		Damage = _damage;
-
+		RemainFrame = _remainframe;
 		AttackObject = GEffectManager.Instance.GetEffectObject(AttackEffect);
+		HitGroupList = _hitgrouplist;
 		//AttackObject.transform.parent = transform;
 		AttackObject.transform.position = transform.position;
 		Destroy(AttackObject.gameObject, 0.2f);
@@ -38,24 +42,30 @@ public class GAttackObjectBase : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		Process(Time.deltaTime);
+		//Process(Time.deltaTime);
 	}
-	
-	protected virtual void Process(float _deltatime)
+
+	public virtual void Process(float _deltatime)
 	{
 		RemainFrame--;
-
+		//Debug.Log("???:" + RemainFrame);
 		transform.position += MoveLocalSpeed * _deltatime;
 
 		if(RemainFrame <= 0)
 		{
-			Destroy(gameObject);
+			DestroyAttackObject();
 		}
+	}
+
+	protected virtual void DestroyAttackObject()
+	{
+		GAttackObjectCreateManager.Instance.RemoveAttackObject(this);
+		Destroy(gameObject);
 	}
 
 	void OnTriggerEnter2D(Collider2D _col)
 	{
-		GameObjectBase gob = _col.GetComponent<GameObjectBase>();
+		GameObject_DamageDetector gob = _col.GetComponent<GameObject_DamageDetector>();
 		if(gob != null)
 		{
 			OnObjectHit(gob);
@@ -64,7 +74,7 @@ public class GAttackObjectBase : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D _col)
 	{
-		GameObjectBase gob = _col.GetComponent<GameObjectBase>();
+		GameObject_DamageDetector gob = _col.GetComponent<GameObject_DamageDetector>();
 		if(gob != null)
 		{
 			OnObjectHit(gob);
@@ -73,33 +83,34 @@ public class GAttackObjectBase : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D _col)
 	{
-		GameObjectBase gob = _col.GetComponent<GameObjectBase>();
+		GameObject_DamageDetector gob = _col.GetComponent<GameObject_DamageDetector>();
 		if(gob != null)
 		{
 			OnObjectHit(gob);
 		}
 	}
 
-	protected virtual void OnObjectHit(GameObjectBase _col)
+	protected virtual void OnObjectHit(GameObject_DamageDetector _col)
 	{
-		Debug.Log("Check collision: " + _col.gameObject.name);
+		//Debug.Log("Check collision: " + _col.gameObject.name);
 		if(IsValidTarget(_col))
 		{
-			_col.Hit(Damage);
+			//Debug.Log("???: "+ _col.GroupID);
+			_col.DoDamage(Damage);
 		}
 	}
 
-	protected virtual void OnObjectStay(GameObjectBase _col)
+	protected virtual void OnObjectStay(GameObject_DamageDetector _col)
 	{
 
 	}
 
-	protected virtual void OnObjectExit(GameObjectBase _col)
+	protected virtual void OnObjectExit(GameObject_DamageDetector _col)
 	{
 
 	}
 
-	protected virtual bool IsValidTarget(GameObjectBase _object)
+	protected virtual bool IsValidTarget(GameObject_DamageDetector _object)
 	{
 		bool match = false;
 		for(int iter = 0; iter < HitGroupList.Count; iter++)
@@ -111,8 +122,8 @@ public class GAttackObjectBase : MonoBehaviour {
 			}
 		}
 
-		//return match;
-		return true;
+		return match;
+		//return true;
 	}
 }
 

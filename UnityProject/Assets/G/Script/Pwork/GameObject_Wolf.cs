@@ -69,13 +69,20 @@ public class GameObject_Wolf : GameObjectBase {
 	protected override void ProcessAnimation (float _timer)
 	{
 		base.ProcessAnimation (_timer);
+
+
 		AnimationComp.SetFloat ("HorizontalSpeed", Mathf.Abs(MoveObject.InnerVelocity.x));
 		AnimationComp.SetLeft(IsLeft);
+		AnimationComp.SetBool("IsDead", IsDead);
+
 	}
 
 	public override void Hit (float _damage)
 	{
 		base.Hit (_damage);
-		AnimationComp.SetTrigger("StartDamaged");
+		if(!IsDead)
+		{
+			AnimationComp.SetTrigger("StartDamaged");
+		}
 	}
 }

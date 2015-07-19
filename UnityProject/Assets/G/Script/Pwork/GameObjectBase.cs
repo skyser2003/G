@@ -10,6 +10,7 @@ public class GameObjectBase : MonoBehaviour {
 	public int GroupID;
 
 	public float CurHealth;
+	public bool IsDead = false;
 	void Start()
 	{
 		Create ();
@@ -26,6 +27,7 @@ public class GameObjectBase : MonoBehaviour {
 		GameObjectManager.Instance.AddToObjectList(this);
 
 		CurHealth = Stat.Health;
+		InitDamageDetector();
 	}
 
 	public virtual void Process(float _deltatime)
@@ -39,7 +41,23 @@ public class GameObjectBase : MonoBehaviour {
 	public virtual void Hit(float _damage)
 	{
 		CurHealth -= _damage;
-		Debug.Log("name: " + name + " got damage: " + _damage + " health: " + CurHealth);
+		if(CurHealth <= 0f)
+		{
+			IsDead = true;
+		}else
+		{
+			IsDead = false;
+		}
+		//Debug.Log("name: " + name + " got damage: " + _damage + " health: " + CurHealth);
+	}
+
+	public List<GameObject_DamageDetector> DamageDetectorList = new List<GameObject_DamageDetector>();
+	public void InitDamageDetector()
+	{
+		for(int iter = 0; iter < DamageDetectorList.Count; iter++)
+		{
+			DamageDetectorList[iter].Init(GroupID);
+		}
 	}
 
 	#region Input things
@@ -102,15 +120,18 @@ public class GameObjectBase : MonoBehaviour {
 			Stat.AddStat(curbuff.Stat);
 		}
 
-		MoveObject.Init(Stat.Mass,
-		                Stat.MaxMovementSpeed,
-		                Stat.MoveForce,
-		                Stat.MoveResistance,
-		                Stat.JumpForce,
-		                Stat.MaxJumpCount,
-		                Stat.MaxFallSpeed,
-		                Stat.GravityResistance
-		                );
+		if(MoveObject != null)
+		{
+			MoveObject.Init(Stat.Mass,
+			                Stat.MaxMovementSpeed,
+			                Stat.MoveForce,
+			                Stat.MoveResistance,
+			                Stat.JumpForce,
+			                Stat.MaxJumpCount,
+			                Stat.MaxFallSpeed,
+			                Stat.GravityResistance
+			                );
+		}
 		for(int iter = 0; iter < AttackCompList.Count; iter++)
 		{
 			AttackCompList[iter].SetStat(Stat);

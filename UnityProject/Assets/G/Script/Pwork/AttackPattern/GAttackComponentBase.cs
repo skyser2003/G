@@ -17,11 +17,12 @@ public class GAttackComponentBase : MonoBehaviour {
 	
 	public List<float> AttackPatternObjectTimeList = new List<float>();
 	protected List<bool> AttackPatternObjectFlagList = new List<bool>();
-	public List<string> AttackObjectDataList = new List<string>();
-	
+	//public List<string> AttackObjectDataList = new List<string>();
+	public List<Object> AttackObjectPrefabList = new List<Object>();
+
 	public bool IsPlaying;
 	
-	public float DamageMulti;
+	public float DamageMulti = 1f;
 	public float AttackSpeed = 1f;
 	public List<int> HitGroupIDList = new List<int>();
 
@@ -38,7 +39,7 @@ public class GAttackComponentBase : MonoBehaviour {
 		TotalTime = gpatterndata.TotalTime;
 		CoolTime = gpatterndata.CoolTime;
 		AttackPatternObjectTimeList = gpatterndata.AttackPatternObjectTimeList;
-		AttackObjectDataList = gpatterndata.AttackObjectDataList;
+		//AttackObjectDataList = gpatterndata.AttackObjectDataList;
 	}
 
 	public virtual bool PlayAttack()
@@ -46,7 +47,7 @@ public class GAttackComponentBase : MonoBehaviour {
 		//Debug.Log("try attack: " + _index);
 		if(CoolIsReady())
 		{
-			Debug.Log("ATtack: ");
+			//Debug.Log("ATtack: ");
 			Play();
 			return true;
 		}
@@ -65,22 +66,23 @@ public class GAttackComponentBase : MonoBehaviour {
 		return false;
 	}
 
-	public void Reset()
+	public virtual void Reset()
 	{
 		AttackPatternObjectFlagList.Clear();
 		CoolTimer = CoolTime;
 		CurTimer = 0f;
 	}
 	
-	public void Play()
+	public virtual void Play()
 	{
+		//Debug.Log("Play attack");
 		AttackPatternObjectFlagList.Clear();
 		IsPlaying = true;
 		CurTimer = 0f;
 		CoolTimer = 0f;
 	}
 	
-	public void Process(float _timer)
+	public virtual void Process(float _timer)
 	{
 		CoolTimer += _timer;
 		if(IsPlaying)
@@ -95,13 +97,14 @@ public class GAttackComponentBase : MonoBehaviour {
 				{
 					//if ratio is done and didn't created before, create attack object
 					AttackPatternObjectFlagList.Add(true);
-					Debug.Log("Create attack object id: " + AttackObjectDataList[iter]);
-					string curattackobjectid = AttackObjectDataList[iter];
-					GAttackObjectCreateManager.Instance.CreateAttackObject(curattackobjectid,
-					                                                       Stat.Attack * DamageMulti,
-					                                                       PivotTransform.position,
-					                                                       PivotTransform.right,
-					                                                       HitGroupIDList);
+					//Debug.Log("Create attack object id: " + AttackObjectDataList[iter]);
+					//string curattackobjectid = AttackObjectDataList[iter];
+					//GAttackObjectCreateManager.Instance.CreateAttackObject(curattackobjectid,
+					//                                                       Stat.Attack * DamageMulti,
+					//                                                       PivotTransform.position,
+					//                                                       PivotTransform.right,
+					//                                                       HitGroupIDList);
+					CreateAttackObject(iter);
 				}
 			}
 			
@@ -112,8 +115,22 @@ public class GAttackComponentBase : MonoBehaviour {
 			}
 		}
 	}
+
+	protected virtual void CreateAttackObject(int _index)
+	{
+		Object CurAttackObject = AttackObjectPrefabList[_index];
+		GameObject newgo = Instantiate(CurAttackObject) as GameObject;
+
+		GAttackObjectBase attackobjectbase = newgo.GetComponent<GAttackObjectBase>();
+		if(attackobjectbase != null)
+		{
+			GAttackObjectData data = DataManager.Inst.GetGAttackObjectData(attackobjectbase.ID);
+			attackobjectbase.Init(PivotTransform.transform.position, data.MoveLocalSpeed, Stat.Attack * DamageMulti * data.DamageMulti,
+			                  data.RemainFrame + 1, data.Attack_Effect, data.Hit_Effect, HitGroupIDList);
+		}
+	}
 	
-	public bool CoolIsReady()
+	public virtual bool CoolIsReady()
 	{
 		if(CoolTimer > CoolTime && !IsPlaying)
 		{
