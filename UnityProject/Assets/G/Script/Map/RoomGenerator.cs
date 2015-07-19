@@ -24,14 +24,26 @@ class RoomGenerator : MonoBehaviour
     }
 
     private System.Random rand = new System.Random();
+    private int piece;
+    private int width;
+    private int height;
 
     public Room Generate(int width, int height)
     {
         var room = new Room(width, height);
 
-        int piece = 3;
-        var fragment = new Vector2(width / piece, height / piece);
+        this.width = width;
+        this.height = height;
+        piece = 3;
 
+        var sectorList = CreateSetorList();
+        GeneratePlatforms(sectorList);
+
+        return room;
+    }
+
+    private List<Sector> CreateSetorList()
+    {
         var beginY = rand.Next(piece);
         var endY = rand.Next(piece);
 
@@ -70,7 +82,7 @@ class RoomGenerator : MonoBehaviour
                 int tempI = i;
                 int tempJ = j;
 
-                if(direction == 0)
+                if (direction == 0)
                 {
                     ++tempJ;
                 }
@@ -89,7 +101,7 @@ class RoomGenerator : MonoBehaviour
                     break;
                 }
 
-                if (piece <= tempI || piece <= tempJ)
+                if (tempI < 0 || tempJ < 0 || piece <= tempI || piece <= tempJ)
                 {
                     visited.Add(direction);
                     continue;
@@ -118,7 +130,7 @@ class RoomGenerator : MonoBehaviour
                 continue;
             }
 
-            if(finished == true)
+            if (finished == true)
             {
                 break;
             }
@@ -126,15 +138,28 @@ class RoomGenerator : MonoBehaviour
 
         sectorList.Add(endSector);
 
+        return sectorList;
+    }
+
+    private void GeneratePlatforms(List<Sector> sectorList)
+    {
+        var fragment = new Vector2(width / piece, height / piece);
+
         foreach (var sector in sectorList)
         {
+            // Sector bg
+            var sectorObj = Object.Instantiate(GameObject.Find("SectorBackground"));
+            sectorObj.GetComponent<Transform>().localPosition = new Vector2(fragment.x * (sector.X + 0.5f), fragment.y * (sector.Y + 0.5f));
+            sectorObj.GetComponent<Transform>().localScale = fragment;
+
+            // Platform
             var obj = Object.Instantiate(GameObject.Find("Platform"));
             var platform = obj.AddComponent<Platform>();
             var transform = obj.GetComponent<Transform>();
 
             int platformWidth = rand.Next((int)fragment.x);
-            int platformHeight = rand.Next((int)fragment.y);
-
+            platformWidth = System.Math.Max(platformWidth, 1);
+            
             float leftX = fragment.x * sector.X;
             float leftY = fragment.y * sector.Y;
             float rightX = fragment.x * (sector.X + 1);
@@ -144,10 +169,8 @@ class RoomGenerator : MonoBehaviour
             float y = rand.Next((int)(rightY - leftY)) + leftY;
 
             transform.localPosition = new Vector2(x, y);
-            transform.localScale = new Vector2(platformWidth, platformHeight);
+            transform.localScale = new Vector2(platformWidth, 1);
         }
-
-        return room;
     }
 
     private bool Contains(List<Sector> sectorList, int x, int y)
