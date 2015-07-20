@@ -150,6 +150,8 @@ class RoomGenerator : MonoBehaviour
     {
         var fragment = new Vector2(width / piece, height / piece);
 
+        Transform prevPlatform = null;
+
         for (int i = 0; i < sectorList.Count; ++i)
         {
             var sector = sectorList[i];
@@ -190,8 +192,6 @@ class RoomGenerator : MonoBehaviour
             {
                 destY = bottomY;
             }
-
-            Transform prevPlatform = null;
 
             while (true)
             {
