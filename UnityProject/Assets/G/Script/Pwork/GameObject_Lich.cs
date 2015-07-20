@@ -12,6 +12,7 @@ public class GameObject_Lich : GameObjectBase {
 
 	public GAttack_Lich_1 AttackPattern1;
 	public GAttack_Lich_2 AttackPattern2;
+	public GAttack_Lich_3 AttackPattern3;
 
 	protected bool IsLeft = false;
 	public override void Process (float _deltatime)
@@ -26,6 +27,11 @@ public class GameObject_Lich : GameObjectBase {
 		if(AttackPattern2.CanAttack())
 		{
 			AttackPattern2.Play();
+		}
+
+		if(AttackPattern3.CanAttack())
+		{
+			AttackPattern3.Play();
 		}
 	}
 

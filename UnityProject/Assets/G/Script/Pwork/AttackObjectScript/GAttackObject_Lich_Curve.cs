@@ -10,14 +10,15 @@ public class GAttackObject_Lich_Curve : GAttackObjectBase {
 	public float MinXForce;
 
 	public float Gravity = -20f;
+	public float MinYSpeed = -10f;
 	protected Vector3 CurSpeed;
 
 	public override void Process (float _deltatime)
 	{
 		CurSpeed += Vector3.up * Gravity * _deltatime;
-		if(CurSpeed.y < -20f)
+		if(CurSpeed.y < MinYSpeed)
 		{
-			CurSpeed.y = -20f;
+			CurSpeed.y = MinYSpeed;
 		}
 
 		transform.position += CurSpeed * _deltatime;
