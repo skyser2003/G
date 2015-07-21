@@ -30,6 +30,7 @@ public class MoveObjectBase : MonoBehaviour {
 	public float GravityResistance = 1f;
 
 	public List<GameObject> PlatformCheckObjectList = new List<GameObject>();
+	public List<GameObject> SideCheckObjectList = new List<GameObject>();
 
 	protected float PlatformCheckYPos = -99999999999f;
 
@@ -83,6 +84,7 @@ public class MoveObjectBase : MonoBehaviour {
 		ProcessOuterForce(_deltatime);
 		Acummulate(_deltatime);
 
+		CheckSide(_deltatime);
 		ProcessMovement(_deltatime);
 		CheckPlatform(_deltatime);
 
@@ -186,6 +188,34 @@ public class MoveObjectBase : MonoBehaviour {
 		}
 	}
 
+	protected void CheckSide(float _deltatime)
+	{
+		for(int sideobjectiter = 0; sideobjectiter < SideCheckObjectList.Count; sideobjectiter++)
+		{
+			Transform curobject = SideCheckObjectList[sideobjectiter].transform;
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.right, TotalVelocity.x * _deltatime, LayerMask.GetMask("SideCollider"));
+			//Debug.Log("Ray check: " + rayhits.Length);
+			if(rayhits.Length > 0)
+			{
+				for(int platformiter = 0; platformiter < rayhits.Length; platformiter++)
+				{
+					Vector2 curpos = curobject.transform.position;
+					Vector2 deltapos = rayhits[platformiter].point - curpos;
+					if((TotalVelocity.x > 0f && deltapos.x > 0f) 
+					   || (TotalVelocity.x < 0f && deltapos.x < 0f)
+
+					   )
+					{
+						//block move
+						TotalVelocity.x = 0f;
+						InnerVelocity.x = 0f;
+						OuterVelocity.x = 0f;
+					}
+				}
+			}
+		}	
+	}
+
 	protected void CheckPlatform(float _deltatime)
 	{
 		//if(InnerVelocity.y > 0f)
@@ -193,11 +223,11 @@ public class MoveObjectBase : MonoBehaviour {
 		PlatformCheckYPos = -99999999999f;
 		//}
 		//check falling speed
+		bool platformfound = false;
 		for(int platformobjectiter = 0; platformobjectiter < PlatformCheckObjectList.Count; platformobjectiter++)
 		{
 			Transform curobject = PlatformCheckObjectList[platformobjectiter].transform;
-			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime,
-			                                              LayerMask.GetMask("Platforms"));
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask("Platforms"));
 			//Debug.Log("Ray check: " + rayhits.Length);
 			if(rayhits.Length > 0)
 			{
@@ -211,7 +241,9 @@ public class MoveObjectBase : MonoBehaviour {
 					float heighestypos = -99999999f;
 					for(int platformiter = 0; platformiter < rayhits.Length; platformiter++)
 					{
-						PlatformBase curplatform = rayhits[platformiter].transform.gameObject.GetComponent<PlatformBase>();
+						PlatformBase curplatform = rayhits[platformiter].collider.transform.gameObject.GetComponent<PlatformBase>();
+						//Debug.Log("???: " + rayhits[platformiter].transform.gameObject.name);
+						//Debug.Log("what the: " + curplatform.ga	meObject.name);
 						if(curplatform != null)
 						{
 							if(curplatform.GetGroundPos() > heighestypos)
@@ -220,12 +252,15 @@ public class MoveObjectBase : MonoBehaviour {
 							}
 						}
 					}
+					platformfound = true;
 					PlatformCheckYPos = heighestypos;
 				}
-			}else
-			{
-				SetIsOnGround(false);
 			}
+		}
+
+		if(!platformfound)
+		{
+			SetIsOnGround(false);
 		}
 	}
 

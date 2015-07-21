@@ -39,6 +39,7 @@ public class GAttackComponentBase : MonoBehaviour {
 		TotalTime = gpatterndata.TotalTime;
 		CoolTime = gpatterndata.CoolTime;
 		AttackPatternObjectTimeList = gpatterndata.AttackPatternObjectTimeList;
+		Reset ();
 		//AttackObjectDataList = gpatterndata.AttackObjectDataList;
 	}
 
