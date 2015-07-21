@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 //----------------------------------------------
 //    Google2u: Google Doc Unity integration
@@ -10,8 +9,6 @@ using System.Collections.Generic;
 //              Do not manually edit
 //----------------------------------------------
 
-using System.Collections.Generic;
-using UnityEngine;
 
 
 public class ObjectBalanceDataRow
