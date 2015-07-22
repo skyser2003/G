@@ -17,22 +17,9 @@ public class GameObject_Lich : GameObjectBase {
 	protected bool IsLeft = false;
 	public override void Process (float _deltatime)
 	{
+		ProcessAI(_deltatime);
+
 		base.Process (_deltatime);
-		if(AttackPattern1.CanAttack())
-		{
-			AttackPattern1.SetTarget(Player.transform);
-			AttackPattern1.Play();
-		}
-
-		if(AttackPattern2.CanAttack())
-		{
-			AttackPattern2.Play();
-		}
-
-		if(AttackPattern3.CanAttack())
-		{
-			AttackPattern3.Play();
-		}
 	}
 
 	protected override void ProcessInput (float _deltatime)
@@ -107,6 +94,69 @@ public class GameObject_Lich : GameObjectBase {
 		if(!IsDead)
 		{
 			AnimationComp.SetTrigger("StartDamaged");
+		}
+	}
+
+	public enum LichState
+	{
+		ATTACK_1,
+		ATTACK_2,
+		ATTACK_3,
+		EXHAUSTED,
+
+	}
+
+	protected bool CanChangeToState(LichState _state)
+	{
+		if(_state == LichState.ATTACK_1)
+		{
+			if(!Orb1.IsDead)
+			{
+				return true;
+			}
+			return false;
+		}else if(_state == LichState.ATTACK_2)
+		{
+			if(!Orb2.IsDead)
+			{
+				return true;
+			}
+			return false;
+		}else if(_state == LichState.ATTACK_3)
+		{
+			if(!Orb3.IsDead)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		return true;
+	}
+
+	protected void ChangeAIState(LichState _state)
+	{
+
+	}
+
+
+	protected void ProcessAI(float _deltatime)
+	{
+
+		if(AttackPattern1.CanAttack())
+		{
+			AttackPattern1.SetTarget(Player.transform);
+			AttackPattern1.Play();
+		}
+		
+		if(AttackPattern2.CanAttack())
+		{
+			AttackPattern2.Play();
+		}
+		
+		if(AttackPattern3.CanAttack())
+		{
+			AttackPattern3.Play();
 		}
 	}
 }

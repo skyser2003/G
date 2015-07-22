@@ -5,6 +5,18 @@ using System.Collections.Generic;
 public class GameObject_Wolf : GameObjectBase {
 
 	protected bool IsLeft = false;
+	public override void Create ()
+	{
+		base.Create ();
+
+	}
+		
+	public override void Process (float _deltatime)
+	{
+		base.Process (_deltatime);
+		ProcessAI (_deltatime);
+	}
+
 	protected override void ProcessInput (float _deltatime)
 	{
 		base.ProcessInput (_deltatime);
@@ -85,4 +97,70 @@ public class GameObject_Wolf : GameObjectBase {
 			AnimationComp.SetTrigger("StartDamaged");
 		}
 	}
+	public enum WolfState
+	{
+		IDLE 		= 0,
+		SEARCH 		= 1,
+		ATTACK 		= 2,
+	}
+
+	public List<GAIBase> AIBaseList = new List<GAIBase>();
+	protected GAIBase CurState;
+	//public List<GAI<WolfState>> AIList = new List<GAI<WolfState>>();
+
+	public bool Searching = false;
+	protected WolfState CurAIstate = WolfState.IDLE;
+	protected void InitAIState()
+	{
+		Searching = true;
+		CurState = AIBaseList[0];
+	}
+
+	protected void ProcessAI(float _deltatime)
+	{
+		CurState.Process(_deltatime);
+
+		CheckChangeState();
+		if(CurAIstate == WolfState.IDLE)
+		{
+
+		}
+	}
+
+	protected void CheckChangeState()
+	{
+		if(CurState.StateIndex == (int)WolfState.IDLE)
+		{
+			//check time
+			if(CurState.PlayingTimer > 1f)
+			{
+				ChangeAIState(WolfState.SEARCH);
+			}
+		}else if(CurState.StateIndex == (int)WolfState.SEARCH)
+		{
+			if(CurState.PlayingTimer > 2f)
+			{
+				ChangeAIState(WolfState.IDLE);
+			}
+		}
+	}
+
+	protected void ChangeAIState(WolfState _state)
+	{
+		CurState.Reset();
+		for(int iter = 0; iter < AIBaseList.Count; iter++)
+		{
+			if((WolfState)AIBaseList[iter] == _state)
+			{
+				CurState = AIBaseList[iter];
+			}
+		}
+	}
+
+	protected void SearchForPlayer()
+	{
+
+	}
+	//public List<GAI> AIList = new List<GAI>();
+
 }

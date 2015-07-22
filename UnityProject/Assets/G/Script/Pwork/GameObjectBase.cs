@@ -16,7 +16,7 @@ public class GameObjectBase : MonoBehaviour {
 		Create ();
 	}
 
-	public void Create()
+	public virtual void Create()
 	{
 		InitInputObject();
 		InitAttackComp();
@@ -59,6 +59,28 @@ public class GameObjectBase : MonoBehaviour {
 			DamageDetectorList[iter].Init(GroupID);
 		}
 	}
+
+	#region Equips
+	public List<GEquipObject> EquipObjectList;
+	public void Equip(GEquipObject _item)
+	{
+		if(!EquipObjectList.Contains(_item))
+		{
+			EquipObjectList.Add(_item);
+			AddBuffData(_item.BuffData);
+		}
+	}
+
+	public void UnEquip(GEquipObject _item)
+	{
+		if(EquipObjectList.Contains(_item))
+		{
+			GEquipObject removeobject = _item;
+			EquipObjectList.Remove(_item);
+			RemoveBuffData(_item.BuffData);
+		}
+	}
+	#endregion
 
 	#region Input things
 	protected void InitInputObject()
@@ -169,6 +191,7 @@ public class GameObjectBase : MonoBehaviour {
 	#endregion
 }
 
+[System.Serializable]
 public struct ObjectStat
 {
 	public float Health;

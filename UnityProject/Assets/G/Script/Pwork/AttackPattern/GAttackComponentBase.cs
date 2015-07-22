@@ -82,7 +82,7 @@ public class GAttackComponentBase : MonoBehaviour {
 		CurTimer = 0f;
 		CoolTimer = 0f;
 	}
-	
+
 	public virtual void Process(float _timer)
 	{
 		CoolTimer += _timer;
