@@ -61,18 +61,18 @@ class CaveGenerator : MonoBehaviour
                 }
             }
 
-            foreach(var miner in minerList)
+            foreach (var removeMiner in removeList)
+            {
+                minerList.Remove(removeMiner);
+            }
+
+            foreach (var miner in minerList)
             {
                 var newMiner = miner.GenerateNew();
                 if(newMiner != null)
                 {
                     addList.Add(newMiner);
                 }
-            }
-
-            foreach (var removeMiner in removeList)
-            {
-                minerList.Remove(removeMiner);
             }
 
             foreach(var newMiner in addList)

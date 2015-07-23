@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 class CaveMiner
 {
     private CaveState[][] map;
-    private System.Random rand = new System.Random();
     private int x, y;
-    
+
     public void Init(CaveState[][] map, int x, int y)
     {
         this.map = map;
@@ -20,12 +21,14 @@ class CaveMiner
             return false;
         }
 
-        var direction = rand.Next(4);
-        int originalX = x;
-        int originalY = y;
+        var tempList = new List<int>();
 
         while (true)
         {
+            int originalX = x;
+            int originalY = y;
+
+            int direction = UnityEngine.Random.Range(0, 4);
             switch (direction)
             {
                 // Up
@@ -54,7 +57,9 @@ class CaveMiner
                     break;
             }
 
-            if (IsValid(x, y) == false)
+            tempList.Add(direction);
+
+            if (IsDiggable(x, y) == false)
             {
                 x = originalX;
                 y = originalY;
@@ -73,7 +78,7 @@ class CaveMiner
 
     public CaveMiner GenerateNew()
     {
-        var possibility = rand.Next(100);
+        var possibility = UnityEngine.Random.Range(0, 100);
         if (possibility <= 7)
         {
             var miner = new CaveMiner();
@@ -88,24 +93,20 @@ class CaveMiner
 
     private bool FourSidesUndiggable(int x, int y)
     {
-        if (IsValid(x - 1, y) == false || map[x - 1][y] == CaveState.Wall)
-        {
-            return false;
-        }
-        if (IsValid(x + 1, y) == false || map[x + 1][y] == CaveState.Wall)
-        {
-            return false;
-        }
-        if (IsValid(x, y - 1) == false || map[x][y - 1] == CaveState.Wall)
-        {
-            return false;
-        }
-        if (IsValid(x, y + 1) == false || map[x][y + 1] == CaveState.Wall)
+        if (IsDiggable(x - 1, y) == true ||
+            IsDiggable(x + 1, y) == true ||
+            IsDiggable(x, y - 1) == true ||
+            IsDiggable(x, y + 1) == true)
         {
             return false;
         }
 
         return true;
+    }
+
+    private bool IsDiggable(int x, int y)
+    {
+        return IsValid(x, y) == true && map[x][y] == CaveState.Wall;
     }
 
     private bool IsValid(int x, int y)
