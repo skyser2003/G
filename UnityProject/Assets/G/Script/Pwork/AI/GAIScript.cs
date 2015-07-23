@@ -26,12 +26,12 @@ public class GAIBase
 
 	public virtual void ProcessEnter(float _deltatime)
 	{
-
+		EnterTimer += _deltatime;
 	}
 
 	public virtual void Process(float _deltatime)
 	{
-
+		PlayingTimer += _deltatime;
 	}
 
 	public virtual void ProcessExit(float _deltatime)

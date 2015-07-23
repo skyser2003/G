@@ -11,33 +11,22 @@ public class GAttackObjectBase : MonoBehaviour {
 
 	public string ID;
 
-	public GameObject AttackObject;
 	public float Damage;
+	public float DamageMulti;
 	public int RemainFrame;
 	public Vector3 MoveLocalSpeed;
 	public List<int> HitGroupList = new List<int>();
 	public string AttackEffect;
 	public string HitEffect;
-	public virtual void Init(Vector3 _worldpos,
-	                            Vector3 _movespeed,
-	                            float _damage,
-	                            int _remainframe,
-	                            string _attackeffect,
-	                            string _hiteffect,
-	                            List<int> _hitgrouplist)
+	public virtual void Init(Vector3 _worldpos, Vector3 _movespeed, float _damage , List<int> _hitgrouplist)
 	{
 		GAttackObjectCreateManager.Instance.AddAttackObject(this);
 		transform.position = _worldpos;
 		MoveLocalSpeed = _movespeed;
-		AttackEffect = _attackeffect;
-		HitEffect = _hiteffect;
-		Damage = _damage;
-		RemainFrame = _remainframe;
-		AttackObject = GEffectManager.Instance.GetEffectObject(AttackEffect);
+		Damage = _damage * DamageMulti;
+		//RemainFrame = _remainframe;
 		HitGroupList = _hitgrouplist;
 		//AttackObject.transform.parent = transform;
-		AttackObject.transform.position = transform.position;
-		Destroy(AttackObject.gameObject, 0.2f);
 	}
 
 	void FixedUpdate()

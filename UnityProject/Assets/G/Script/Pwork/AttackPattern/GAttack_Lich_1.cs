@@ -23,8 +23,7 @@ public class GAttack_Lich_1 : GAttackComponentBase {
 			velocity.Normalize();
 			velocity *= 3f;
 			GAttackObjectData data = DataManager.Inst.GetGAttackObjectData(attackobjectbase.ID);
-			attackobjectbase.Init(PivotTransform.transform.position, velocity, Stat.Attack * DamageMulti * data.DamageMulti,
-			                      data.RemainFrame + 1, data.Attack_Effect, data.Hit_Effect, HitGroupIDList);
+			attackobjectbase.Init(PivotTransform.transform.position, velocity, Stat.Attack * DamageMulti * data.DamageMulti, HitGroupIDList);
 		}
 	}
 }

@@ -15,9 +15,8 @@ public class GAttack_Lich_3 : GAttackComponentBase {
 		{
 			attackobjectbase.FollowObject = TargetPlayer;
 
-			GAttackObjectData data = DataManager.Inst.GetGAttackObjectData(attackobjectbase.ID);
-			attackobjectbase.Init(PivotTransform.transform.position, Vector3.zero, Stat.Attack * DamageMulti * data.DamageMulti,
-			                      data.RemainFrame * 100 + 1, data.Attack_Effect, data.Hit_Effect, HitGroupIDList);
+			//GAttackObjectData data = DataManager.Inst.GetGAttackObjectData(attackobjectbase.ID);
+			attackobjectbase.Init(PivotTransform.transform.position, Vector3.zero, Stat.Attack * DamageMulti, HitGroupIDList);
 		}
 	}
 }

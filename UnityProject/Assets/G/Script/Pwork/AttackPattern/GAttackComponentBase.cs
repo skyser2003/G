@@ -34,11 +34,11 @@ public class GAttackComponentBase : MonoBehaviour {
 	public void Init()
 	{
 		GAttackPatternObject gpatterndata = DataManager.Inst.GetGAttackPattern(ID);
-		ID = gpatterndata.ID;
-		Name = gpatterndata.Name;
-		TotalTime = gpatterndata.TotalTime;
-		CoolTime = gpatterndata.CoolTime;
-		AttackPatternObjectTimeList = gpatterndata.AttackPatternObjectTimeList;
+		//ID = gpatterndata.ID;
+		//Name = gpatterndata.Name;
+		//TotalTime = gpatterndata.TotalTime;
+		//CoolTime = gpatterndata.CoolTime;
+		//AttackPatternObjectTimeList = gpatterndata.AttackPatternObjectTimeList;
 		Reset ();
 		//AttackObjectDataList = gpatterndata.AttackObjectDataList;
 	}
@@ -125,9 +125,7 @@ public class GAttackComponentBase : MonoBehaviour {
 		GAttackObjectBase attackobjectbase = newgo.GetComponent<GAttackObjectBase>();
 		if(attackobjectbase != null)
 		{
-			GAttackObjectData data = DataManager.Inst.GetGAttackObjectData(attackobjectbase.ID);
-			attackobjectbase.Init(PivotTransform.transform.position, data.MoveLocalSpeed, Stat.Attack * DamageMulti * data.DamageMulti,
-			                  data.RemainFrame + 1, data.Attack_Effect, data.Hit_Effect, HitGroupIDList);
+			attackobjectbase.Init(PivotTransform.transform.position, Vector3.zero, Stat.Attack * DamageMulti, HitGroupIDList);
 		}
 	}
 	

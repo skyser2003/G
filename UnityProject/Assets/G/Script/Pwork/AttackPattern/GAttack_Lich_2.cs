@@ -12,9 +12,7 @@ public class GAttack_Lich_2 : GAttackComponentBase {
 		if(attackobjectbase != null)
 		{
 
-			GAttackObjectData data = DataManager.Inst.GetGAttackObjectData(attackobjectbase.ID);
-			attackobjectbase.Init(PivotTransform.transform.position, Vector3.zero, Stat.Attack * DamageMulti * data.DamageMulti,
-			                      data.RemainFrame * 100 + 1, data.Attack_Effect, data.Hit_Effect, HitGroupIDList);
+			attackobjectbase.Init(PivotTransform.transform.position, Vector3.zero, Stat.Attack * DamageMulti, HitGroupIDList);
 			attackobjectbase.InitSpeed();
 		}
 	}

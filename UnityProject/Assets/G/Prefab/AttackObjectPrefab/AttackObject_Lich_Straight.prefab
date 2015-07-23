@@ -309,9 +309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: ID_3
-  AttackObject: {fileID: 0}
   Damage: 0
-  RemainFrame: 0
+  DamageMulti: 1
+  RemainFrame: 300
   MoveLocalSpeed: {x: 0, y: 0, z: 0}
   HitGroupList: 
   AttackEffect: 
@@ -7818,6 +7818,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.y
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DamageMulti
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RemainFrame
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

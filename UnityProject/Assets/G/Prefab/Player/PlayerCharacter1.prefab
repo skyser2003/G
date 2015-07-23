@@ -3072,11 +3072,12 @@ MonoBehaviour:
     GravityResistance: 0
   ID: ID_1
   Name: 
-  TotalTime: 0
+  TotalTime: .200000003
   CurTimer: 0
   CoolTime: 0
   CoolTimer: 0
-  AttackPatternObjectTimeList: []
+  AttackPatternObjectTimeList:
+  - .5
   AttackObjectPrefabList:
   - {fileID: 124794, guid: 6ea82a0211b90ec48a26fb7a1493f2e9, type: 2}
   IsPlaying: 0
@@ -3117,17 +3118,17 @@ MonoBehaviour:
     MaxFallSpeed: 0
     GravityResistance: 0
   BaseStat:
-    Health: 0
-    Attack: 0
-    Defense: 0
-    Mass: 0
-    MaxMovementSpeed: 0
-    MoveForce: 0
-    MoveResistance: 0
-    JumpForce: 0
-    MaxJumpCount: 0
-    MaxFallSpeed: 0
-    GravityResistance: 0
+    Health: 100
+    Attack: 10
+    Defense: 10
+    Mass: 1
+    MaxMovementSpeed: 4
+    MoveForce: 20
+    MoveResistance: .949999988
+    JumpForce: 15
+    MaxJumpCount: 1
+    MaxFallSpeed: -20
+    GravityResistance: 1
   BuffDataList: []
   AnimationComp: {fileID: 11488470}
   AttackCompList:
@@ -3208,6 +3209,7 @@ MonoBehaviour:
   - {fileID: 158672}
   - {fileID: 121782}
   - {fileID: 126892}
+  SideLength: 1
   SideCheckObjectList:
   - {fileID: 172122}
 --- !u!137 &13767468

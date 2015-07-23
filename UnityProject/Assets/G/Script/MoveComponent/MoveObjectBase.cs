@@ -30,6 +30,8 @@ public class MoveObjectBase : MonoBehaviour {
 	public float GravityResistance = 1f;
 
 	public List<GameObject> PlatformCheckObjectList = new List<GameObject>();
+
+	public float SideLength = 1f;
 	public List<GameObject> SideCheckObjectList = new List<GameObject>();
 
 	protected float PlatformCheckYPos = -99999999999f;

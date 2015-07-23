@@ -21,8 +21,8 @@ public class GameObjectBase : MonoBehaviour {
 		InitInputObject();
 		InitAttackComp();
 
-		ObjectStat stat = DataManager.Inst.GetObjectStat(BalanceID);
-		SetBaseStat(stat);
+		//ObjectStat stat = DataManager.Inst.GetObjectStat(BalanceID);
+		SetBaseStat(BaseStat);
 
 		GameObjectManager.Instance.AddToObjectList(this);
 

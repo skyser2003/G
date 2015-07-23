@@ -77,6 +77,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &104216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 445238}
+  m_Layer: 0
+  m_Name: 00. OrbPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &105036
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +306,21 @@ GameObject:
   - 4: {fileID: 496306}
   m_Layer: 0
   m_Name: RigLArmIndex1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &117476
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 448910}
+  m_Layer: 0
+  m_Name: 00. OrbPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,6 +881,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &149050
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489894}
+  m_Layer: 0
+  m_Name: 00. OrbPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &149264
 GameObject:
   m_ObjectHideFlags: 1
@@ -1112,6 +1157,21 @@ GameObject:
   - 4: {fileID: 489556}
   m_Layer: 0
   m_Name: RigLArmMiddle1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &163026
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 496608}
+  m_Layer: 0
+  m_Name: 00. OrbPos (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2442,6 +2502,21 @@ Transform:
   - {fileID: 487162}
   m_Father: {fileID: 423654}
   m_RootOrder: 4
+--- !u!4 &445238
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.46999979, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 489894}
+  - {fileID: 448910}
+  - {fileID: 496608}
+  m_Father: {fileID: 454780}
+  m_RootOrder: 5
 --- !u!4 &445336
 Transform:
   m_ObjectHideFlags: 1
@@ -2535,6 +2610,18 @@ Transform:
   - {fileID: 490768}
   m_Father: {fileID: 427128}
   m_RootOrder: 0
+--- !u!4 &448910
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.31999993, y: 2.33999991, z: .860000014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 445238}
+  m_RootOrder: 1
 --- !u!4 &449594
 Transform:
   m_ObjectHideFlags: 1
@@ -2637,6 +2724,7 @@ Transform:
   - {fileID: 407274}
   - {fileID: 445336}
   - {fileID: 483440}
+  - {fileID: 445238}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &455648
@@ -3149,6 +3237,18 @@ Transform:
   - {fileID: 457860}
   m_Father: {fileID: 448384}
   m_RootOrder: 1
+--- !u!4 &489894
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.100000001, y: -0, z: -3.24000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 445238}
+  m_RootOrder: 0
 --- !u!4 &490768
 Transform:
   m_ObjectHideFlags: 1
@@ -3290,6 +3390,18 @@ Transform:
   - {fileID: 442538}
   m_Father: {fileID: 448384}
   m_RootOrder: 0
+--- !u!4 &496608
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.44000006, y: 2.47000003, z: 1.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 445238}
+  m_RootOrder: 2
 --- !u!4 &496610
 Transform:
   m_ObjectHideFlags: 1
@@ -3528,6 +3640,8 @@ MonoBehaviour:
   GravityResistance: 1
   PlatformCheckObjectList:
   - {fileID: 105036}
+  SideLength: 1
+  SideCheckObjectList: []
 --- !u!114 &11422844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3547,20 +3661,92 @@ MonoBehaviour:
   IsDead: 0
   DamageDetectorList:
   - {fileID: 11461660}
+  EquipObjectList: []
   InputReceivedList: 
   MoveObject: {fileID: 11415378}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
+  BaseStat:
+    Health: 50000
+    Attack: 10
+    Defense: 20
+    Mass: 100
+    MaxMovementSpeed: 1
+    MoveForce: 20
+    MoveResistance: .899999976
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: -20
+    GravityResistance: 1
+  BuffDataList: []
   AnimationComp: {fileID: 11409296}
   AttackCompList:
   - {fileID: 11425922}
   - {fileID: 11478324}
   - {fileID: 11437078}
   Player: {fileID: 0}
+  CurOrb: {fileID: 0}
   Orb1: {fileID: 11487988}
   Orb2: {fileID: 11496414}
   Orb3: {fileID: 11449308}
   AttackPattern1: {fileID: 11425922}
   AttackPattern2: {fileID: 11478324}
   AttackPattern3: {fileID: 11437078}
+  OrbPosList:
+  - {fileID: 489894}
+  - {fileID: 448910}
+  - {fileID: 496608}
+  AIBaseList:
+  - StateIndex: 0
+    EnterTime: 0
+    EnterTimer: 0
+    PlayingTime: 0
+    PlayingTimer: 0
+    EndTime: 0
+    EndTimer: 0
+    IsPlaying: 0
+  - StateIndex: 1
+    EnterTime: 0
+    EnterTimer: 0
+    PlayingTime: 0
+    PlayingTimer: 0
+    EndTime: 0
+    EndTimer: 0
+    IsPlaying: 0
+  - StateIndex: 2
+    EnterTime: 0
+    EnterTimer: 0
+    PlayingTime: 0
+    PlayingTimer: 0
+    EndTime: 0
+    EndTimer: 0
+    IsPlaying: 0
+  - StateIndex: 3
+    EnterTime: 0
+    EnterTimer: 0
+    PlayingTime: 0
+    PlayingTimer: 0
+    EndTime: 0
+    EndTimer: 0
+    IsPlaying: 0
+  - StateIndex: 4
+    EnterTime: 0
+    EnterTimer: 0
+    PlayingTime: 0
+    PlayingTimer: 0
+    EndTime: 0
+    EndTimer: 0
+    IsPlaying: 0
 --- !u!114 &11425922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3573,13 +3759,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotTransform: {fileID: 407274}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
   ID: ID_5
   Name: 
-  TotalTime: 0
+  TotalTime: .5
   CurTimer: 0
-  CoolTime: 0
+  CoolTime: .5
   CoolTimer: 0
-  AttackPatternObjectTimeList: []
+  AttackPatternObjectTimeList:
+  - .5
   AttackObjectPrefabList:
   - {fileID: 183552, guid: c868317b332c6fb43a0ad3b24257aaab, type: 2}
   IsPlaying: 0
@@ -3612,13 +3811,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotTransform: {fileID: 483440}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
   ID: ID_7
   Name: 
-  TotalTime: 0
+  TotalTime: 30
   CurTimer: 0
-  CoolTime: 0
+  CoolTime: 30
   CoolTimer: 0
-  AttackPatternObjectTimeList: []
+  AttackPatternObjectTimeList:
+  - .100000001
+  - .200000003
+  - .300000012
+  - .400000006
+  - .5
+  - .600000024
+  - .699999988
+  - .800000012
+  - .899999976
+  - 1
   AttackObjectPrefabList:
   - {fileID: 183552, guid: fd9bc99b9e1e40e4a849ec99dc431857, type: 2}
   - {fileID: 183552, guid: fd9bc99b9e1e40e4a849ec99dc431857, type: 2}
@@ -3679,8 +3900,34 @@ MonoBehaviour:
   IsDead: 0
   DamageDetectorList:
   - {fileID: 11472426}
+  EquipObjectList: []
   InputReceivedList: 
   MoveObject: {fileID: 0}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
+  BaseStat:
+    Health: 1000
+    Attack: 1
+    Defense: 1
+    Mass: 1
+    MaxMovementSpeed: 1
+    MoveForce: 1
+    MoveResistance: 1
+    JumpForce: 1
+    MaxJumpCount: 0
+    MaxFallSpeed: 1
+    GravityResistance: 1
+  BuffDataList: []
   AnimationComp: {fileID: 0}
   AttackCompList: []
   BaseObject: {fileID: 11422844}
@@ -3722,14 +3969,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotTransform: {fileID: 445336}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
   ID: ID_6
   Name: 
-  TotalTime: 0
+  TotalTime: 5
   CurTimer: 0
-  CoolTime: 0
+  CoolTime: 10
   CoolTimer: 0
-  AttackPatternObjectTimeList: []
+  AttackPatternObjectTimeList:
+  - .5
+  - .5
+  - .5
+  - .5
+  - .5
+  - .5
+  - .5
+  - .5
+  - .5
+  - .5
   AttackObjectPrefabList:
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
+  - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
   - {fileID: 183552, guid: c5e46c44c5d204f408f9626fe9bf634a, type: 2}
   IsPlaying: 0
   DamageMulti: 1
@@ -3754,8 +4032,34 @@ MonoBehaviour:
   IsDead: 0
   DamageDetectorList:
   - {fileID: 11432448}
+  EquipObjectList: []
   InputReceivedList: 
   MoveObject: {fileID: 0}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
+  BaseStat:
+    Health: 1000
+    Attack: 1
+    Defense: 1
+    Mass: 1
+    MaxMovementSpeed: 1
+    MoveForce: 1
+    MoveResistance: 1
+    JumpForce: 1
+    MaxJumpCount: 0
+    MaxFallSpeed: -20
+    GravityResistance: 1
+  BuffDataList: []
   AnimationComp: {fileID: 0}
   AttackCompList: []
   BaseObject: {fileID: 11422844}
@@ -3778,8 +4082,34 @@ MonoBehaviour:
   IsDead: 0
   DamageDetectorList:
   - {fileID: 11446942}
+  EquipObjectList: []
   InputReceivedList: 
   MoveObject: {fileID: 0}
+  Stat:
+    Health: 0
+    Attack: 0
+    Defense: 0
+    Mass: 0
+    MaxMovementSpeed: 0
+    MoveForce: 0
+    MoveResistance: 0
+    JumpForce: 0
+    MaxJumpCount: 0
+    MaxFallSpeed: 0
+    GravityResistance: 0
+  BaseStat:
+    Health: 1000
+    Attack: 1
+    Defense: 1
+    Mass: 1
+    MaxMovementSpeed: 1
+    MoveForce: 1
+    MoveResistance: .949999988
+    JumpForce: 1
+    MaxJumpCount: 1
+    MaxFallSpeed: 1
+    GravityResistance: 1
+  BuffDataList: []
   AnimationComp: {fileID: 0}
   AttackCompList: []
   BaseObject: {fileID: 11422844}
