@@ -30,7 +30,7 @@ class CaveGenerator : MonoBehaviour
         {
             map[i] = new CaveState[height];
 
-            for(int j=0;j< height; ++j)
+            for (int j = 0; j < height; ++j)
             {
                 map[i][j] = CaveState.Wall;
             }
@@ -69,15 +69,53 @@ class CaveGenerator : MonoBehaviour
             foreach (var miner in minerList)
             {
                 var newMiner = miner.GenerateNew();
-                if(newMiner != null)
+                if (newMiner != null)
                 {
                     addList.Add(newMiner);
                 }
             }
 
-            foreach(var newMiner in addList)
+            foreach (var newMiner in addList)
             {
                 minerList.Add(newMiner);
+            }
+        }
+
+        var visited = new bool[map.Length][];
+        for (int i = 0; i < map.Length; ++i)
+        {
+            visited[i] = new bool[map[i].Length];
+            for (int j = 0; j < map[i].Length; ++j)
+            {
+                visited[i][j] = false;
+            }
+        }
+
+        var chunkList = new List<List<Vector2>>();
+
+        for (int i = 0; i < map.Length; ++i)
+        {
+            for (int j = 0; j < map[i].Length; ++j)
+            {
+                if (map[i][j] == CaveState.Empty || visited[i][j] == true)
+                {
+                    continue;
+                }
+
+                var chunk = new List<Vector2>();
+                GetChunk(chunk, visited, i, j);
+                chunkList.Add(chunk);
+            }
+        }
+
+        foreach(var chunk in chunkList)
+        {
+            if(chunk.Count <= 4)
+            {
+                foreach(var point in chunk)
+                {
+                    map[(int)point.x][(int)point.y] = CaveState.Empty;
+                }
             }
         }
 
@@ -87,18 +125,41 @@ class CaveGenerator : MonoBehaviour
             {
                 GameObject obj = null;
                 // Empty
-                if(map[i][j] == CaveState.Empty)
+                if (map[i][j] == CaveState.Empty)
                 {
                     obj = Object.Instantiate(GameObject.Find("EmptyCave"));
                 }
                 // Wall
-                else if(map[i][j] == CaveState.Wall)
+                else if (map[i][j] == CaveState.Wall)
                 {
                     obj = Object.Instantiate(GameObject.Find("WallCave"));
                 }
 
                 obj.GetComponent<Transform>().localPosition = new Vector2(i, j);
             }
+        }
+    }
+
+    private void GetChunk(List<Vector2> chunk, bool[][] visited, int x, int y)
+    {
+        if ((0 <= x && x < map.Length && 0 <= y && y < map[0].Length) == false)
+        {
+            return;
+        }
+
+        if(map[x][y] == CaveState.Empty)
+        {
+            return;
+        }
+
+        if (visited[x][y] == false)
+        {
+            visited[x][y] = true;
+            chunk.Add(new Vector2(x, y));
+            GetChunk(chunk, visited, x - 1, y);
+            GetChunk(chunk, visited, x + 1, y);
+            GetChunk(chunk, visited, x, y - 1);
+            GetChunk(chunk, visited, x, y + 1);
         }
     }
 }
