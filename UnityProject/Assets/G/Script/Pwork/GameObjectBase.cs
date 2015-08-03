@@ -10,6 +10,7 @@ public class GameObjectBase : MonoBehaviour {
 	public int GroupID;
 
 	public float CurHealth;
+	public float CurStamina;
 	public bool IsDead = false;
 	void Start()
 	{
@@ -27,6 +28,7 @@ public class GameObjectBase : MonoBehaviour {
 		GameObjectManager.Instance.AddToObjectList(this);
 
 		CurHealth = Stat.Health;
+		CurStamina = Stat.MaxStamina;
 		InitDamageDetector();
 	}
 
@@ -36,6 +38,30 @@ public class GameObjectBase : MonoBehaviour {
 		MoveObject.Process(_deltatime);
 		ProcessAttack(_deltatime);
 		ProcessAnimation(_deltatime);
+		ProcessHealthRegen(_deltatime);
+		ProcessStaminaRegen(_deltatime);
+	}
+
+	protected virtual void ProcessHealthRegen(float _deltatime)
+	{
+		if(!IsDead)
+		{
+			if(CurHealth < Stat.Health)
+			{
+				CurHealth += Stat.HealthRegen * _deltatime;
+			}
+		}
+	}
+
+	protected virtual void ProcessStaminaRegen(float _deltatime)
+	{
+		if(!IsDead)
+		{
+			if(CurStamina < Stat.MaxStamina)
+			{
+				CurHealth += Stat.StaminaRegen * _deltatime;
+			}
+		}
 	}
 
 	public virtual void Hit(float _damage)
@@ -173,7 +199,7 @@ public class GameObjectBase : MonoBehaviour {
 	#endregion
 
 	#region AttackComponent
-	public List<GAttackComponentBase> AttackCompList = new List<GAttackComponentBase>();
+	public List<GAttackPatternBase> AttackCompList = new List<GAttackPatternBase>();
 	protected virtual void InitAttackComp()
 	{
 		for(int iter = 0; iter < AttackCompList.Count; iter++)
@@ -195,6 +221,7 @@ public class GameObjectBase : MonoBehaviour {
 public struct ObjectStat
 {
 	public float Health;
+	public float HealthRegen;
 	public float Attack;
 	public float Defense;
 	public float Mass;
@@ -205,10 +232,12 @@ public struct ObjectStat
 	public int MaxJumpCount;
 	public float MaxFallSpeed;
 	public float GravityResistance;
-
+	public float MaxStamina;
+	public float StaminaRegen;
 	public void AddStat(ObjectStat _stat)
 	{
 		Health += _stat.Health;
+		HealthRegen += _stat.HealthRegen;
 		Attack += _stat.Attack;
 		Defense += _stat.Defense;
 		Mass += _stat.Mass;
@@ -219,5 +248,7 @@ public struct ObjectStat
 		MaxJumpCount += _stat.MaxJumpCount;
 		MaxFallSpeed += _stat.MaxFallSpeed;
 		GravityResistance += _stat.GravityResistance;
+		MaxStamina += _stat.MaxStamina;
+		StaminaRegen += _stat.StaminaRegen;
 	}
 }

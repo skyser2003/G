@@ -55,40 +55,25 @@ public class GameObject_Player : GameObjectBase {
 				//check if item can be equiped....
 				CheckEquipItem();
 
-				//if(AttackComp.PlayAttack(0))
-				//{
-				//	AnimationComp.SetTrigger("StartWeakAttack");
-				//}
-				if(AttackCompList[0].CanAttack())
-				{
-					IsHoldingStringAttack = true;
-				}
-
 				AttackPressedTimer = 0f;
 			}
+
 			if(curinput == GInputType.KEY_1_PRESSED)
 			{
-				if(AttackCompList[0].CanAttack())
+				if(CurStamina > AttackCompList[0].StaminaCost && AttackCompList[0].CanAttack())
 				{
-					IsHoldingStringAttack = true;
-					AttackPressedTimer += Time.deltaTime;
-					if(AttackPressedTimer > StrongAttackStartTime)
+					if(AttackCompList[0].PlayAttack())
 					{
-
+						CurStamina -= AttackCompList[0].StaminaCost;
+						AnimationComp.SetTrigger("ReleaseAttack");
 					}
+					AttackPressedTimer = 0f;
 				}
 			}
 
 			if(curinput == GInputType.KEY_1_RELEASE)
 			{
-				if(AttackCompList[0].CanAttack())
-				{
-					if(AttackCompList[0].PlayAttack())
-					{
-						AnimationComp.SetTrigger("ReleaseAttack");
-					}
-					AttackPressedTimer = 0f;
-				}
+
 			}
 		}
 

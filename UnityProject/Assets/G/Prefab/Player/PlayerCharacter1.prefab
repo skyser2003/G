@@ -3054,13 +3054,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 142348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1221560865f0fdd4294caf4ee798d25c, type: 3}
+  m_Script: {fileID: 11500000, guid: d903ee8852457434b8043619b0ba1be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PivotTransform: {fileID: 465298}
   Stat:
     Health: 0
-    Attack: 0
+    HealthRegen: 0
+    Attack: 10
     Defense: 0
     Mass: 0
     MaxMovementSpeed: 0
@@ -3070,12 +3071,15 @@ MonoBehaviour:
     MaxJumpCount: 0
     MaxFallSpeed: 0
     GravityResistance: 0
-  ID: ID_1
+    MaxStamina: 0
+    StaminaRegen: 0
+  ID: 
   Name: 
-  TotalTime: .200000003
+  TotalTime: .100000001
   CurTimer: 0
-  CoolTime: 0
+  CoolTime: .100000001
   CoolTimer: 0
+  StaminaCost: 0
   AttackPatternObjectTimeList:
   - .5
   AttackObjectPrefabList:
@@ -3083,7 +3087,7 @@ MonoBehaviour:
   IsPlaying: 0
   DamageMulti: 1
   AttackSpeed: 1
-  HitGroupIDList: 050000000600000007000000
+  HitGroupIDList: 0400000005000000060000000700000008000000
 --- !u!114 &11462134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3100,6 +3104,7 @@ MonoBehaviour:
   ID: 0
   GroupID: 1
   CurHealth: 0
+  CurStamina: 0
   IsDead: 0
   DamageDetectorList: []
   EquipObjectList: []
@@ -3107,6 +3112,7 @@ MonoBehaviour:
   MoveObject: {fileID: 11493872}
   Stat:
     Health: 0
+    HealthRegen: 0
     Attack: 0
     Defense: 0
     Mass: 0
@@ -3117,8 +3123,11 @@ MonoBehaviour:
     MaxJumpCount: 0
     MaxFallSpeed: 0
     GravityResistance: 0
+    MaxStamina: 0
+    StaminaRegen: 0
   BaseStat:
     Health: 100
+    HealthRegen: 10
     Attack: 10
     Defense: 10
     Mass: 1
@@ -3129,6 +3138,8 @@ MonoBehaviour:
     MaxJumpCount: 1
     MaxFallSpeed: -20
     GravityResistance: 1
+    MaxStamina: 100
+    StaminaRegen: 10
   BuffDataList: []
   AnimationComp: {fileID: 11488470}
   AttackCompList:

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class GAttack_Lich_1 : GAttackComponentBase {
+public class GAttack_Lich_1 : GAttackPatternBase {
 
 	public Transform Target;
 

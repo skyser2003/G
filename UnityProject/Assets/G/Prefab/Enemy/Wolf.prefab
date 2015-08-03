@@ -2383,13 +2383,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 198798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1221560865f0fdd4294caf4ee798d25c, type: 3}
+  m_Script: {fileID: 11500000, guid: d903ee8852457434b8043619b0ba1be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PivotTransform: {fileID: 484564}
   Stat:
     Health: 0
-    Attack: 0
+    HealthRegen: 0
+    Attack: 10
     Defense: 0
     Mass: 0
     MaxMovementSpeed: 0
@@ -2399,12 +2400,15 @@ MonoBehaviour:
     MaxJumpCount: 0
     MaxFallSpeed: 0
     GravityResistance: 0
+    MaxStamina: 0
+    StaminaRegen: 0
   ID: 
   Name: 
   TotalTime: 1
   CurTimer: 0
-  CoolTime: .5
+  CoolTime: 1
   CoolTimer: 0
+  StaminaCost: 0
   AttackPatternObjectTimeList:
   - .5
   AttackObjectPrefabList:
@@ -2429,6 +2433,7 @@ MonoBehaviour:
   ID: 2
   GroupID: 5
   CurHealth: 0
+  CurStamina: 0
   IsDead: 0
   DamageDetectorList: []
   EquipObjectList: []
@@ -2436,6 +2441,7 @@ MonoBehaviour:
   MoveObject: {fileID: 11435832}
   Stat:
     Health: 0
+    HealthRegen: 0
     Attack: 0
     Defense: 0
     Mass: 0
@@ -2446,8 +2452,11 @@ MonoBehaviour:
     MaxJumpCount: 0
     MaxFallSpeed: 0
     GravityResistance: 0
+    MaxStamina: 0
+    StaminaRegen: 0
   BaseStat:
     Health: 100
+    HealthRegen: 0
     Attack: 10
     Defense: 10
     Mass: 1
@@ -2458,6 +2467,8 @@ MonoBehaviour:
     MaxJumpCount: 1
     MaxFallSpeed: -20
     GravityResistance: 1
+    MaxStamina: 0
+    StaminaRegen: 0
   BuffDataList: []
   AnimationComp: {fileID: 11490246}
   AttackCompList:

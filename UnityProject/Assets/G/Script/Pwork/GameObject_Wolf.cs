@@ -9,7 +9,7 @@ public class GameObject_Wolf : GameObjectBase {
 
 	protected bool IsLeft = false;
 
-	public GAttackComponentBase BiteAttack;
+	public GAttackPatternBase BiteAttack;
 	public override void Create ()
 	{
 		base.Create ();

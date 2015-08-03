@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class GAttackComponentBase : MonoBehaviour {
+public class GAttackPatternBase : MonoBehaviour {
 
 	public Transform PivotTransform;
 	public ObjectStat Stat;
@@ -14,6 +14,7 @@ public class GAttackComponentBase : MonoBehaviour {
 	public float CurTimer;
 	public float CoolTime;
 	public float CoolTimer;
+	public float StaminaCost;
 	
 	public List<float> AttackPatternObjectTimeList = new List<float>();
 	protected List<bool> AttackPatternObjectFlagList = new List<bool>();
