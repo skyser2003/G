@@ -17,11 +17,10 @@ public struct PlayerInfoStruct {
 }
 
 public class PlayerInfo : MonoBehaviour {
-
-	private PlayerInfoStruct playerData;
+	private PlayerInfoStruct characterData;
 
 	PlayerInfo(PlayerInfoStruct info) {
-		this.playerData = info;
+		this.characterData = info;
 	}
 
 	// Use this for initialization

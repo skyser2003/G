@@ -25,8 +25,8 @@ public class InvitationEvents : MonoBehaviour {
 		}
 
 		if (inviterName == null) {
-			inviterName = (Invitation.Inviter == null || Invitation.Inviter.DisplayName == null) ? "Someone" :
-				Invitation.Inviter.DisplayName;
+			inviterName = (invitation.Inviter == null || invitation.Inviter.DisplayName == null) ? "Someone" :
+				invitation.Inviter.DisplayName;
 			message.text = inviterName + " Join";
 		}
 
