@@ -36,6 +36,12 @@ public class GPlayerInputUI : MonoBehaviour {
 			SavedInputList.Add(data);
 			//GInputManager.Instance.AddInput(data);
 		}
+
+		if(Jump.Release)
+		{
+			GInputData data = new GInputData(Player.ID, GInputType.JUMP_RELEASE);
+			SavedInputList.Add(data);
+		}
 		
 		if(Attack.Pressed)
 		{

@@ -10,7 +10,9 @@ public class GameObjectBase : MonoBehaviour {
 	public int GroupID;
 
 	public float CurHealth;
+	public float HealthRegenTimer;
 	public float CurStamina;
+	public float StaminaRegenTimer;
 	public bool IsDead = false;
 	void Start()
 	{
@@ -46,9 +48,13 @@ public class GameObjectBase : MonoBehaviour {
 	{
 		if(!IsDead)
 		{
-			if(CurHealth < Stat.Health)
+			HealthRegenTimer += _deltatime;
+			if(HealthRegenTimer >= Stat.HealthRegenDelayTime)
 			{
-				CurHealth += Stat.HealthRegen * _deltatime;
+				if(CurHealth < Stat.Health)
+				{
+					CurHealth += Stat.HealthRegen * _deltatime;
+				}
 			}
 		}
 	}
@@ -57,16 +63,28 @@ public class GameObjectBase : MonoBehaviour {
 	{
 		if(!IsDead)
 		{
-			if(CurStamina < Stat.MaxStamina)
+			StaminaRegenTimer += _deltatime;
+			if(StaminaRegenTimer >= Stat.StaminaRegenDelayTime)
 			{
-				CurHealth += Stat.StaminaRegen * _deltatime;
+				if(CurStamina < Stat.MaxStamina)
+				{
+					CurStamina += Stat.StaminaRegen * _deltatime;
+				}
 			}
 		}
+	}
+
+	protected virtual void UseStamina(float _value)
+	{
+		CurStamina -= _value;
+		CurStamina = Mathf.Max(0f, CurStamina);
+		StaminaRegenTimer = 0f;
 	}
 
 	public virtual void Hit(float _damage)
 	{
 		CurHealth -= _damage;
+		HealthRegenTimer = 0f;
 		if(CurHealth <= 0f)
 		{
 			IsDead = true;
@@ -222,6 +240,7 @@ public struct ObjectStat
 {
 	public float Health;
 	public float HealthRegen;
+	public float HealthRegenDelayTime;
 	public float Attack;
 	public float Defense;
 	public float Mass;
@@ -234,10 +253,12 @@ public struct ObjectStat
 	public float GravityResistance;
 	public float MaxStamina;
 	public float StaminaRegen;
+	public float StaminaRegenDelayTime;
 	public void AddStat(ObjectStat _stat)
 	{
 		Health += _stat.Health;
 		HealthRegen += _stat.HealthRegen;
+		HealthRegenDelayTime += _stat.HealthRegenDelayTime;
 		Attack += _stat.Attack;
 		Defense += _stat.Defense;
 		Mass += _stat.Mass;
@@ -250,5 +271,6 @@ public struct ObjectStat
 		GravityResistance += _stat.GravityResistance;
 		MaxStamina += _stat.MaxStamina;
 		StaminaRegen += _stat.StaminaRegen;
+		StaminaRegenDelayTime += _stat.StaminaRegenDelayTime;
 	}
 }

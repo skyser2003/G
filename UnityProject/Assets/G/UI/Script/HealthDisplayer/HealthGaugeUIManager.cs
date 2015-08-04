@@ -39,7 +39,7 @@ public class HealthGaugeUIManager : MonoBehaviour {
 		}
 	}
 
-	public void ShowHealthDisplayer(Vector3 _worldpos, float _curhealth, float _maxhealth)
+	public void ShowHealthDisplayer(Vector3 _worldpos, float _curhealth, float _maxhealth, float _curstamina, float _maxstamina)
 	{
 		HealthGaugeDisplayer displayer;
 		if(HealthDisplayerList.Count > DisplayHealthCallCount)
@@ -57,7 +57,7 @@ public class HealthGaugeUIManager : MonoBehaviour {
 
 		displayer.gameObject.SetActive(true);
 		Vector3 newworldpos = UICamera.ScreenToWorldPoint(GameCamera.WorldToScreenPoint(_worldpos));
-		displayer.UpdateUI(newworldpos, _curhealth,	 _maxhealth);
+		displayer.UpdateUI(newworldpos, _curhealth,	 _maxhealth, _curstamina, _maxstamina);
 
 		DisplayHealthCallCount++;
 	}

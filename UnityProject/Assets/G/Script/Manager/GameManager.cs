@@ -35,11 +35,11 @@ public class GameManager : RealTimeMultiplayerListener {
 	}
 
 	private void TearDownMap() {
-		BehaviorUtils.MakeVisible (GameObject.Find (MapName), false);
+		//BehaviorUtils.MakeVisible (GameObject.Find (MapName), false);
 		foreach(PlayerInfo player in players) {
 			GameObject playerCharacter = GameObject.Find(player.name);
 //			playerCharacter.GetComponent<playerController>().Reset();
-			BehaviorUtils.MakeVisible(playerCharacter, false);
+			//BehaviorUtils.MakeVisible(playerCharacter, false);
 		}
 	}
 

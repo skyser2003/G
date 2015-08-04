@@ -139,6 +139,7 @@ public class MoveObjectBase : MonoBehaviour {
 			IsTryingToJump = true;
 		}
 
+		Debug.Log("Curjumpcount: " + CurJumpCount);
 		if(CurJumpCount < JumpMaxCount)
 		{
 			CurJumpCount ++;

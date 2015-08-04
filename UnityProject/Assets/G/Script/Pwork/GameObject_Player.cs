@@ -42,7 +42,7 @@ public class GameObject_Player : GameObjectBase {
 				MoveObject.Move(false);
 			}
 
-			if(curinput == GInputType.JUMP_DOWN)
+			if(curinput == GInputType.JUMP_RELEASE)
 			{
 				if(	MoveObject.Jump() )
 				{
@@ -64,7 +64,8 @@ public class GameObject_Player : GameObjectBase {
 				{
 					if(AttackCompList[0].PlayAttack())
 					{
-						CurStamina -= AttackCompList[0].StaminaCost;
+						//CurStamina -= AttackCompList[0].StaminaCost;
+						UseStamina(AttackCompList[0].StaminaCost);
 						AnimationComp.SetTrigger("ReleaseAttack");
 					}
 					AttackPressedTimer = 0f;

@@ -7,6 +7,7 @@ public class HealthGaugeDisplayGameObject : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		HealthGaugeUIManager.Instance.ShowHealthDisplayer(transform.position, ObjectBase.CurHealth, ObjectBase.Stat.Health);
+		HealthGaugeUIManager.Instance.ShowHealthDisplayer(transform.position, ObjectBase.CurHealth, ObjectBase.Stat.Health,
+		                                                  ObjectBase.CurStamina, ObjectBase.Stat.MaxStamina);
 	}
 }

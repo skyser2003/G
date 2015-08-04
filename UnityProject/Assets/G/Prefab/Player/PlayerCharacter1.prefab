@@ -3061,6 +3061,7 @@ MonoBehaviour:
   Stat:
     Health: 0
     HealthRegen: 0
+    HealthRegenDelayTime: 0
     Attack: 10
     Defense: 0
     Mass: 0
@@ -3073,13 +3074,14 @@ MonoBehaviour:
     GravityResistance: 0
     MaxStamina: 0
     StaminaRegen: 0
+    StaminaRegenDelayTime: 0
   ID: 
   Name: 
-  TotalTime: .100000001
+  TotalTime: .200000003
   CurTimer: 0
-  CoolTime: .100000001
+  CoolTime: .200000003
   CoolTimer: 0
-  StaminaCost: 0
+  StaminaCost: 30
   AttackPatternObjectTimeList:
   - .5
   AttackObjectPrefabList:
@@ -3104,7 +3106,9 @@ MonoBehaviour:
   ID: 0
   GroupID: 1
   CurHealth: 0
+  HealthRegenTimer: 0
   CurStamina: 0
+  StaminaRegenTimer: 0
   IsDead: 0
   DamageDetectorList: []
   EquipObjectList: []
@@ -3113,6 +3117,7 @@ MonoBehaviour:
   Stat:
     Health: 0
     HealthRegen: 0
+    HealthRegenDelayTime: 0
     Attack: 0
     Defense: 0
     Mass: 0
@@ -3125,21 +3130,24 @@ MonoBehaviour:
     GravityResistance: 0
     MaxStamina: 0
     StaminaRegen: 0
+    StaminaRegenDelayTime: 0
   BaseStat:
     Health: 100
-    HealthRegen: 10
+    HealthRegen: 30
+    HealthRegenDelayTime: 1
     Attack: 10
     Defense: 10
     Mass: 1
-    MaxMovementSpeed: 4
-    MoveForce: 20
-    MoveResistance: .949999988
+    MaxMovementSpeed: 8
+    MoveForce: 120
+    MoveResistance: .5
     JumpForce: 15
     MaxJumpCount: 1
     MaxFallSpeed: -20
     GravityResistance: 1
     MaxStamina: 100
-    StaminaRegen: 10
+    StaminaRegen: 30
+    StaminaRegenDelayTime: 1
   BuffDataList: []
   AnimationComp: {fileID: 11488470}
   AttackCompList:
@@ -3197,8 +3205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 1
-  MaxSpeed: 4
-  Acceleration: 10
+  MaxSpeed: 8
+  Acceleration: 160
   MoveFriction: .949999988
   IsInnerMoving: 0
   PrevInnerForce: {x: 0, y: 0, z: 0}
