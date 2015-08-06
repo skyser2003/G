@@ -18,6 +18,6 @@ public enum Direction
 public class GDungeonPart : MonoBehaviour
 {
 	public List<GDungeonObjectPlacer> ObjectPlacerList = new List<GDungeonObjectPlacer>();
-	public List<int> OpenIndex = new List<int>();
+	public List<Direction> OpenDirectionList = new List<Direction>();
 
 }
