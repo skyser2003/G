@@ -30,5 +30,4 @@ public class GDungeonPart : MonoBehaviour
 		Gizmos.color = c;
 		Gizmos.DrawCube(transform.position, new Vector3(30f,30f));
 	}
-
 }
