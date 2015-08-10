@@ -34,6 +34,8 @@ public class MoveObjectBase : MonoBehaviour {
 	public float SideLength = 1f;
 	public List<GameObject> SideCheckObjectList = new List<GameObject>();
 
+	public List<GameObject> JumpCheckObjectList = new List<GameObject>();
+
 	protected float PlatformCheckYPos = -99999999999f;
 
 	void OnDrawGizmos()
@@ -42,6 +44,13 @@ public class MoveObjectBase : MonoBehaviour {
 		for(int platformobjectiter = 0; platformobjectiter < PlatformCheckObjectList.Count; platformobjectiter++)
 		{
 			Transform curobject = PlatformCheckObjectList[platformobjectiter].transform;
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(curobject.transform.position, Vector3.up * TotalVelocity.y * Time.deltaTime);
+		}
+
+		for(int platformobjectiter = 0; platformobjectiter < JumpCheckObjectList.Count; platformobjectiter++)
+		{
+			Transform curobject = JumpCheckObjectList[platformobjectiter].transform;
 			Gizmos.color = Color.red;
 			Gizmos.DrawRay(curobject.transform.position, Vector3.up * TotalVelocity.y * Time.deltaTime);
 		}
@@ -89,7 +98,7 @@ public class MoveObjectBase : MonoBehaviour {
 		CheckSide(_deltatime);
 		ProcessMovement(_deltatime);
 		CheckPlatform(_deltatime);
-
+		CheckJump(_deltatime);
 		ResetForces();
 	}
 
@@ -196,7 +205,7 @@ public class MoveObjectBase : MonoBehaviour {
 		for(int sideobjectiter = 0; sideobjectiter < SideCheckObjectList.Count; sideobjectiter++)
 		{
 			Transform curobject = SideCheckObjectList[sideobjectiter].transform;
-			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.right, TotalVelocity.x * _deltatime, LayerMask.GetMask("SideCollider"));
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.right, TotalVelocity.x * _deltatime, LayerMask.GetMask(Constant.SideCollider));
 			//Debug.Log("Ray check: " + rayhits.Length);
 			if(rayhits.Length > 0)
 			{
@@ -230,7 +239,7 @@ public class MoveObjectBase : MonoBehaviour {
 		for(int platformobjectiter = 0; platformobjectiter < PlatformCheckObjectList.Count; platformobjectiter++)
 		{
 			Transform curobject = PlatformCheckObjectList[platformobjectiter].transform;
-			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask("Platforms"));
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask(Constant.GroundCheckCollider));
 			//Debug.Log("Ray check: " + rayhits.Length);
 			if(rayhits.Length > 0)
 			{
@@ -264,6 +273,27 @@ public class MoveObjectBase : MonoBehaviour {
 		if(!platformfound)
 		{
 			SetIsOnGround(false);
+		}
+	}
+
+	protected void CheckJump(float _deltatime)
+	{
+		for(int iter = 0; iter < JumpCheckObjectList.Count; iter++)
+		{
+			Transform curobject = JumpCheckObjectList[iter].transform;
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask(Constant.JumpCheckCollider));
+			if(rayhits.Length > 0f)
+			{
+				if(InnerVelocity.y < 0f)
+				{
+					break;
+				}else
+				{
+					//if hit set y speed to zero
+					InnerVelocity.y = 0f;
+					TotalVelocity.y = 0f;
+				}
+			}
 		}
 	}
 

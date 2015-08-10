@@ -20,4 +20,15 @@ public class GDungeonPart : MonoBehaviour
 	public List<GDungeonObjectPlacer> ObjectPlacerList = new List<GDungeonObjectPlacer>();
 	public List<Direction> OpenDirectionList = new List<Direction>();
 
+	public float Width = 30f;
+	public float Height = 30f;
+
+	void OnDrawGizmos()
+	{
+		Color c = Color.red;
+		c.a = 0.1f;
+		Gizmos.color = c;
+		Gizmos.DrawCube(transform.position, new Vector3(30f,30f));
+	}
+
 }
