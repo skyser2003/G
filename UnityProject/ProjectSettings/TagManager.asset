@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - Platforms
+  - GroundPlatform
   - SideCollider
   - DropItem
-  - 
+  - JumpCheckCollider
   - 
   - 
   - 
