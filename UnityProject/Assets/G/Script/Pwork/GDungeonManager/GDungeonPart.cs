@@ -4,22 +4,19 @@ using System.Collections.Generic;
 
 public enum Direction
 {
-	LEFT_BOT = 0,
-	MID_BOT = 1,
-	RIGHT_BOT = 2,
-	LEFT_MID = 3,
-	MID_MID = 4,
-	RIGHT_MID = 5,
-	LEFT_TOP = 6,
-	MID_TOP = 7,
-	RIGHT_TOP = 8,
+	LEFT = 0,
+	BOT = 1,
+	RIGHT = 2,
+	TOP = 3,
 }
 
 public class GDungeonPart : MonoBehaviour
 {
-	public List<GDungeonObjectPlacer> ObjectPlacerList = new List<GDungeonObjectPlacer>();
-	public List<Direction> OpenDirectionList = new List<Direction>();
+	public static float MustOpenLength = 4;
 
+	public List<GDungeonObjectPlacer> ObjectPlacerList = new List<GDungeonObjectPlacer>();
+	public List<Direction> InDirectionList = new List<Direction>();
+	public List<Direction> OutDirectionList = new List<Direction>();
 	public float Width = 30f;
 	public float Height = 30f;
 
@@ -29,5 +26,28 @@ public class GDungeonPart : MonoBehaviour
 		c.a = 0.1f;
 		Gizmos.color = c;
 		Gizmos.DrawCube(transform.position, new Vector3(30f,30f));
+
+		Color opencolor = Color.green;
+		opencolor.a = 0.1f;
+		Gizmos.color = opencolor;
+
+		Vector3 pos = transform.position;
+		pos = transform.position + Vector3.right * (Width / 2f - MustOpenLength / 2f);
+		Gizmos.DrawCube(pos, new Vector3(MustOpenLength, MustOpenLength));
+
+		pos = transform.position - Vector3.right * (Width / 2f - MustOpenLength / 2f);
+		Gizmos.DrawCube(pos, new Vector3(MustOpenLength, MustOpenLength));
+
+		pos = transform.position + Vector3.up * (Height / 2f - MustOpenLength / 2f);
+		Gizmos.DrawCube(pos, new Vector3(MustOpenLength, MustOpenLength));
+
+		pos = transform.position - Vector3.up * (Height / 2f - MustOpenLength / 2f);
+		Gizmos.DrawCube(pos, new Vector3(MustOpenLength, MustOpenLength));
+
+	}
+
+	protected virtual void Create()
+	{
+
 	}
 }

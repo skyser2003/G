@@ -39,12 +39,15 @@ public class PlatformCreator : MonoBehaviour {
 		RightColliderObject.transform.localPosition = new Vector3((Width / 2f - SideColliderDepth / 2f), 0f, 0f);
 		RightColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.SideCollider);
 
-		BotColliderObject = new GameObject("BotCollider");
-		BotColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width, TopColliderDepth);
-		BotColliderObject.transform.parent = transform;
-		BotColliderObject.transform.localPosition = new Vector3(0f, -(Height / 2f - TopColliderDepth / 2f), 0f);
-		BotColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.JumpCheckCollider);
-		BotColliderObject.AddComponent<PlatformBase>().Init(TopColliderDepth);
+		if(Height > 1f)
+		{
+			BotColliderObject = new GameObject("BotCollider");
+			BotColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width, TopColliderDepth);
+			BotColliderObject.transform.parent = transform;
+			BotColliderObject.transform.localPosition = new Vector3(0f, -(Height / 2f - TopColliderDepth / 2f), 0f);
+			BotColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.JumpCheckCollider);
+			BotColliderObject.AddComponent<PlatformBase>().Init(TopColliderDepth);
+		}
 	}
 
 	// Update is called once per frame
