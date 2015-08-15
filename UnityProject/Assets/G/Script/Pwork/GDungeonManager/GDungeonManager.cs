@@ -128,22 +128,22 @@ public class GDungeonManager : MonoBehaviour
                 var nextPos = path[i + 1];
                 var dir = nextPos - pos;
 
-                if(dir.x == 0 && dir.y == 1)
+                if (dir.x == 0 && dir.y == 1)
                 {
                     nextInput = Direction.BOT;
                     outputList.Add(Direction.TOP);
                 }
-                else if(dir.x == 0 && dir.y == -1)
+                else if (dir.x == 0 && dir.y == -1)
                 {
                     nextInput = Direction.TOP;
                     outputList.Add(Direction.BOT);
                 }
-                else if(dir.x == 1 && dir.y == 0)
+                else if (dir.x == 1 && dir.y == 0)
                 {
                     nextInput = Direction.LEFT;
                     outputList.Add(Direction.RIGHT);
                 }
-                else if(dir.x == -1 && dir.y == 0)
+                else if (dir.x == -1 && dir.y == 0)
                 {
                     nextInput = Direction.RIGHT;
                     outputList.Add(Direction.LEFT);
@@ -152,12 +152,12 @@ public class GDungeonManager : MonoBehaviour
 
             var useablePartList = new List<GDungeonPart>();
 
-            foreach(var part in DungeonPartList)
+            foreach (var part in DungeonPartList)
             {
                 bool inputExists = false;
                 bool outputExists = false;
 
-                foreach(var input in inputList)
+                foreach (var input in inputList)
                 {
                     if (part.InDirectionList.Contains(input) == true)
                     {
@@ -166,22 +166,22 @@ public class GDungeonManager : MonoBehaviour
                     }
                 }
 
-                foreach(var output in outputList)
+                foreach (var output in outputList)
                 {
-                    if(part.OutDirectionList.Contains(output) == true)
+                    if (part.OutDirectionList.Contains(output) == true)
                     {
                         outputExists = true;
                         break;
                     }
                 }
 
-                if(inputExists == true && outputExists == true)
+                if (inputExists == true && outputExists == true)
                 {
                     useablePartList.Add(part);
                 }
             }
 
-            if(useablePartList.Count != 0)
+            if (useablePartList.Count != 0)
             {
                 var index = Random.Range(0, useablePartList.Count);
                 var part = useablePartList[index];
