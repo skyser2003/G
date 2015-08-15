@@ -55,6 +55,7 @@ public class GDungeonManager : MonoBehaviour
 
         // Main path
         var curPos = begin;
+        path.Add(curPos);
 
         while (true)
         {
