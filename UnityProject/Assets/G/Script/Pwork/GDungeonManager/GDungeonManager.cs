@@ -188,6 +188,7 @@ public class GDungeonManager : MonoBehaviour
 
                 var obj = UnityEngine.Object.Instantiate(part.gameObject);
                 obj.GetComponent<Transform>().localPosition = offset + new Vector2(pos.x * 30, pos.y * 30);
+                obj.GetComponent<GDungeonPart>().Create(PartType.MAIN, i, path.Count);
             }
         }
     }
