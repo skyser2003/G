@@ -87,6 +87,57 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1116377489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1116377491}
+  - 114: {fileID: 1116377490}
+  m_Layer: 0
+  m_Name: MapCreateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1116377490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1116377489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c41f8d2f34b0ac4299e0da205c5ee58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurCreatedDungeon: {fileID: 0}
+  DungeonPartList:
+  - {fileID: 11477776, guid: a3fd1350141840b4682f97218161194c, type: 2}
+  - {fileID: 11418668, guid: d038645f99da13c44b317ad49d0a1cd8, type: 2}
+  - {fileID: 11438834, guid: a60a4385753c272409332729632d87b0, type: 2}
+  - {fileID: 11422938, guid: 0c24f00ebbbccf647a714ae578c53a3d, type: 2}
+  - {fileID: 11443444, guid: 9ef08e3a2caa9964eb26d9c84f5e0a70, type: 2}
+  - {fileID: 11414222, guid: 9dbdd6eb0b7ed564ab8f5e30cdae91ec, type: 2}
+  - {fileID: 11420808, guid: 6b850a74d9a7c144da29849c793ef8b3, type: 2}
+  - {fileID: 11410646, guid: 1c480bf20b5bc88468913f38d12ae116, type: 2}
+  DungeonWidth: 5
+  DungeonHeight: 5
+--- !u!4 &1116377491
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1116377489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &1691346377
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,4 +222,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
