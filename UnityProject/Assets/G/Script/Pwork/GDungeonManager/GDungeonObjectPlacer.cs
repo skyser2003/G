@@ -9,5 +9,6 @@ public class GDungeonObjectPlacer : MonoBehaviour {
 	public void SpawnRandomObject()
 	{
 		//place object
+
 	}
 }

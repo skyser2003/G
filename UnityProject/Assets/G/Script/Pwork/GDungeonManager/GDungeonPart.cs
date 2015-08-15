@@ -10,6 +10,12 @@ public enum Direction
 	TOP = 3,
 }
 
+public enum PartType
+{
+	MAIN = 0,
+	SIDE = 1,
+}
+
 public class GDungeonPart : MonoBehaviour
 {
 	public static float MustOpenLength = 4;
@@ -46,8 +52,13 @@ public class GDungeonPart : MonoBehaviour
 
 	}
 
-	protected virtual void Create()
-	{
 
+	protected virtual void Create(PartType _type, int _curlength, int _totallength)
+	{
+		for(int iter = 0; iter < ObjectPlacerList.Count; iter++)
+		{
+			GDungeonObjectPlacer placer = ObjectPlacerList[iter];
+			placer.SpawnRandomObject();
+		}	
 	}
 }

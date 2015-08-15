@@ -11,3 +11,13 @@ public class Constant{
 	public static readonly string SideCollider = "SideCollider";
 	public static readonly string JumpCheckCollider = "JumpCheckCollider";
 }
+
+public enum GObjectGroup
+{
+	MY_PLAYER = 1,
+	OPP_PLAYER = 2,
+	ENEMY = 4,
+	ENEMY_BOSS = 5,
+	OBJECT = 6,
+	TRAP = 7,
+}

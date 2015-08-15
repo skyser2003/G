@@ -18,7 +18,7 @@ public class PlatformCreator : MonoBehaviour {
 		Init();
 	}
 
-	public void Init()
+	public virtual void Init()
 	{
 		TopColliderObject = new GameObject("TopCollider");
 		TopColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width, TopColliderDepth);
