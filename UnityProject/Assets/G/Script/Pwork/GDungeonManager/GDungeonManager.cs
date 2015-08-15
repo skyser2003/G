@@ -43,7 +43,7 @@ public class GDungeonManager : MonoBehaviour
     public List<GDungeonPart> DungeonPartList = new List<GDungeonPart>();
     public int DungeonWidth;
     public int DungeonHeight;
-    public List<Vector2> path;
+    private List<Vector2> path;
 
     public void CreateDungeon()
     {
