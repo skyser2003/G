@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class GDungeonManager : MonoBehaviour
 {
-
     private static GDungeonManager instance;
     public static GDungeonManager Instance
     {
@@ -29,13 +28,22 @@ public class GDungeonManager : MonoBehaviour
             CreateDungeon();
         }
 
-        PlaceInMap();
+        PlaceInMap(path, "MAIN", null);
+        for (int i = 0; i < subPathList.Count; ++i)
+        {
+            PlaceInMap(subPathList[i].path, "SUB", connectedMainPos[i]);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
 
+    [Serializable]
+    public struct Path
+    {
+        public List<Vector2> path;
     }
 
     public GameObject CurCreatedDungeon;
@@ -44,6 +52,8 @@ public class GDungeonManager : MonoBehaviour
     public int DungeonWidth;
     public int DungeonHeight;
     private List<Vector2> path;
+    private List<Path> subPathList;
+    private List<Vector2> connectedMainPos;
 
     public void CreateDungeon()
     {
@@ -76,7 +86,6 @@ public class GDungeonManager : MonoBehaviour
             while (true)
             {
                 int index = Random.Range(0, possiblePathList.Count);
-                Debug.Log("index : " + index + ", count : " + possiblePathList.Count);
                 randomWay = possiblePathList[index];
                 if (PathExists(path, randomWay, destination) == true)
                 {
@@ -90,13 +99,69 @@ public class GDungeonManager : MonoBehaviour
 
         path.Add(destination);
 
-        // TODO : Sub path
+        // Sub path
+        const int maxSubPathCount = 2;
+        const int maxSubPathLength = 3;
+        subPathList = new List<Path>();
+        connectedMainPos = new List<Vector2>();
+
+        foreach (var point in path)
+        {
+            var subPath = new List<Vector2>();
+            var curSubPos = point;
+
+            while (true)
+            {
+                var possiblePathList = GetAllMoveablePath(curSubPos);
+                foreach (var point2 in path)
+                {
+                    possiblePathList.Remove(point2);
+                }
+                foreach (var point2 in subPath)
+                {
+                    possiblePathList.Remove(point2);
+                }
+                foreach (var subPath2 in subPathList)
+                {
+                    foreach (var point2 in subPath2.path)
+                    {
+                        possiblePathList.Remove(point2);
+                    }
+                }
+
+                if (possiblePathList.Count == 0)
+                {
+                    break;
+                }
+
+                var subPos = possiblePathList[Random.Range(0, possiblePathList.Count)];
+                subPath.Add(subPos);
+
+                if (maxSubPathLength <= subPath.Count)
+                {
+                    break;
+                }
+
+                curSubPos = subPos;
+            }
+
+            if (subPath.Count != 0)
+            {
+                subPathList.Add(new Path { path = subPath });
+                connectedMainPos.Add(point);
+            }
+
+            if (maxSubPathCount <= subPathList.Count)
+            {
+                break;
+            }
+        }
     }
 
-    private void PlaceInMap()
+    private void PlaceInMap(List<Vector2> path, string prefix, Vector2? initialPos)
     {
         var offset = new Vector2(0, 0);
-        Direction nextInput = Direction.LEFT;
+        var nextInput = Direction.LEFT;
 
         for (int i = 0; i < path.Count; ++i)
         {
@@ -106,10 +171,37 @@ public class GDungeonManager : MonoBehaviour
 
             if (i == 0)
             {
-                inputList.Add(Direction.BOT);
-                inputList.Add(Direction.LEFT);
-                inputList.Add(Direction.RIGHT);
-                inputList.Add(Direction.TOP);
+                if (initialPos == null)
+                {
+                    inputList.Add(Direction.BOT);
+                    inputList.Add(Direction.LEFT);
+                    inputList.Add(Direction.RIGHT);
+                    inputList.Add(Direction.TOP);
+                }
+                else
+                {
+                    var firstInput = Direction.LEFT;
+                    var dir = pos - initialPos;
+
+                    if (dir.Value.x == 0 && dir.Value.y == 1)
+                    {
+                        firstInput = Direction.BOT;
+                    }
+                    else if (dir.Value.x == 0 && dir.Value.y == -1)
+                    {
+                        firstInput = Direction.TOP;
+                    }
+                    else if (dir.Value.x == 1 && dir.Value.y == 0)
+                    {
+                        firstInput = Direction.LEFT;
+                    }
+                    else if (dir.Value.x == -1 && dir.Value.y == 0)
+                    {
+                        firstInput = Direction.RIGHT;
+                    }
+
+                    inputList.Add(firstInput);
+                }
             }
             else
             {
@@ -186,9 +278,11 @@ public class GDungeonManager : MonoBehaviour
                 var index = Random.Range(0, useablePartList.Count);
                 var part = useablePartList[index];
 
+                var type = prefix == "MAIN" ? PartType.MAIN : PartType.SIDE;
                 var obj = UnityEngine.Object.Instantiate(part.gameObject);
                 obj.GetComponent<Transform>().localPosition = offset + new Vector2(pos.x * 30, pos.y * 30);
-                obj.GetComponent<GDungeonPart>().Create(PartType.MAIN, i, path.Count);
+                obj.GetComponent<GDungeonPart>().Create(type, i, path.Count);
+                obj.name = pos.x + "-" + pos.y + ":" + prefix;
             }
         }
     }
