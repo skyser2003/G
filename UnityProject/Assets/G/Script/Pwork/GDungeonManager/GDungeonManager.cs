@@ -24,7 +24,12 @@ public class GDungeonManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        while (path == null || path.Count > 10)
+        {
+            CreateDungeon();
+        }
 
+        PlaceInMap();
     }
 
     // Update is called once per frame
@@ -38,25 +43,15 @@ public class GDungeonManager : MonoBehaviour
     public List<GDungeonPart> DungeonPartList = new List<GDungeonPart>();
     public int DungeonWidth;
     public int DungeonHeight;
-    List<Vector2> path;
+    public List<Vector2> path;
 
     public void CreateDungeon()
     {
-        //make path of 16
-        //start is left_bot and end is right_bot
-        //set main path first.
-        //then create sub paths.
-        //
-        // height - 1
-        // .
-        // width + 1 ....
-        // 0  1  2  ... width
-
         path = new List<Vector2>();
 
         // TODO : set begin position and destination position
-        var begin = new Vector2();
-        var destination = new Vector2();
+        var begin = new Vector2(0, 0);
+        var destination = new Vector2(4, 0);
 
         // Main path
         var curPos = begin;
@@ -79,7 +74,9 @@ public class GDungeonManager : MonoBehaviour
 
             while (true)
             {
-                randomWay = possiblePathList[Random.Range(0, possiblePathList.Count)];
+                int index = Random.Range(0, possiblePathList.Count);
+                Debug.Log("index : " + index + ", count : " + possiblePathList.Count);
+                randomWay = possiblePathList[index];
                 if (PathExists(path, randomWay, destination) == true)
                 {
                     break;
@@ -87,11 +84,111 @@ public class GDungeonManager : MonoBehaviour
             }
 
             path.Add(randomWay);
+            curPos = randomWay;
         }
 
         path.Add(destination);
 
         // TODO : Sub path
+    }
+
+    private void PlaceInMap()
+    {
+        var offset = new Vector2(0, 0);
+        Direction nextInput = Direction.LEFT;
+
+        for (int i = 0; i < path.Count; ++i)
+        {
+            var pos = path[i];
+            var inputList = new HashSet<Direction>();
+            var outputList = new HashSet<Direction>();
+
+            if (i == 0)
+            {
+                inputList.Add(Direction.BOT);
+                inputList.Add(Direction.LEFT);
+                inputList.Add(Direction.RIGHT);
+                inputList.Add(Direction.TOP);
+            }
+            else
+            {
+                inputList.Add(nextInput);
+            }
+
+            if (i == path.Count - 1)
+            {
+                outputList.Add(Direction.LEFT);
+                outputList.Add(Direction.BOT);
+                outputList.Add(Direction.RIGHT);
+                outputList.Add(Direction.TOP);
+            }
+            else
+            {
+                var nextPos = path[i + 1];
+                var dir = nextPos - pos;
+
+                if(dir.x == 0 && dir.y == 1)
+                {
+                    nextInput = Direction.BOT;
+                    outputList.Add(Direction.TOP);
+                }
+                else if(dir.x == 0 && dir.y == -1)
+                {
+                    nextInput = Direction.TOP;
+                    outputList.Add(Direction.BOT);
+                }
+                else if(dir.x == 1 && dir.y == 0)
+                {
+                    nextInput = Direction.LEFT;
+                    outputList.Add(Direction.RIGHT);
+                }
+                else if(dir.x == -1 && dir.y == 0)
+                {
+                    nextInput = Direction.RIGHT;
+                    outputList.Add(Direction.LEFT);
+                }
+            }
+
+            var useablePartList = new List<GDungeonPart>();
+
+            foreach(var part in DungeonPartList)
+            {
+                bool inputExists = false;
+                bool outputExists = false;
+
+                foreach(var input in inputList)
+                {
+                    if (part.InDirectionList.Contains(input) == true)
+                    {
+                        inputExists = true;
+                        break;
+                    }
+                }
+
+                foreach(var output in outputList)
+                {
+                    if(part.OutDirectionList.Contains(output) == true)
+                    {
+                        outputExists = true;
+                        break;
+                    }
+                }
+
+                if(inputExists == true && outputExists == true)
+                {
+                    useablePartList.Add(part);
+                }
+            }
+
+            if(useablePartList.Count != 0)
+            {
+                var index = Random.Range(0, useablePartList.Count);
+                var part = useablePartList[index];
+
+                var obj = UnityEngine.Object.Instantiate(part.gameObject);
+                obj.GetComponent<Transform>().localPosition = offset + new Vector2(pos.x * 30, pos.y * 30);
+            }
+        }
     }
 
     private List<Vector2> GetAllMoveablePath(Vector2 center)
@@ -128,7 +225,7 @@ public class GDungeonManager : MonoBehaviour
 
         while (stack.Count != 0)
         {
-            if(visited.Contains(end) == true)
+            if (visited.Contains(end) == true)
             {
                 ret = true;
                 break;
