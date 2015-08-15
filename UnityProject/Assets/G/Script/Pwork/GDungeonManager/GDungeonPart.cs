@@ -52,8 +52,7 @@ public class GDungeonPart : MonoBehaviour
 
 	}
 
-
-	protected virtual void Create(PartType _type, int _curlength, int _totallength)
+	public virtual void Create(PartType _type, int _curlength, int _totallength)
 	{
 		for(int iter = 0; iter < ObjectPlacerList.Count; iter++)
 		{
