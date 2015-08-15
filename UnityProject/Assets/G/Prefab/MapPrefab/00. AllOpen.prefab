@@ -134,6 +134,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &113326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 471444}
+  - 114: {fileID: 11400148}
+  m_Layer: 0
+  m_Name: 00. SpawnObjectPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &113502
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +259,22 @@ GameObject:
   - 114: {fileID: 11487548}
   m_Layer: 8
   m_Name: Close (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &128290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 412830}
+  - 114: {fileID: 11450632}
+  m_Layer: 0
+  m_Name: 01. EndPosPlacer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1147,6 +1179,18 @@ Transform:
   - {fileID: 490542}
   m_Father: {fileID: 487042}
   m_RootOrder: 14
+--- !u!4 &412830
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 487042}
+  m_RootOrder: 33
 --- !u!4 &412940
 Transform:
   m_ObjectHideFlags: 1
@@ -1600,6 +1644,18 @@ Transform:
   - {fileID: 424682}
   m_Father: {fileID: 487042}
   m_RootOrder: 24
+--- !u!4 &471444
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 487042}
+  m_RootOrder: 32
 --- !u!4 &472372
 Transform:
   m_ObjectHideFlags: 1
@@ -1792,6 +1848,8 @@ Transform:
   - {fileID: 453396}
   - {fileID: 463602}
   - {fileID: 447862}
+  - {fileID: 471444}
+  - {fileID: 412830}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &489438
@@ -2908,6 +2966,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183180}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11400148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc661706e6f30d4e9806a200ca0bca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectList:
+  - Prefab: {fileID: 140442, guid: 885d97c8b91cb6e47bb960d8b0e1e89d, type: 2}
+    DeltaPos: {x: 0, y: 0, z: 0}
+  - Prefab: {fileID: 140442, guid: 885d97c8b91cb6e47bb960d8b0e1e89d, type: 2}
+    DeltaPos: {x: -13.5, y: -1, z: 0}
+  - Prefab: {fileID: 140442, guid: 885d97c8b91cb6e47bb960d8b0e1e89d, type: 2}
+    DeltaPos: {x: 13.5, y: -1, z: 0}
 --- !u!114 &11400984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3014,6 +3090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34fe338ebdb94f4b9c074d9cef47cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnObjectPlacer: {fileID: 11400148}
+  EndObjectPlacer: {fileID: 11450632}
   ObjectPlacerList: []
   InDirectionList: 00000000010000000200000003000000
   OutDirectionList: 00000000010000000200000003000000
@@ -3247,6 +3325,24 @@ MonoBehaviour:
   LeftColliderObject: {fileID: 0}
   RightColliderObject: {fileID: 0}
   BotColliderObject: {fileID: 0}
+--- !u!114 &11450632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc661706e6f30d4e9806a200ca0bca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectList:
+  - Prefab: {fileID: 196168, guid: 6d72ef54cabdbfb41b8615559aa97e55, type: 2}
+    DeltaPos: {x: 0, y: 0, z: 0}
+  - Prefab: {fileID: 196168, guid: 6d72ef54cabdbfb41b8615559aa97e55, type: 2}
+    DeltaPos: {x: -13.5, y: -1, z: 0}
+  - Prefab: {fileID: 196168, guid: 6d72ef54cabdbfb41b8615559aa97e55, type: 2}
+    DeltaPos: {x: 13.5, y: -1, z: 0}
 --- !u!114 &11452244
 MonoBehaviour:
   m_ObjectHideFlags: 1

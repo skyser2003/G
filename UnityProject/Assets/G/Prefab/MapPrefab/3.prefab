@@ -83,6 +83,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &149660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 445528}
+  - 114: {fileID: 11422924}
+  m_Layer: 0
+  m_Name: 01. EndPosPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &176420
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +110,22 @@ GameObject:
   - 114: {fileID: 11490868}
   m_Layer: 8
   m_Name: Close (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &178086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 490846}
+  - 114: {fileID: 11460308}
+  m_Layer: 0
+  m_Name: 00. SpawnObjectPlacer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,6 +184,18 @@ Transform:
   - {fileID: 418750}
   m_Father: {fileID: 492692}
   m_RootOrder: 2
+--- !u!4 &445528
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 492692}
+  m_RootOrder: 3
 --- !u!4 &459000
 Transform:
   m_ObjectHideFlags: 1
@@ -177,6 +221,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 496462}
   m_RootOrder: 0
+--- !u!4 &490846
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 492692}
+  m_RootOrder: 4
 --- !u!4 &492692
 Transform:
   m_ObjectHideFlags: 1
@@ -190,6 +246,8 @@ Transform:
   - {fileID: 459000}
   - {fileID: 496462}
   - {fileID: 428342}
+  - {fileID: 445528}
+  - {fileID: 490846}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &496462
@@ -298,6 +356,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131992}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11422924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc661706e6f30d4e9806a200ca0bca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectList:
+  - Prefab: {fileID: 196168, guid: 6d72ef54cabdbfb41b8615559aa97e55, type: 2}
+    DeltaPos: {x: 13.5, y: -1.5, z: 0}
+  - Prefab: {fileID: 196168, guid: 6d72ef54cabdbfb41b8615559aa97e55, type: 2}
+    DeltaPos: {x: -13.5, y: -1.5, z: 0}
 --- !u!114 &11422938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -309,11 +383,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34fe338ebdb94f4b9c074d9cef47cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnObjectPlacer: {fileID: 11422924}
+  EndObjectPlacer: {fileID: 11460308}
   ObjectPlacerList: []
   InDirectionList: 0000000002000000
   OutDirectionList: 000000000200000001000000
   Width: 30
   Height: 30
+--- !u!114 &11460308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc661706e6f30d4e9806a200ca0bca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectList:
+  - Prefab: {fileID: 140442, guid: 885d97c8b91cb6e47bb960d8b0e1e89d, type: 2}
+    DeltaPos: {x: 13.5, y: -1.5, z: 0}
+  - Prefab: {fileID: 140442, guid: 885d97c8b91cb6e47bb960d8b0e1e89d, type: 2}
+    DeltaPos: {x: -13.5, y: -1.5, z: 0}
 --- !u!114 &11465314
 MonoBehaviour:
   m_ObjectHideFlags: 1

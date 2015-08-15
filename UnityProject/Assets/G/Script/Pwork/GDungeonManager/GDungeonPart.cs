@@ -20,6 +20,8 @@ public class GDungeonPart : MonoBehaviour
 {
 	public static float MustOpenLength = 4;
 
+	public GDungeonObjectPlacer SpawnObjectPlacer;
+	public GDungeonObjectPlacer EndObjectPlacer;
 	public List<GDungeonObjectPlacer> ObjectPlacerList = new List<GDungeonObjectPlacer>();
 	public List<Direction> InDirectionList = new List<Direction>();
 	public List<Direction> OutDirectionList = new List<Direction>();
@@ -53,12 +55,29 @@ public class GDungeonPart : MonoBehaviour
 	}
 
 
-	protected virtual void Create(PartType _type, int _curlength, int _totallength)
+	public virtual void Create(PartType _type, int _curlength, int _totallength)
 	{
+		if (_type == PartType.MAIN) 
+		{
+			if(_curlength == 0)
+			{
+				if(SpawnObjectPlacer != null)
+				{
+					SpawnObjectPlacer.SpawnRandomObject();
+				}
+			}else if(_curlength == _totallength - 1)
+			{
+				if(EndObjectPlacer != null)
+				{
+					EndObjectPlacer.SpawnRandomObject();
+				}
+			}
+		}
+
 		for(int iter = 0; iter < ObjectPlacerList.Count; iter++)
 		{
 			GDungeonObjectPlacer placer = ObjectPlacerList[iter];
 			placer.SpawnRandomObject();
-		}	
+		}
 	}
 }
