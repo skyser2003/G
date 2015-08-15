@@ -54,7 +54,6 @@ public class GDungeonPart : MonoBehaviour
 
 	}
 
-
 	public virtual void Create(PartType _type, int _curlength, int _totallength)
 	{
 		if (_type == PartType.MAIN) 
