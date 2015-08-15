@@ -29,10 +29,13 @@ public class GDungeonManager : MonoBehaviour
         }
 
         PlaceInMap(path, "MAIN", null);
+
         for (int i = 0; i < subPathList.Count; ++i)
         {
             PlaceInMap(subPathList[i].path, "SUB", connectedMainPos[i]);
         }
+
+        PlaceUnusedInMap(unusedPointList);
     }
 
     // Update is called once per frame
@@ -49,11 +52,14 @@ public class GDungeonManager : MonoBehaviour
     public GameObject CurCreatedDungeon;
 
     public List<GDungeonPart> DungeonPartList = new List<GDungeonPart>();
+    public GDungeonPart AllClosedPart;
     public int DungeonWidth;
     public int DungeonHeight;
     private List<Vector2> path;
     private List<Path> subPathList;
     private List<Vector2> connectedMainPos;
+    private List<Vector2> unusedPointList;
+    private Vector2 offset = new Vector2(0, 0);
 
     public void CreateDungeon()
     {
@@ -156,11 +162,32 @@ public class GDungeonManager : MonoBehaviour
                 break;
             }
         }
+
+        // Fill in unused points and walls
+        unusedPointList = new List<Vector2>();
+        for(int i = -1; i <= DungeonWidth; ++i)
+        {
+            for(int j = -1; j <= DungeonHeight; ++j)
+            {
+                unusedPointList.Add(new Vector2(i, j));
+            }
+        }
+
+        foreach(var point in path)
+        {
+            unusedPointList.Remove(point);
+        }
+        foreach(var subPath in subPathList)
+        {
+            foreach(var point in subPath.path)
+            {
+                unusedPointList.Remove(point);
+            }
+        }
     }
 
     private void PlaceInMap(List<Vector2> path, string prefix, Vector2? initialPos)
     {
-        var offset = new Vector2(0, 0);
         var nextInput = Direction.LEFT;
 
         for (int i = 0; i < path.Count; ++i)
@@ -284,6 +311,16 @@ public class GDungeonManager : MonoBehaviour
                 obj.GetComponent<GDungeonPart>().Create(type, i, path.Count);
                 obj.name = pos.x + "-" + pos.y + ":" + prefix;
             }
+        }
+    }
+
+    private void PlaceUnusedInMap(List<Vector2> unusedPointList)
+    {
+        foreach (var pos in unusedPointList)
+        {
+            var obj = UnityEngine.Object.Instantiate(AllClosedPart.gameObject);
+            obj.GetComponent<Transform>().localPosition = offset + new Vector2(pos.x * 30, pos.y * 30);
+            obj.name = pos.x + "-" + pos.y + ":" + "CLOSED";
         }
     }
 
