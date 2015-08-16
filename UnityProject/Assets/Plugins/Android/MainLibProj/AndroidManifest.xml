@@ -5,9 +5,12 @@
     package="com.google.example.games.mainlibproj"
     android:versionCode="1"
     android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16" />
+
+    <!-- replaced during setup -->
     
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16" /> 
- 
+
     <application>
     
      <!-- Required for Nearby Connections API -->
