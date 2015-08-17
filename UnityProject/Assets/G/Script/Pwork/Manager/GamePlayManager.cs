@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GamePlayManager : MonoBehaviour {
 	private static GamePlayManager instance;
@@ -35,6 +36,12 @@ public class GamePlayManager : MonoBehaviour {
 		DontDestroyOnLoad (this.gameObject);
 	}
 
+	public void SceneChange()
+	{
+		MyPlayer = null;
+		PlayerList = new List<GameObjectBase>();
+	}
+
 	public int DungeonClearCount = 0;
 	public int DungeonToBossCount = 3;
 	public void DungeonClearEvent()
@@ -49,7 +56,22 @@ public class GamePlayManager : MonoBehaviour {
 		} else {
 			Application.LoadLevel(Constant.Scene_Dungeon_Scene);
 		}
-
 	}
 
+	public GameObjectBase MyPlayer;
+	public List<GameObjectBase> PlayerList = new List<GameObjectBase>();
+
+	public void SetMyPlayer(GameObjectBase _myplayer)
+	{
+		MyPlayer = _myplayer;
+		AddPlayer(_myplayer);
+	}
+
+	public void AddPlayer(GameObjectBase _go)
+	{
+		if(!PlayerList.Contains(_go))
+		{
+			PlayerList.Add(_go);
+		}
+	}
 }

@@ -277,7 +277,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 468008, guid: 1c480bf20b5bc88468913f38d12ae116, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 468008, guid: 1c480bf20b5bc88468913f38d12ae116, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3483,6 +3483,7 @@ MonoBehaviour:
   - {fileID: 11414222, guid: 9dbdd6eb0b7ed564ab8f5e30cdae91ec, type: 2}
   - {fileID: 11420808, guid: 6b850a74d9a7c144da29849c793ef8b3, type: 2}
   - {fileID: 11410646, guid: 1c480bf20b5bc88468913f38d12ae116, type: 2}
+  AllClosedPart: {fileID: 0}
   DungeonWidth: 5
   DungeonHeight: 5
 --- !u!1 &961343052

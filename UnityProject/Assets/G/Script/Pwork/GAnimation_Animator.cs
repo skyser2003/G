@@ -4,15 +4,17 @@ using System.Collections;
 public class GAnimation_Animator : GAnimationBase {
 
 	public Animator m_Animator;
+	public float RightAngle = 90f;
+	public float LeftAngle = 270f;
 
 	public override void SetLeft (bool _left)
 	{
 		base.SetLeft (_left);
 
-		Vector3 eulerangle = new Vector3(0f,90f,0f); 
+		Vector3 eulerangle = new Vector3(0f,RightAngle,0f); 
 		if(_left)
 		{
-			eulerangle.y = 270f;
+			eulerangle.y = LeftAngle;
 		}
 
 		m_Animator.transform.localEulerAngles = eulerangle;
