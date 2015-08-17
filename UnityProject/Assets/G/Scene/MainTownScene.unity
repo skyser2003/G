@@ -711,6 +711,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34fe338ebdb94f4b9c074d9cef47cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnObjectPlacer: {fileID: 0}
+  EndObjectPlacer: {fileID: 0}
   ObjectPlacerList: []
   InDirectionList: 
   OutDirectionList: 

@@ -121,7 +121,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Users/goodocy/Project/PoolC/2015/Line_G/Keystore/com.poolc.keystore
+  AndroidKeystoreName: /Users/goodocy/Project/PoolC/2015/Line_2/Keystore/com.poolc.keystore
   AndroidKeyaliasName: line.g
   AndroidTVCompatibility: 1
   AndroidIsGame: 1

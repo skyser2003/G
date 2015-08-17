@@ -8,15 +8,76 @@ using System.Collections.Generic;
 
 using System;
 
-public class GameManager : RealTimeMultiplayerListener {
-	string MapName = "Tutorial-1";
-	public enum GameState { SettingUp, Playing, Finish, SetupFailed, Aborted };
-	private GameState mGameState = GameState.SettingUp;
+public class GameManager : MonoBehaviour, NetworkUpdateListener {
+	// My Player
+	private GameObject myPlayer = null;
 
-	private PlayerInfo[] players;
-	private Dictionary<string, int> mPlayerAttack = new Dictionary<string, int>();
+	// Network
+	public NetworkManager networkManager = null;
+
+	// Player Manager
+	private PlayersManager playersManager = null;
+	private string myParticipantID;
+
+	// Game State
+	public enum GameState { None, SettingUp, Playing, Finish, SetupFailed, Aborted };
+	private GameState mGameState = GameState.None;
 
 	private int mFinishRank = 0;
+	
+	public string mapName = null;
+
+	// Deal Meter
+	private Dictionary<string, float> damageDealMeter = null;
+
+	// Player Position - Using Unity Inspector
+	public List<Vector3> playerInitPos = new List<Vector3>();
+
+	// Playing Time
+	private float playedTime;
+
+	// Next broadcast Time
+	private float nextBroadcastTime = 0;
+	// broadcast gap
+	private float broadcastGap = .16f;
+
+	private static GameManager _instance = null;
+
+	protected GameManager() {
+		// NetworkManager initialized
+		networkManager = NetworkManager.Instance;
+
+		// PlayersManager initialized
+		playersManager = PlayersManager.Instance;
+
+		playedTime = 0;
+
+		mGameState = GameState.SettingUp;
+	}
+	
+	public static GameManager Instance {
+		get {
+			if (_instance == null ) {
+				_instance = new GameManager();
+			}
+			return _instance;
+		}
+	}
+
+	public void SignInAndStartGame() {
+		Debug.Log ("SignInAndStartGame Btn Clk");
+		networkManager.SignInAndStartGame ((bool success) => {
+			Debug.Log ("SignIn: " + networkManager.IsAuthenticated());
+			
+			networkManager.updateListener = this;
+			
+			// My Participant
+			myParticipantID = networkManager.GetSelf ().ParticipantId;
+			
+			List<Participant> allPlayers = networkManager.GetAllPlayers ();
+			damageDealMeter = new Dictionary<string, float> (allPlayers.Count);
+		});
+	}
 
 	public GameState State {
 		get {
@@ -34,127 +95,69 @@ public class GameManager : RealTimeMultiplayerListener {
 
 	}
 
-	private void TearDownMap() {
-		//BehaviorUtils.MakeVisible (GameObject.Find (MapName), false);
-		foreach(PlayerInfo player in players) {
-			GameObject playerCharacter = GameObject.Find(player.name);
-//			playerCharacter.GetComponent<playerController>().Reset();
-			//BehaviorUtils.MakeVisible(playerCharacter, false);
+	// Update Logic
+	void Update() {
+	}
+
+	// Network Update Logic
+	void DoNetworkUpdate() {
+		playedTime += Time.deltaTime;
+
+		if (Time.time > nextBroadcastTime) {
+			networkManager.SendMyUpdate (myPlayer.transform.position.x,
+			                             myPlayer.transform.position.y);
+
+			nextBroadcastTime = Time.time + broadcastGap;
 		}
 	}
 
-	public void OnRoomConnected(bool success) {
-		if (success) {
-			mGameState = GameState.Playing;
-			mMyParticipantId = GetSelf ().ParticipantId;
-			SetupMap ();
+	// Network Update Interface
+	public void UpdateReceived(string participantID, float posX, float posY) {
+	}
+
+	public void StageFinished(string senderID, float finishTime) {
+	}
+
+	public void LeftRoomConfirmed() {
+	}
+
+	public void PlayerJoinRoom(string participantID) {
+		if (playersManager.IsAlreadyPlayerParticipantID (participantID)) {
+			Debug.Log ("Player is Already");
+			return;
+		}
+
+		// Player Initialized
+		PlayerInfo playerInfo = new PlayerInfo ();
+		playerInfo.ParticipantID = participantID;
+
+		GameObject playerTemplate = GameObject.Find ("PlayerCharacter1");
+		GameObject_Player templateInfo = playerTemplate.GetComponent<GameObject_Player> ();
+		MoveObjectBase templateMove = playerTemplate.GetComponent<MoveObjectBase> ();
+		GAnimation_Animator templateAnimator = playerTemplate.GetComponent<GAnimation_Animator> ();
+		GAttackPatternBase templateAttackPattern = playerTemplate.GetComponent<GAttackPatternBase> ();
+
+		playerInfo.GameObjectPlayerComp = templateInfo;
+
+		// Initialized Player Position
+		Vector3 initPos = Vector3.zero;
+		int playersCount = playersManager.PlayersCount();
+		if (playersCount == playerInitPos.Count) {
+			System.Random rand = new System.Random();
+			int initPosIndex = rand.Next(0, playerInitPos.Count);
+			initPos = playerInitPos[initPosIndex];
 		} else {
-			mGameState = GameState.SetupFailed;
+			initPos = playerInitPos[playersCount];
 		}
-	}
-	
-	// Network
-	static uint QuickGameOpponents = 1;
-	static uint GameVariant = 0;
-	static uint MinOpponents = 1;
-	static uint MaxOpponents = 8;
-	
-	internal static GameManager sInstance = null;
+		// initPos is already other player, initPos y axis + 40
+		if (playersManager.IsCollisionPlayerPos(initPos)) {
+			initPos.y += 40;
+		}
+		playerInfo.GameObjectPlayerComp.transform.position = initPos;
 
-	public static GameManager Instance {
-		get {
-			return sInstance;
-		}
-	}
-	
-	private string mMyParticipantId = "";
-	
-	private int mResultRank = 0;
-	
-	private float mRoomSetupProgress = 0.0f;
-	
-	const float FakeProgressSpeed = 1.0f;
-	const float MaxFakeProgress = 30.0f;
-	float mRoomSetupStartTime = 0.0f;
-	
-	private GameManager() {
-		mRoomSetupStartTime = Time.time;
-	}
-	
-	public static void CreateQuickGame() {
-		sInstance = new GameManager ();
-		PlayGamesPlatform.Instance.RealTime.CreateQuickGame (QuickGameOpponents, QuickGameOpponents,
-		                                                     GameVariant, sInstance);
-	}
-	
-	public static void CreateWithInvitationScreen() {
-		sInstance = new GameManager ();
-		PlayGamesPlatform.Instance.RealTime.CreateWithInvitationScreen (MinOpponents, MaxOpponents,
-		                                                                GameVariant, sInstance);
-	}
-	
-	public static void AcceptFromInbox() {
-		sInstance = new GameManager ();
-		PlayGamesPlatform.Instance.RealTime.AcceptFromInbox (sInstance);
-	}
-	
-	public static void AcceptInvitation(string invitationId) {
-		sInstance = new GameManager ();
-		PlayGamesPlatform.Instance.RealTime.AcceptInvitation (invitationId, sInstance);
-	}
-	
-	public float RoomSetupProgress {
-		get {
-			float fakeProgress = (Time.time - mRoomSetupStartTime) * FakeProgressSpeed;
-			if (fakeProgress > MaxFakeProgress) {
-				fakeProgress = MaxFakeProgress;
-			}
-			float progress = mRoomSetupProgress + fakeProgress;
-			
-			return progress < 99.0f ? progress : 99.0f;
-		}
+		playersManager.PlayerAdd (playerInfo);
 	}
 
-	public void OnLeftRoom() {
-		if (mGameState != GameState.Finish ) {
-			mGameState = GameState.Aborted;
-		}
-	}
-	
-	public void OnPeersConnected(string[] peers) {
-	}
-	
-	public void OnParticipantLeft(Participant participant) {
-	}
-	
-	public void OnPeersDisconnected(string[] peers) {
-		foreach (string perr in peers) {
-		}
-	}
-	
-	public void OnRoomSetupProgress(float percent) {
-		mRoomSetupProgress = percent;
-	}
-	
-	public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data) {
-	}
-	
-	virtual public void Cleanup() {
-		PlayGamesPlatform.Instance.RealTime.LeaveRoom ();
-		TearDownMap ();
-		mGameState = GameState.Aborted;
-		sInstance = null;
-	}
-	
-	internal Participant GetSelf() {
-		return PlayGamesPlatform.Instance.RealTime.GetSelf ();
-	}
-	
-	internal List<Participant> GetPlayers() {
-		return PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants ();
-	}
-	
-	internal Participant GetParticipant(string participantId) {
-		return PlayGamesPlatform.Instance.RealTime.GetParticipant (participantId);
+	public void PlayerLeftRoom(string participantID) {
 	}
 }

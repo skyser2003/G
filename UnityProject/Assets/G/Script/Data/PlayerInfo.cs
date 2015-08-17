@@ -1,35 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[SerializeField]
-public struct PlayerInfoStruct {
-	public string name;
-	public float damage;
-	public int health;
-	public float defence;
-	public float weight;
-	public float maxMoveSpeed;
-	public float moveForce;
-	public float moveFriction;
-	public float jumpForce;
-	public int jumpNumber;
-	public float gravityFriction;
-}
-
 public class PlayerInfo : MonoBehaviour {
-	private PlayerInfoStruct characterData;
+	public string ParticipantID = null;
 
-	PlayerInfo(PlayerInfoStruct info) {
-		this.characterData = info;
+	#region GameObjectPlayer
+	public GameObject_Player GameObjectPlayerComp;
+
+	public void UpdatePlayerPos(float posX, float posY) {
+		if (GameObjectPlayerComp == null) {
+			return;
+		}
+
+		GameObjectPlayerComp.MoveObject.InnerForce.x = posX;
+		GameObjectPlayerComp.MoveObject.InnerForce.y = posY;
 	}
 
-	// Use this for initialization
-	void Start () {
-	
+	public byte[] SerializedPlayerInfo() {
+		return null;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	#endregion
 }
