@@ -3,10 +3,10 @@ using System.Collections;
 
 public class GameObject_DamageDetector : MonoBehaviour {
 
-	public int GroupID;
+	public GObjectGroup GroupID;
 	public GameObjectBase DamageTo;
 
-	public void Init(int _groupid)
+	public void Init(GObjectGroup _groupid)
 	{
 
 	}

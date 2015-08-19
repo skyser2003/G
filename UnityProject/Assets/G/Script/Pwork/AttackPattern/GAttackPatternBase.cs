@@ -25,7 +25,7 @@ public class GAttackPatternBase : MonoBehaviour {
 	
 	public float DamageMulti = 1f;
 	public float AttackSpeed = 1f;
-	public List<int> HitGroupIDList = new List<int>();
+	public List<GObjectGroup> HitGroupIDList = new List<GObjectGroup>();
 
 	public void SetStat(ObjectStat _stat)
 	{

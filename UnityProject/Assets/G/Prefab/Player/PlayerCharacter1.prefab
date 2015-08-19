@@ -858,7 +858,8 @@ GameObject:
   - 114: {fileID: 11493872}
   - 114: {fileID: 11488470}
   - 114: {fileID: 11443582}
-  m_Layer: 0
+  - 114: {fileID: 11415080}
+  m_Layer: 12
   m_Name: PlayerCharacter1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3074,6 +3075,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroupID: 1
   DamageTo: {fileID: 11462134}
+--- !u!114 &11415080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f3003cf029841b0925574ead4f5fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticipantID: 
+  GameObjectPlayerComp: {fileID: 11462134}
 --- !u!114 &11443582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3117,7 +3131,7 @@ MonoBehaviour:
   IsPlaying: 0
   DamageMulti: 1
   AttackSpeed: 1
-  HitGroupIDList: 0400000005000000060000000700000008000000
+  HitGroupIDList: 04000000050000000600000007000000
 --- !u!114 &11462134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3221,6 +3235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 9599428}
+  RightAngle: 90
+  LeftAngle: 270
 --- !u!114 &11493872
 MonoBehaviour:
   m_ObjectHideFlags: 1

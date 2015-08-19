@@ -15,10 +15,10 @@ public class GAttackObjectBase : MonoBehaviour {
 	public float DamageMulti;
 	public int RemainFrame;
 	public Vector3 MoveLocalSpeed;
-	public List<int> HitGroupList = new List<int>();
+	public List<GObjectGroup> HitGroupList = new List<GObjectGroup>();
 	public string AttackEffect;
 	public string HitEffect;
-	public virtual void Init(Vector3 _worldpos, Vector3 _movespeed, float _damage , List<int> _hitgrouplist)
+	public virtual void Init(Vector3 _worldpos, Vector3 _movespeed, float _damage , List<GObjectGroup> _hitgrouplist)
 	{
 		GAttackObjectCreateManager.Instance.AddAttackObject(this);
 		transform.position = _worldpos;

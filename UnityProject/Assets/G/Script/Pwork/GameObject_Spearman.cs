@@ -4,12 +4,16 @@ using System.Collections.Generic;
 
 public class GameObject_Spearman : GameObjectBase {
 
-	public Transform Player;
 	public Transform TargetPlayer;
 
 	protected bool IsLeft = false;
 
 	public GAttackPatternBase BiteAttack;
+
+	public bool HasGroundForward = true;
+	public Transform AIGroundChecker;
+
+	public float PlayerFindDistance = 4f;
 	public override void Create ()
 	{
 		base.Create ();
@@ -99,6 +103,7 @@ public class GameObject_Spearman : GameObjectBase {
 
 	protected void ProcessAI(float _deltatime)
 	{
+		CheckGroundForward();
 		CurState.Process(_deltatime);
 
 		CheckChangeState();
@@ -110,10 +115,22 @@ public class GameObject_Spearman : GameObjectBase {
 			//make input
 			if(IsLeft)
 			{
-				AddInput(GInputType.MOVE_LEFT_PRESSED);
+				if(!HasGroundForward)
+				{
+					IsLeft = !IsLeft;
+				}else
+				{
+					AddInput(GInputType.MOVE_LEFT_PRESSED);				
+				}
 			}else
 			{
-				AddInput(GInputType.MOVE_RIGHT_PRESSED);
+				if(!HasGroundForward)
+				{
+					IsLeft = !IsLeft;
+				}else
+				{
+					AddInput(GInputType.MOVE_RIGHT_PRESSED);
+				}
 			}
 		}else if((WolfState)CurState.StateIndex == WolfState.Follow)
 		{
@@ -124,12 +141,29 @@ public class GameObject_Spearman : GameObjectBase {
 				IsLeft = deltax < 0f ? true : false;
 				if(IsLeft)
 				{
-					AddInput(GInputType.MOVE_LEFT_PRESSED);
+					if(HasGroundForward)
+					{
+						AddInput(GInputType.MOVE_LEFT_PRESSED);
+					}
 				}else
 				{
-					AddInput(GInputType.MOVE_RIGHT_PRESSED);
+					if(HasGroundForward)
+					{
+						AddInput(GInputType.MOVE_RIGHT_PRESSED);
+					}
 				}
 			}
+		}
+	}
+
+	protected void CheckGroundForward()
+	{
+		HasGroundForward = false;
+
+		RaycastHit2D[] hitlist = Physics2D.RaycastAll(AIGroundChecker.position, Vector2.down, 1f, LayerMask.GetMask(Constant.Layer_Ground));
+		if(hitlist.Length > 0)
+		{
+			HasGroundForward = true;
 		}
 	}
 
@@ -209,15 +243,17 @@ public class GameObject_Spearman : GameObjectBase {
 		if((WolfState)CurState.StateIndex != WolfState.Follow
 		   && (WolfState)CurState.StateIndex != WolfState.ATTACK)
 		{
-			float deltaposx =  Player.transform.position.x - transform.position.x;
-			//check looking and distance
-			if(deltaposx > 0f && !IsLeft && Mathf.Abs(deltaposx) < 4f)
+			Vector2 direction = Vector2.right;
+			if(IsLeft)
 			{
-				TargetPlayer = Player;
-				ChangeAIState(WolfState.Follow);
-			}else if(deltaposx < 0f && IsLeft && Mathf.Abs(deltaposx) < 4f)
+				direction = Vector2.left;
+			}
+			RaycastHit2D[] hitinfo = Physics2D.RaycastAll(transform.position, direction, PlayerFindDistance, LayerMask.GetMask(Constant.Layer_Player));
+			Debug.Log("whta the fuck: " + hitinfo.Length);
+			if(hitinfo.Length > 0)
 			{
-				TargetPlayer = Player;
+				Debug.Log("found player");
+				TargetPlayer = hitinfo[0].transform.root.transform;
 				ChangeAIState(WolfState.Follow);
 			}else
 			{

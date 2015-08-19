@@ -7,7 +7,7 @@ public class GameObjectBase : MonoBehaviour {
 	public Vector3 DirectionPos;
 	public string BalanceID = "ID_1";
 	public int ID;
-	public int GroupID;
+	public GObjectGroup GroupID;
 
 	public float CurHealth;
 	public float HealthRegenTimer;

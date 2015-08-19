@@ -387,6 +387,10 @@ Prefab:
       propertyPath: TargetPlayer
       value: 
       objectReference: {fileID: 806670005}
+    - target: {fileID: 198798, guid: 6abcbde5144e360478e5bd3aed1f9dce, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6abcbde5144e360478e5bd3aed1f9dce, type: 2}
   m_IsPrefabParent: 0
@@ -1647,19 +1651,6 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 142348, guid: d967331de2a8f124587463f5744609e7, type: 2}
   m_PrefabInternal: {fileID: 1549725063}
---- !u!114 &876332021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876332020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f3003cf029841b0925574ead4f5fa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ParticipantID: 
-  GameObjectPlayerComp: {fileID: 806670006}
 --- !u!1 &1022895618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,7 +2777,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 458998, guid: d967331de2a8f124587463f5744609e7, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d967331de2a8f124587463f5744609e7, type: 2}
@@ -3797,11 +3788,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 436238, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.09305859
+      value: 1.76999998
       objectReference: {fileID: 0}
     - target: {fileID: 436238, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.0299999993
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 436238, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3827,14 +3818,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11483758, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 806670005}
-    - target: {fileID: 11483758, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
-      propertyPath: TargetPlayer
-      value: 
-      objectReference: {fileID: 806670005}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
   m_IsPrefabParent: 0

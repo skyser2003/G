@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlatformCreator : MonoBehaviour {
@@ -24,20 +24,20 @@ public class PlatformCreator : MonoBehaviour {
 		TopColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width, TopColliderDepth);
 		TopColliderObject.transform.parent = transform;
 		TopColliderObject.transform.localPosition = new Vector3(0f, Height / 2f - TopColliderDepth / 2f, 0f);
-		TopColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.GroundCheckCollider);
+		TopColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.Layer_Ground);
 		TopColliderObject.AddComponent<PlatformBase>().Init(TopColliderDepth);
 
 		LeftColliderObject = new GameObject("LeftCollider");
 		LeftColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(SideColliderDepth, Height);
 		LeftColliderObject.transform.parent = transform;
 		LeftColliderObject.transform.localPosition = new Vector3(-(Width / 2f - SideColliderDepth / 2f), 0f, 0f);
-		LeftColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.SideCollider);
+		LeftColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.Layer_Side);
 
 		RightColliderObject = new GameObject("RightCollider");
 		RightColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(SideColliderDepth, Height);
 		RightColliderObject.transform.parent = transform;
 		RightColliderObject.transform.localPosition = new Vector3((Width / 2f - SideColliderDepth / 2f), 0f, 0f);
-		RightColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.SideCollider);
+		RightColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.Layer_Side);
 
 		if(Height > 1f)
 		{
@@ -45,7 +45,7 @@ public class PlatformCreator : MonoBehaviour {
 			BotColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width, TopColliderDepth);
 			BotColliderObject.transform.parent = transform;
 			BotColliderObject.transform.localPosition = new Vector3(0f, -(Height / 2f - TopColliderDepth / 2f), 0f);
-			BotColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.JumpCheckCollider);
+			BotColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.Layer_JumpCheck);
 			BotColliderObject.AddComponent<PlatformBase>().Init(TopColliderDepth);
 		}
 	}

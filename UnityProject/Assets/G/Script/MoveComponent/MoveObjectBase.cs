@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -205,7 +205,7 @@ public class MoveObjectBase : MonoBehaviour {
 		for(int sideobjectiter = 0; sideobjectiter < SideCheckObjectList.Count; sideobjectiter++)
 		{
 			Transform curobject = SideCheckObjectList[sideobjectiter].transform;
-			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.right, TotalVelocity.x * _deltatime, LayerMask.GetMask(Constant.SideCollider));
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.right, TotalVelocity.x * _deltatime, LayerMask.GetMask(Constant.Layer_Side));
 			//Debug.Log("Ray check: " + rayhits.Length);
 			if(rayhits.Length > 0)
 			{
@@ -239,7 +239,7 @@ public class MoveObjectBase : MonoBehaviour {
 		for(int platformobjectiter = 0; platformobjectiter < PlatformCheckObjectList.Count; platformobjectiter++)
 		{
 			Transform curobject = PlatformCheckObjectList[platformobjectiter].transform;
-			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask(Constant.GroundCheckCollider));
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask(Constant.Layer_Ground));
 			//Debug.Log("Ray check: " + rayhits.Length);
 			if(rayhits.Length > 0)
 			{
@@ -281,7 +281,7 @@ public class MoveObjectBase : MonoBehaviour {
 		for(int iter = 0; iter < JumpCheckObjectList.Count; iter++)
 		{
 			Transform curobject = JumpCheckObjectList[iter].transform;
-			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask(Constant.JumpCheckCollider));
+			RaycastHit2D[] rayhits = Physics2D.RaycastAll(curobject.transform.position, Vector2.up, TotalVelocity.y * _deltatime, LayerMask.GetMask(Constant.Layer_JumpCheck));
 			if(rayhits.Length > 0f)
 			{
 				if(InnerVelocity.y < 0f)
