@@ -19,16 +19,24 @@ public class GamePlayManager : MonoBehaviour {
 	
 	void Awake()
 	{
-		if (instance = null)
+		if (instance == null)
 		{
 			instance = this;
 			instance.Initiate();
+		}
+
+		if(instance != this)
+		{
+			Destroy(gameObject);
 		}
 	}
 	
 	void OnDestroy()
 	{
-		instance = this;
+		if(instance == this)
+		{
+			instance = null;
+		}
 	}
 	
 	protected void Initiate()

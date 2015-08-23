@@ -14,10 +14,13 @@ public class CameraSystem : MonoBehaviour {
 
 	public void UpdateCameraPos()
 	{
-		Vector3 targetpos = TargetTransform.position;
-		targetpos.z = DeltaPos.z;	
-		Vector3 pos = Vector3.Lerp(transform.position,  TargetTransform.position, FollowSpeed);
-		pos.z = DeltaPos.z;	
-		transform.position = pos;
+		if(TargetTransform != null)
+		{
+			Vector3 targetpos = TargetTransform.position;
+			targetpos.z = DeltaPos.z;	
+			Vector3 pos = Vector3.Lerp(transform.position,  TargetTransform.position, FollowSpeed);
+			pos.z = DeltaPos.z;	
+			transform.position = pos;
+		}
 	}
 }

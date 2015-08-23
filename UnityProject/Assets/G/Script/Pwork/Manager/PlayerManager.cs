@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour {
 
 	void Awake()
 	{
-		if (instance = null)
+		if (instance == null)
 		{
 			instance = this;
 			instance.Initiate();
@@ -28,18 +28,19 @@ public class PlayerManager : MonoBehaviour {
 
 	void OnDestroy()
 	{
-		instance = this;
+		instance = null;
 	}
 
 	protected void Initiate()
 	{
+		Debug.Log("Create");
 		PlayerGameObject = (Instantiate (PlayerObject) as GameObject).GetComponent<GameObjectBase>();
 	}
 
 	public Object PlayerObject;
 	public GameObjectBase PlayerGameObject;
 
-	public void SetPlayerInitPos(Vector3 _playerpos)
+	public void CreatePlayerInitPos(Vector3 _playerpos)
 	{
 		PlayerGameObject.transform.position = _playerpos;
 	}

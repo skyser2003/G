@@ -19,7 +19,7 @@ public class BossStageManager : MonoBehaviour {
 	
 	void Awake()
 	{
-		if (instance = null)
+		if (instance == null)
 		{
 			instance = this;
 			instance.Initiate();
@@ -28,7 +28,7 @@ public class BossStageManager : MonoBehaviour {
 	
 	void OnDestroy()
 	{
-		instance = this;
+		instance = null;
 	}
 
 	protected void Initiate()

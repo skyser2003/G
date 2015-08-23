@@ -23,20 +23,25 @@ public class GDungeonManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        while (path == null || path.Count > 10)
-        {
-            CreateDungeon();
-        }
-
-        PlaceInMap(path, "MAIN", null);
-
-        for (int i = 0; i < subPathList.Count; ++i)
-        {
-            PlaceInMap(subPathList[i].path, "SUB", connectedMainPos[i]);
-        }
-
-        PlaceUnusedInMap(unusedPointList);
+        
     }
+
+	public void Create()
+	{
+		while (path == null || path.Count > 10)
+		{
+			CreateDungeon();
+		}
+		
+		PlaceInMap(path, "MAIN", null);
+		
+		for (int i = 0; i < subPathList.Count; ++i)
+		{
+			PlaceInMap(subPathList[i].path, "SUB", connectedMainPos[i]);
+		}
+		
+		PlaceUnusedInMap(unusedPointList);
+	}
 
     // Update is called once per frame
     void Update()

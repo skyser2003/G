@@ -9,7 +9,14 @@ public class GDungeonObjectPlacer : MonoBehaviour {
 	public void SpawnRandomObject()
 	{
 		//place object
+		int randomindex = Random.Range(0, ObjectList.Count);
 
+		Object selected = ObjectList[randomindex].Prefab;
+
+		GameObject go = Instantiate(selected) as GameObject;
+		go.transform.position = transform.position + ObjectList[randomindex].DeltaPos;
+
+		Debug.Log("Spawn object");
 	}
 
 	public void OnDrawGizmosSelected ()

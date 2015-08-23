@@ -165,7 +165,7 @@ public class MoveObject : MonoBehaviour {
 		//check falling speed
 
 		RaycastHit2D[] rayhits = Physics2D.RaycastAll(transform.position, Vector2.down, TotalVelocity.y * _deltatime,
-		                                              LayerMask.GetMask("Platforms"));
+		                                              LayerMask.GetMask(Constant.Layer_Ground));
 		//Debug.Log("Ray check: " + rayhits.Length);
 		if(rayhits.Length > 0)
 		{

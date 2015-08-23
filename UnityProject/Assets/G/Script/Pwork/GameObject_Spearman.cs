@@ -13,7 +13,21 @@ public class GameObject_Spearman : GameObjectBase {
 	public bool HasGroundForward = true;
 	public Transform AIGroundChecker;
 
+	public Transform PlayerSearchRoot;
 	public float PlayerFindDistance = 4f;
+
+	void OnDrawGizmos()
+	{
+		//Vector2 direction = Vector2.right;
+		//if(IsLeft)
+		//{
+		//	direction = Vector2.left;
+		//}
+		//Gizmos.color = Color.red;
+		//
+		//Gizmos.DrawRay(transform.position, direction * PlayerFindDistance);
+	}
+
 	public override void Create ()
 	{
 		base.Create ();
@@ -248,12 +262,11 @@ public class GameObject_Spearman : GameObjectBase {
 			{
 				direction = Vector2.left;
 			}
-			RaycastHit2D[] hitinfo = Physics2D.RaycastAll(transform.position, direction, PlayerFindDistance, LayerMask.GetMask(Constant.Layer_Player));
-			Debug.Log("whta the fuck: " + hitinfo.Length);
+			RaycastHit2D[] hitinfo = Physics2D.RaycastAll(PlayerSearchRoot.position, direction, PlayerFindDistance, LayerMask.GetMask(Constant.Layer_Player));
 			if(hitinfo.Length > 0)
 			{
 				Debug.Log("found player");
-				TargetPlayer = hitinfo[0].transform.root.transform;
+				TargetPlayer = hitinfo[0].transform;
 				ChangeAIState(WolfState.Follow);
 			}else
 			{

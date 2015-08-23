@@ -19,7 +19,7 @@ public class DungeonStageManager : MonoBehaviour {
 	
 	void Awake()
 	{
-		if (instance = null)
+		if (instance == null)
 		{
 			instance = this;
 			instance.Initiate();
@@ -28,16 +28,24 @@ public class DungeonStageManager : MonoBehaviour {
 	
 	void OnDestroy()
 	{
-		instance = this;
+		instance = null;
 	}
+
+	public CameraSystem CameraSystem;
+	public GPlayerInputUI InputSystem;
 
 	protected void Initiate()
 	{
-		GDungeonManager.Instance.CreateDungeon ();
+		Debug.Log("instantiate dungeonmanager");
+		GDungeonManager.Instance.Create ();
 
 		//find player
-		Transform playerpos = FindObjectOfType (typeof(PlayerSpawnPoser)) as Transform;
-		PlayerManager.Instance.SetPlayerInitPos (playerpos.position);
+		Transform playerpos = (FindObjectOfType (typeof(PlayerSpawnPoser)) as PlayerSpawnPoser).transform;
+		PlayerManager.Instance.CreatePlayerInitPos (playerpos.position);
+
+		//create player
+		CameraSystem.TargetTransform = PlayerManager.Instance.PlayerGameObject.transform;
+		InputSystem.Player = PlayerManager.Instance.PlayerGameObject;
 	}
 
 
