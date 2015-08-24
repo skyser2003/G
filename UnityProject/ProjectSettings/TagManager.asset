@@ -17,9 +17,9 @@ TagManager:
   - SideCollider
   - DropItem
   - JumpCheckCollider
-  - 
-  - 
-  - 
+  - Player
+  - Trap
+  - Enemy
   - 
   - 
   - 
