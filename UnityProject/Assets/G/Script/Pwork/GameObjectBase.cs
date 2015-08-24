@@ -21,6 +21,7 @@ public class GameObjectBase : MonoBehaviour {
 
 	public virtual void Create()
 	{
+		//Debug.Log("What the fuick: " + transform.position);
 		InitInputObject();
 		InitAttackComp();
 
@@ -36,6 +37,7 @@ public class GameObjectBase : MonoBehaviour {
 
 	public virtual void Process(float _deltatime)
 	{
+		//Debug.Log("What the fuick2s: " + transform.position);
 		ProcessInput(_deltatime);
 		MoveObject.Process(_deltatime);
 		ProcessAttack(_deltatime);

@@ -265,7 +265,7 @@ public class GameObject_Spearman : GameObjectBase {
 			RaycastHit2D[] hitinfo = Physics2D.RaycastAll(PlayerSearchRoot.position, direction, PlayerFindDistance, LayerMask.GetMask(Constant.Layer_Player));
 			if(hitinfo.Length > 0)
 			{
-				Debug.Log("found player");
+				//Debug.Log("found player");
 				TargetPlayer = hitinfo[0].transform;
 				ChangeAIState(WolfState.Follow);
 			}else

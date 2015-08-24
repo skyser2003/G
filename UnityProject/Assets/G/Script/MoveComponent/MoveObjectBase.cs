@@ -167,7 +167,7 @@ public class MoveObjectBase : MonoBehaviour {
 		}
 	}
 
-	protected void ProcessGravity(float _deltatime)
+	protected virtual void ProcessGravity(float _deltatime)
 	{
 		InnerVelocity += GravityForce * _deltatime / GravityResistance;
 		if(InnerVelocity.y < MaxFallSpeed)
@@ -190,7 +190,7 @@ public class MoveObjectBase : MonoBehaviour {
 
 	protected void ProcessMovement(float _deltatime)
 	{
-		transform.position += TotalVelocity * _deltatime;
+		transform.position = transform.position + TotalVelocity * _deltatime;
 		if(PlatformCheckYPos > transform.position.y)
 		{
 			Vector3 newpos = transform.position;
@@ -200,7 +200,7 @@ public class MoveObjectBase : MonoBehaviour {
 		}
 	}
 
-	protected void CheckSide(float _deltatime)
+	protected virtual void CheckSide(float _deltatime)
 	{
 		for(int sideobjectiter = 0; sideobjectiter < SideCheckObjectList.Count; sideobjectiter++)
 		{
@@ -228,7 +228,7 @@ public class MoveObjectBase : MonoBehaviour {
 		}	
 	}
 
-	protected void CheckPlatform(float _deltatime)
+	protected virtual void CheckPlatform(float _deltatime)
 	{
 		//if(InnerVelocity.y > 0f)
 		//{

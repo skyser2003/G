@@ -33,6 +33,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &145782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 441528}
+  - 114: {fileID: 11460184}
+  m_Layer: 0
+  m_Name: 02. Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &158970
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +168,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 407528}
   m_RootOrder: 0
+--- !u!4 &441528
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 485530}
+  m_RootOrder: 4
 --- !u!4 &455450
 Transform:
   m_ObjectHideFlags: 1
@@ -190,6 +218,7 @@ Transform:
   - {fileID: 406816}
   - {fileID: 489098}
   - {fileID: 471844}
+  - {fileID: 441528}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &489098
@@ -336,6 +365,24 @@ MonoBehaviour:
     DeltaPos: {x: 4.5, y: -1.5, z: 0}
   - Prefab: {fileID: 196168, guid: 6d72ef54cabdbfb41b8615559aa97e55, type: 2}
     DeltaPos: {x: -13.5, y: -1.5, z: 0}
+--- !u!114 &11460184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc661706e6f30d4e9806a200ca0bca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectList:
+  - Prefab: {fileID: 175214, guid: d6e60141723084f40b750dfdf21eb2d9, type: 2}
+    DeltaPos: {x: 0, y: -1.48000002, z: 0}
+  - Prefab: {fileID: 173004, guid: 80fe536fb8d8a624b98dc71e9bafeb7d, type: 2}
+    DeltaPos: {x: 0, y: 0, z: 0}
+  - Prefab: {fileID: 158696, guid: 74c2b29e055493c428be6fd7149e0ebf, type: 2}
+    DeltaPos: {x: 0, y: 0, z: 0}
 --- !u!114 &11477776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,7 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnObjectPlacer: {fileID: 11438660}
   EndObjectPlacer: {fileID: 11444104}
-  ObjectPlacerList: []
+  ObjectPlacerList:
+  - {fileID: 11460184}
   InDirectionList: 0000000002000000
   OutDirectionList: 0000000002000000
   Width: 30

@@ -21,7 +21,7 @@ public class PlatformCreator : MonoBehaviour {
 	public virtual void Init()
 	{
 		TopColliderObject = new GameObject("TopCollider");
-		TopColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width, TopColliderDepth);
+		TopColliderObject.AddComponent<BoxCollider2D>().size = new Vector2(Width + 0.1f, TopColliderDepth);
 		TopColliderObject.transform.parent = transform;
 		TopColliderObject.transform.localPosition = new Vector3(0f, Height / 2f - TopColliderDepth / 2f, 0f);
 		TopColliderObject.gameObject.layer = LayerMask.NameToLayer(Constant.Layer_Ground);

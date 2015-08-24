@@ -13,10 +13,13 @@ public class GDungeonObjectPlacer : MonoBehaviour {
 
 		Object selected = ObjectList[randomindex].Prefab;
 
-		GameObject go = Instantiate(selected) as GameObject;
-		go.transform.position = transform.position + ObjectList[randomindex].DeltaPos;
-
-		Debug.Log("Spawn object");
+		if(selected != null)
+		{
+			GameObject go = Instantiate(selected, transform.position + ObjectList[randomindex].DeltaPos, Quaternion.identity) as GameObject;
+			//go.transform.position = transform.position + ObjectList[randomindex].DeltaPos;
+			//Debug.Log("WTF!??!??!!?1?!>?!?: " + go.transform.position);
+			Debug.Log("Spawn object");
+		}
 	}
 
 	public void OnDrawGizmosSelected ()

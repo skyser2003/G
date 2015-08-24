@@ -1,15 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UserDataManager : MonoBehaviour {
+public class UserDataManager 
+{
+	private static UserDataManager instance;
+	public static UserDataManager Instance
+	{
+		get
+		{
+			if(instance == null)
+			{
+				instance = new UserDataManager();
+				instance.Initiate();
+			}
 
-	// Use this for initialization
-	void Start () {
-	
+			return instance;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+
+	public int Coin;
+
+	protected void Initiate()
+	{
+		Coin = 0;
 	}
 }

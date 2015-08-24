@@ -183,7 +183,7 @@ public class MoveObject : MonoBehaviour {
 						newpos.y = rayhits[iter].point.y;
 					}
 				}
-				transform.position = newpos;
+				//transform.position = newpos;
 				TotalVelocity.y = 0f;
 				InnerVelocity.y = 0f;
 				SetIsOnGround(true);
